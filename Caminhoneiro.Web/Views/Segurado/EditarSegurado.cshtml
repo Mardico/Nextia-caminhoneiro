@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "EditarSegurado";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<section class="content">
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("ConsultarSegurado","Segurado")" role="tab" aria-selected="true">
+                    Segurado <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link " href="@Url.Action("CartaoDigital","Segurado")" role="tab" aria-selected="false">
+                    Cartão Digital <i class="fas fa-id-badge"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("EditarSegurado","Segurado")" role="tab" aria-selected="false">
+                    Editar <i class="fas fa-wrench"> </i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Historico","Segurado")" role="tab" aria-selected="false">
+                    Histórico
+                    <i class="fas fa-book-open"> </i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-custom-content">
+            <p class="lead mb-0">Cartão Digital</p>
+        </div>
+
+        <section class="content">
+            <div class="container-fluid">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h3 class="card-title">Dados Caminhoneiro</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Nome Caminhoneiro</label>
+                                    <input type="text" class="form-control" placeholder="Nome Caminhoneiro" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>CPF</label>
+                                    <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" placeholder="CPF" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Data Nascimento</label>
+                                    <input type="text" class="form-control" placeholder="Data Nascimento" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Sexo</label>
+                                    <select class="form-control">
+                                        <option>Feminino</option>
+                                        <option>Masculino</option>
+                                        <option>Outro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Estado Civil</label>
+                                    <select class="form-control">
+                                        <option>Casada(o)</option>
+                                        <option>Divorciada(o)</option>
+                                        <option>Solteira(o)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>E-mail</label>
+                                    <input type="text" class="form-control" placeholder="E-mail" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>CEP</label>
+                                    <input type="text" class="form-control" placeholder="CEP" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Endereço</label>
+                                    <input type="text" class="form-control" placeholder="Endereço" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Número</label>
+                                    <input type="text" class="form-control" placeholder="Número" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Complento</label>
+                                    <input type="text" class="form-control" placeholder="Complento">
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Bairro</label>
+                                    <input type="text" class="form-control" placeholder="Bairro" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Cidade</label>
+                                    <input type="text" class="form-control" placeholder="Cidade" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="form-group">
+                                    <label>UF</label>
+                                    <input type="text" class="form-control" placeholder="UF" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Telefone Fixo</label>
+                                    <input type="text" class="form-control" placeholder="(DDD)+NÚMERO">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Telefone Celular</label>
+                                    <input type="text" class="form-control" placeholder="(DDD)+NÚMERO" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <label>Canal de Vendas</label>
+                                    <select class="form-control">
+                                        <option>Sindicato</option>
+                                        <option>Associação</option>
+                                        <option>Rodobens</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Usuário</label>
+                                    <select class="form-control">
+                                        <option>option 1</option>
+                                        <option>option 2</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Como Prefere ser conectado?</label>
+                                    <select class="form-control">
+                                        <option>WhatsApp</option>
+                                        <option>E-mail</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                        Editar
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-primary">
+    <div class="modal-dialog">
+        <div class="modal-content bg-primary">
+            <div class="modal-header">
+                <h4 class="modal-title">Sucesso!</h4>
+            </div>
+            <div class="modal-body">
+                <p>Dados Editados com sucesso!</p>
+            </div>
+            <div class="modal-footer float-lg-right">
+                <button type="button" class="btn btn-outline-light"
+                        onclick="location.href='@Url.Action("ConsultarSegurado", "Segurado")'">
+                    Voltar
+                </button>
+
+            </div>
+        </div>
+
+    </div>
+</div>

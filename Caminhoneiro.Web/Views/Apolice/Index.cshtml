@@ -1,0 +1,73 @@
+﻿@model List<Caminhoneiro.Models.Produto.RetornoProdutoModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+  <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Produtos</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4 col-7">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-blue">
+                        <div class="inner">
+                            <h3>RODOCARDMED</h3>
+                            <p>Planos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-medkit"></i>
+                        </div>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[0].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[0].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[0].valor <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+
+                </div>
+
+
+                <div class="col-lg-4 col-7">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-warning">
+                        <div class="inner">
+                            <h3>@Model[1].nome</h3>
+                            <p>Planos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-happy"></i>
+                        </div>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[1].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[1].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[1].valor <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+
+                </div>
+
+                <div class="col-lg-4 col-7">
+                    <!-- small box -->
+                    <div class="small-box bg-gradient-danger">
+                        <div class="inner">
+                            <h3>@Model[2].nome</h3>
+                            <p>Planos</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-iphone"></i>
+                        </div>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[2].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[2].valor <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ @Model[2].valor <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+
+                </div>
+       </div>
+        </div>
+    </section>

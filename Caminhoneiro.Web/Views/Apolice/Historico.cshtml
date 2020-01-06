@@ -1,0 +1,113 @@
+﻿
+@{
+    ViewBag.Title = "Historico";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<section class="content">
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  " href="@Url.Action("DadosCadastrais","Segurado")" role="tab" aria-selected="true">
+                    Segurado <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ListaTodos","Apolice")" role="tab" aria-selected="false">
+                    Produtos <i class="fa fa-list-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("CartaoDigital","Segurado")" role="tab" aria-selected="false">
+                    Cartão Digital <i class="fas fa-id-badge"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-custom-content">
+            <p class="lead mb-0"></p>
+        </div>
+        <div class="card card-primary card-outline">
+            <div class="card-body">
+                <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link  " href="@Url.Action("ConsultarApolice","Apolice")" role="tab" aria-selected="true">
+                            Dados Gerais <i class="fas fa-user"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Pagamento","Apolice")" role="tab" aria-selected="false">
+                            Pagamentos <i class="fas fa-search-dollar"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " href="@Url.Action("EditarApolice","Apolice")" role="tab" aria-selected="false">
+                            Editar <i class="fa fa-wrench"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="@Url.Action("Historico","Apolice")" role="tab" aria-selected="false">
+                            Histórico
+                            <i class="fas fa-book-open"> </i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+                <div class="tab-custom-content">
+                    <p class="lead mb-0">Histórico de Atendimento</p>
+                </div>
+                <div class="card card-primary card-outline">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Histórico</h3>
+                        </div>
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Proposta</th>
+                                        <th>Número Endosso</th>
+                                        <th>Tipo de endosso</th>
+                                        <th>Endosso</th>
+                                        <th>Data</th>
+                                        <th>Usuário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>00000000000001</td>
+                                        <td>0</td>
+                                        <td>Inclusão de Proposta</td>
+                                        <td>Inclusao de Proposta</td>
+                                        <td>07/07/2019</td>
+                                        <td>antonio.barbosa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>00000000000001</td>
+                                        <td>1</td>
+                                        <td>Alteração dados do Segurado</td>
+                                        <td>Alteração Endereço</td>
+                                        <td>07/08/2019</td>
+                                        <td>antonio.barbosa</td>
+                                    </tr>
+                                    <tr>
+                                        <td>00000000000001</td>
+                                        <td>2</td>
+                                        <td>Alteração dados do Caminhão</td>
+                                        <td>Alteração Placa</td>
+                                        <td>14/08/2019</td>
+                                        <td>maria.felicia</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+   
+</section>
+
+

@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewBag.Title = "ListaTodos";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<section class="content">
+    <div class="card-body">
+        <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link  " href="@Url.Action("DadosCadastrais","Segurado")" role="tab" aria-selected="true">
+                    Segurado <i class="fas fa-user"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="@Url.Action("ListaTodos","Apolice")" role="tab" aria-selected="false">
+                    Produtos <i class="fa fa-list-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("KitProduto","Segurado")" role="tab" aria-selected="false">
+                    Kit Produto  <i class="fas fa-id-badge"></i>
+                </a>
+            </li>
+        </ul>
+
+        <div class="tab-custom-content">
+            <p class="lead mb-0">Produtos</p>
+        </div>
+        <div class="card card-primary card-outline">
+
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>Nome Caminhoneiro</label>
+                            <input type="text" class="form-control" value="Marcelo de Souza" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <label>CPF</label>
+                            <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" value="574.715.907-81" disabled>
+                        </div>
+                    </div>
+                </div>
+                <h3>Produtos</h3>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Nome do Produto</th>
+                            <th>Número da Proposta</th>
+                            <th>Endosso</th>
+                            <th>Data Inicial de Vigência</th>
+                            <th>Status</th>
+                            <th>Ver</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>RODOCARDMED</td>
+                            <td>001700807819</td>
+                            <td>2</td>
+                            <td>07/08/2019</td>
+                            <td>Vigente</td>
+                            <td> <a href="@Url.Action("ConsultarApolice", "Apolice")"><i class="fas fa-eye"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/dist/js/adminlte.min.js"></script>
+
+
+
+
+
+

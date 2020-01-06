@@ -1,0 +1,10 @@
+/packages
+/Caminhoneiro.Web/obj
+/Caminhoneiro.Web/bin
+/Caminhoneiro.Servico/bin
+/Caminhoneiro.Servico/bin
+/Caminhoneiro.Models/bin
+/Caminhoneiro.Models/bin
+
+*.suo
+*.vs
