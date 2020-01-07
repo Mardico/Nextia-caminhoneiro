@@ -23,44 +23,49 @@ namespace Caminhoneiro.Web.Controllers
         [HttpPost]
         public ActionResult Login(LoginModels login)
         {
-             try { 
-                     LoginServico _loginS = new LoginServico();
-                     RetornoLoginModel ret= 
-                    _loginS.autenticacaoLogin(Constantes.clientId,Constantes.apiKey,Constantes.apiVersion,login.usuario, login.senha);
-                     if(ret.token!=null)
-                     {
-                        Session["NomeUsuario"] = ret.nome.Substring(0,ret.nome.IndexOf(" "));
-                        Session["Token"] = ret.token;
+            try
+            {
+                LoginServico _loginS = new LoginServico();
+                RetornoLoginModel ret = _loginS.autenticacaoLogin(Constantes.clientId, Constantes.apiKey, Constantes.apiVersion, login.usuario, login.senha);
+                if (ret.token != null)
+                {
+                    Session["NomeUsuario"] = ret.nome.Substring(0, ret.nome.IndexOf(" "));
+                    Session["Token"] = ret.token;
 
-                        HttpCookie authCookie = FormsAuthentication.GetAuthCookie(ret.nome, true);
-                        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                        FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, DateTime.Now, DateTime.Now.AddDays(1), 
-                           ticket.IsPersistent, FormsAuthentication.FormsCookiePath);
-                        authCookie.Value = FormsAuthentication.Encrypt(newTicket);
+                    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(ret.nome, true);
+                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                    FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(
+                        ticket.Version,
+                        ticket.Name,
+                        DateTime.Now,
+                        DateTime.Now.AddDays(1),
+                        ticket.IsPersistent,
+                        FormsAuthentication.FormsCookiePath
+                    );
+                    authCookie.Value = FormsAuthentication.Encrypt(newTicket);
 
-                        Response.Cookies.Add(authCookie);
+                    Response.Cookies.Add(authCookie);
 
+                    return RedirectToAction("Index", "Apolice");
+                }
+                else
+                {
+                    ViewBag.Mensagem = "Usuário não encontrado!";
+                    return View();
+                }
 
-                        return RedirectToAction("Index", "Apolice");
-                     }
-                     else
-                     {
-                            ViewBag.Mensagem = "Usuário não encontrado!";
-                            return View();
-                     }
-
-             }
-             catch
-             {
+            }
+            catch
+            {
                 ViewBag.Mensagem = "Erro ao conectar no serviço de Login!";
                 return View();
-             }
+            }
         }
 
         public ActionResult Sair()
         {
             Session.Remove("Token");
-            return RedirectToAction("Login","Login");
+            return RedirectToAction("Login", "Login");
         }
     }
 }

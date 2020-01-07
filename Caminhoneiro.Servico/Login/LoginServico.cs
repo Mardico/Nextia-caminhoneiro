@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Net.Http;
 using Caminhoneiro.Models.Login;
 using Caminhoneiro.Servico.Util;
@@ -33,8 +30,7 @@ namespace Caminhoneiro.Servico.Login
                     Task<HttpResponseMessage> postTask = client.PostAsJsonAsync<LoginDTO>("login", dto);
                     postTask.Wait();
                     HttpResponseMessage result = postTask.Result;
-
-
+                    
                     var log = result.Content.ReadAsStringAsync().Result;
                     ret = new JavaScriptSerializer().Deserialize<RetornoLoginModel>(log);
                     return ret;
