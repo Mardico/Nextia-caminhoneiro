@@ -31,8 +31,7 @@ namespace Caminhoneiro.Servico.Produto
                     Task<HttpResponseMessage> getTask = client.GetAsync($"?empresa={1}&usuario={"6goD{FZM+["}");
                     getTask.Wait();
                     HttpResponseMessage result = getTask.Result;
-
-
+                    
                     var log = result.Content.ReadAsStringAsync().Result;
                     JavaScriptSerializer js = new JavaScriptSerializer();
                     ret= JsonConvert.DeserializeObject<List<RetornoProdutoModel>>(log);

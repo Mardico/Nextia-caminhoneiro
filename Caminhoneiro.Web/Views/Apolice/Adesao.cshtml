@@ -567,7 +567,7 @@
         var contador = 1;
         //adiciona nova linha
         $("#addLinhaBeneficiario").on("click", function () {
-            var newRow = $("<div class='row' style='border-bottom: 1px solid rgba(0, 0, 0, 0.2); margin: 5px;'>");
+            var newRow = $("<div class='row linha-beneficiario' style='border-bottom: 1px solid rgba(0, 0, 0, 0.2); margin: 5px;'>");
             var cols = "";
 
             cols += "<div class='col-lg-6'>"
@@ -615,20 +615,22 @@
                 + "<input type='number' class='form-control' placeholder='Porcentagem'>"
                 + "</div>"
                 + "</div>"
+                + "<div class='col-lg-11'></div>"
+                + "<div class='col-lg-1'><a class='deleteLinhaBeneficiario nav-icon far fa-arrow-alt-circle-up' style='margin:5px; cursor:pointer'></a></div>"
                 + "</div>";
 
             newRow.append(cols);
             contador++;
 
-            if (contador <= 10) {
+            if (contador <= 3) {
                 $("#tableBeneficiario").append(newRow);
-            } if (contador == 10) {
+            } if (contador == 3) {
                 $("#addLinhaBeneficiario").attr("disabled", true);
             }
         });
         //remove linha
         $("#tableBeneficiario").on("click", "a.deleteLinhaBeneficiario", function (event) {
-            $(this).closest("tr").remove();
+            $(this).closest(".linha-beneficiario").remove();
             $("#addLinhaBeneficiario").attr("disabled", false);
             contador--;
         });
