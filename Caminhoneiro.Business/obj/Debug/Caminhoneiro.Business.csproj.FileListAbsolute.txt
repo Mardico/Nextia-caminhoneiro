@@ -1,0 +1,10 @@
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\obj\Debug\Caminhoneiro.Business.csprojAssemblyReference.cache
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.Business.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.Business.pdb
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.DTO.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.Entidade.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.DTO.pdb
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\bin\Debug\Caminhoneiro.Entidade.pdb
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\obj\Debug\Caminhoneiro.Business.csproj.CopyComplete
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\obj\Debug\Caminhoneiro.Business.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Business\obj\Debug\Caminhoneiro.Business.pdb

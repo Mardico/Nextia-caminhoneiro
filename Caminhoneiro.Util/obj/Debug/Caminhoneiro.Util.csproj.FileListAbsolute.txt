@@ -1,0 +1,15 @@
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\Caminhoneiro.Util.dll.config
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\Caminhoneiro.Util.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\Caminhoneiro.Util.pdb
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\log4net.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\Newtonsoft.Json.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\RestSharp.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\log4net.xml
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\Newtonsoft.Json.xml
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\RestSharp.xml
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\bin\Debug\pt-br\System.Net.Http.Formatting.resources.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\obj\Debug\Caminhoneiro.Util.csproj.CopyComplete
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\obj\Debug\Caminhoneiro.Util.dll
+C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Util\obj\Debug\Caminhoneiro.Util.pdb
