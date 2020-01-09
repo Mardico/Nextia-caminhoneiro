@@ -53,7 +53,11 @@
                             <th>Endosso</th>
                             <th>Data Inicial de Vigência</th>
                             <th>Status</th>
-                            <th>Ver</th>
+                            <th>Visualizar</th>
+                            <th>Alterar</th>
+                            <th>Cancelar</th>
+                            <th>Reenviar Kit</th>
+                            <th>Imprimir Cert.</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,6 +68,10 @@
                             <td>07/08/2019</td>
                             <td>Vigente</td>
                             <td> <a href="@Url.Action("ConsultarApolice", "Apolice")"><i class="fas fa-eye"></i></a></td>
+                            <td> <a href="@Url.Action("EditarApolice", "Apolice")"><i class="fas fa-pen"></i></a></td>
+                            <td> <a href="#"><i class="fas fa-times"></i></a></td>
+                            <td> <a href="#"><i class="fas fa-share-square"></i></a></td>
+                            <td> <a href="#"><i class="fas fa-print"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
