@@ -1,187 +1,187 @@
-﻿@model Caminhoneiro.ViewModel.Usuario
+﻿@model Caminhoneiro.ViewModel.Usuario.FiltroLoginViewModel
 @{
     Layout = null;
 }
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Caminhoneiro</title>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Caminhoneiro</title>
 
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="shortcut icon" type="imagem/x-icon" href="~/dist/img/caminhao-icon.png" />
-        <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
-        <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-        <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-        <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="imagem/x-icon" href="~/dist/img/caminhao-icon.png" />
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
 
 
-    <body class="hold-transition login-page">
-        @using (Html.BeginForm("Login", "Login", FormMethod.Post))
-        {
-            <div id="fundo-externo">
-                <div id="fundo">
-                    <img src="~/dist/img/caminhao.jpg" alt="" />
+<body class="hold-transition login-page">
+    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+    {
+        <div id="fundo-externo">
+            <div id="fundo">
+                <img src="~/dist/img/caminhao.jpg" alt="" />
+            </div>
+            <div class="login login-box">
+                <div class="login-logo">
+                    <a href="../../index2.html"><b>Meu</b>CAMINHONEIRO</a>
                 </div>
-                <div class="login login-box">
-                    <div class="login-logo">
-                        <a href="../../index2.html"><b>Meu</b>CAMINHONEIRO</a>
-                    </div>
-                    <div class="card" style="filter:alpha(opacity=50); opacity:0.8;">
-                        <div class="card-body login-card-body">
-                            <img src="~/dist/img/logo-plug-color.svg" class="center"  width=60 height=40>
-                            <p> </p>
-                            <form action="../../index3.html" method="post">
-                                <div class="input-group mb-3">
-                                    @Html.TextBoxFor(l => l.usuario, new { @class = "form-control", placeholder = "Usuário" })
-                                    @Html.ValidationMessageFor(model => model.usuario, null, new { @class = "text-warning" })
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fa fa-user"></span>
-                                        </div>
+                <div class="card" style="filter:alpha(opacity=50); opacity:0.8;">
+                    <div class="card-body login-card-body">
+                        <img src="~/dist/img/logo-plug-color.svg" class="center" width=60 height=40>
+                        <p> </p>
+                        <form action="../../index3.html" method="post">
+                            <div class="input-group mb-3">
+                                @Html.TextBoxFor(l => l.Usuario, new { @class = "form-control", placeholder = "Usuário" })
+                                @Html.ValidationMessageFor(model => model.Usuario, null, new { @class = "text-warning" })
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fa fa-user"></span>
                                     </div>
                                 </div>
-                                <div class="input-group mb-3">
-                                    @Html.TextBoxFor(l => l.senha, new { @class = "form-control", placeholder = "******", type = "password" })
-                                    @Html.ValidationMessageFor(model => model.senha, null, new { @class = "text-warning" })
-                                    <div class="input-group-append">
-                                        <div class="input-group-text">
-                                            <span class="fas fa-lock"></span>
-                                        </div>
+                            </div>
+                            <div class="input-group mb-3">
+                                @Html.TextBoxFor(l => l.Senha, new { @class = "form-control", placeholder = "******", type = "password" })
+                                @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-warning" })
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
                                     </div>
                                 </div>
-                                <div class="row float-lg-right">
+                            </div>
+                            <div class="row float-lg-right">
 
-                                    <div class="col-15">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
-                                    </div>
+                                <div class="col-15">
+                                    <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
                                 </div>
-                            </form>
-                            <p class="mb-1">
-                                <a href="#">Esqueci minha senha</a>
-                            </p>
-                            <center><label class="text-danger text-center">@ViewBag.Mensagem</label></center>
-                        </div>
+                            </div>
+                        </form>
+                        <p class="mb-1">
+                            <a href="#">Esqueci minha senha</a>
+                        </p>
+                        <center><label class="text-danger text-center">@ViewBag.Mensagem</label></center>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <script src="~/plugins/jquery/jquery.min.js"></script>
-            <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-        }
-        </body>
-    <style>
+        <script src="~/plugins/jquery/jquery.min.js"></script>
+        <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    }
+</body>
+<style>
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-        body, html {
-            width: 100%;
-            height: 100%;
-            font-family: Arial, Tahoma, sans-serif;
-        }
+    body, html {
+        width: 100%;
+        height: 100%;
+        font-family: Arial, Tahoma, sans-serif;
+    }
 
-        #fundo-externo {
-            overflow: hidden;
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
+    #fundo-externo {
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
 
-        #fundo {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-        }
+    #fundo {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+    }
 
-            #fundo img {
-                width: 100%; /* com isso imagem ocupará toda a largura da tela. Se colocarmos height: 100% também, a imagem irá distorcer */
-                position: absolute;
-            }
+    #fundo img {
+        width: 100%; /* com isso imagem ocupará toda a largura da tela. Se colocarmos height: 100% também, a imagem irá distorcer */
+        position: absolute;
+    }
 
-        #site {
-            position: absolute;
-            top: 40px;
-            left: 50%;
-            width: 560px;
-            padding: 20px;
-            margin-left: -300px; /* por causa do posicionamento absoluto temos que usar margem negativa para centralizar o site */
-            background: #FFF; /* fundo branco para navegadores que não suportam rgba */
-            background: rgba(255,255,255,0.8); /* fundo branco com um pouco de transparência */
-        }
+    #site {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        width: 560px;
+        padding: 20px;
+        margin-left: -300px; /* por causa do posicionamento absoluto temos que usar margem negativa para centralizar o site */
+        background: #FFF; /* fundo branco para navegadores que não suportam rgba */
+        background: rgba(255,255,255,0.8); /* fundo branco com um pouco de transparência */
+    }
 
-        p {
-            margin-bottom: 1.5em;
-        }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <script>
-        /*
-        - Como Fazer Uma Imagem de Fundo Preencher Toda a Tela
-        - Autor: Guilherme M�ller
-        - Site: http://guilhermemuller.com.br/blog/2011/06/08/como-fazer-uma-imagem-de-fundo-preencher-a-tela-inteira/
-        */
+    p {
+        margin-bottom: 1.5em;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script>
+    /*
+    - Como Fazer Uma Imagem de Fundo Preencher Toda a Tela
+    - Autor: Guilherme M�ller
+    - Site: http://guilhermemuller.com.br/blog/2011/06/08/como-fazer-uma-imagem-de-fundo-preencher-a-tela-inteira/
+    */
 
-        // Funcao adaptImage()
-        // Parametros: targetimg (objeto jquery com elementos selecionados)
-        function adaptImage(targetimg) {
-            var wheight = $(window).height(); // altura da janela do navegador
-            var wwidth = $(window).width(); // largura da janela do navegador
+    // Funcao adaptImage()
+    // Parametros: targetimg (objeto jquery com elementos selecionados)
+    function adaptImage(targetimg) {
+        var wheight = $(window).height(); // altura da janela do navegador
+        var wwidth = $(window).width(); // largura da janela do navegador
 
-            // removemos os atributos de largura e altura da imagem
-            targetimg.removeAttr("width")
-                .removeAttr("height")
-                .css({ width: "", height: "" }); // removemos poss�veis regras css tamb�m
+        // removemos os atributos de largura e altura da imagem
+        targetimg.removeAttr("width")
+            .removeAttr("height")
+            .css({ width: "", height: "" }); // removemos poss�veis regras css tamb�m
 
-            var imgwidth = targetimg.width(); // largura da imagem
-            var imgheight = targetimg.height(); // altura da imagem
+        var imgwidth = targetimg.width(); // largura da imagem
+        var imgheight = targetimg.height(); // altura da imagem
 
-            var destwidth = wwidth; // largura que a imagem deve ter
-            var destheight = wheight; // altura que a imagem deve ter
+        var destwidth = wwidth; // largura que a imagem deve ter
+        var destheight = wheight; // altura que a imagem deve ter
 
-            // aqui vamos determinar o tamanho final da imagem
-            if (imgheight < wheight) {
-                // se a altura da imagem for menor que a altura da tela, fazemos um c�lculo
-                // para redefinir a largura da imagem para bater com a altura que queremos
-                destwidth = (imgwidth * wheight) / imgheight;
+        // aqui vamos determinar o tamanho final da imagem
+        if (imgheight < wheight) {
+            // se a altura da imagem for menor que a altura da tela, fazemos um c�lculo
+            // para redefinir a largura da imagem para bater com a altura que queremos
+            destwidth = (imgwidth * wheight) / imgheight;
 
-                $('#fundo img').height(destheight);
-                $('#fundo img').width(destwidth);
-            }
-
-            // aqui utilizamos um c�lculo simples para determinar o posicionamento da imagem
-            // para que a mesma fique no meio da tela
-            // posicao = dimens�o da imagem/2 - dimens�o da tela/2
-            destheight = $('#fundo img').height();
-            var posy = (destheight / 2 - wheight / 2);
-            var posx = (destwidth / 2 - wwidth / 2);
-
-            //se o c�lculo das posicoes der resultado positivo, trocamos para negativo
-            if (posy > 0) {
-                posy *= -1;
-            }
-            if (posx > 0) {
-                posx *= -1;
-            }
-
-            // colocamos atraves da funcao css() do jquery o posicionamento da imagem
-            $('#fundo').css({ 'top': posy + 'px', 'left': posx + 'px' });
+            $('#fundo img').height(destheight);
+            $('#fundo img').width(destwidth);
         }
 
-        //quando a janela for redimensionada, adaptamos a imagem
-        $(window).resize(function () {
-            adaptImage($('#fundo img'));
-        });
+        // aqui utilizamos um c�lculo simples para determinar o posicionamento da imagem
+        // para que a mesma fique no meio da tela
+        // posicao = dimens�o da imagem/2 - dimens�o da tela/2
+        destheight = $('#fundo img').height();
+        var posy = (destheight / 2 - wheight / 2);
+        var posx = (destwidth / 2 - wwidth / 2);
 
-        //quando a pagina carregar, fazemos o mesmo
-        $(window).load(function () {
-            $(window).resize();
-        });
-    </script>
+        //se o c�lculo das posicoes der resultado positivo, trocamos para negativo
+        if (posy > 0) {
+            posy *= -1;
+        }
+        if (posx > 0) {
+            posx *= -1;
+        }
+
+        // colocamos atraves da funcao css() do jquery o posicionamento da imagem
+        $('#fundo').css({ 'top': posy + 'px', 'left': posx + 'px' });
+    }
+
+    //quando a janela for redimensionada, adaptamos a imagem
+    $(window).resize(function () {
+        adaptImage($('#fundo img'));
+    });
+
+    //quando a pagina carregar, fazemos o mesmo
+    $(window).load(function () {
+        $(window).resize();
+    });
+</script>
 
 <style>
     .center {
