@@ -1,9 +1,0 @@
-C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.ViewModel\bin\Debug\Caminhoneiro.ViewModel.dll
-C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.ViewModel\bin\Debug\Caminhoneiro.ViewModel.pdb
-C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.ViewModel\obj\Debug\Caminhoneiro.ViewModel.dll
-C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.ViewModel\obj\Debug\Caminhoneiro.ViewModel.pdb
-C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.ViewModel\bin\Debug\Caminhoneiro.ViewModel.dll
-C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.ViewModel\bin\Debug\Caminhoneiro.ViewModel.pdb
-C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.ViewModel\obj\Debug\Caminhoneiro.ViewModel.csproj.CoreCompileInputs.cache
-C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.ViewModel\obj\Debug\Caminhoneiro.ViewModel.dll
-C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.ViewModel\obj\Debug\Caminhoneiro.ViewModel.pdb
