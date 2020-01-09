@@ -1,6 +1,4 @@
-﻿
-@{
-
+﻿@{
     ViewBag.Title = "Adesao";
     Layout = "~/Views/MasterPage.cshtml";
 }
@@ -390,13 +388,31 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Celular</label>
-                            <input type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                            <input id="celular1" name="celular1" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                            <input id="whatsapp1" type="checkbox" name="whatsapp1" value="" />
+                            <label for="whatsapp1" style="cursor:pointer;">
+                                WhatsApp
+                            </label>
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Celular(2)</label>
-                            <input type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                            <input id="celular2" name="celular2" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO">
+                            <input id="whatsapp2" type="checkbox" name="whatsapp2" value="" /> 
+                            <label for="whatsapp2" style="cursor:pointer;">
+                                WhatsApp
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Telefone Celular(3)</label>
+                            <input id="celular3" name="celular3" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO">
+                            <input id="whatsapp3" type="checkbox" name="whatsapp3" value="" />
+                            <label for="whatsapp3" style="cursor:pointer;">
+                                WhatsApp
+                            </label>
                         </div>
                     </div>
                     <div class="col-lg-2">
