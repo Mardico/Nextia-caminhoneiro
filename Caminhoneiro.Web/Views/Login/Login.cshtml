@@ -1,4 +1,4 @@
-﻿@model Caminhoneiro.Web.Models.LoginModels
+﻿@model Caminhoneiro.ViewModel.Usuario.FiltroLoginViewModel
 @{
     Layout = null;
 }
@@ -35,8 +35,8 @@
                         <p> </p>
                         <form action="../../index3.html" method="post">
                             <div class="input-group mb-3">
-                                @Html.TextBoxFor(l => l.usuario, new { @class = "form-control", placeholder = "Usuário" })
-                                @Html.ValidationMessageFor(model => model.usuario, null, new { @class = "text-warning" })
+                                @Html.TextBoxFor(l => l.Usuario, new { @class = "form-control", placeholder = "Usuário" })
+                                @Html.ValidationMessageFor(model => model.Usuario, null, new { @class = "text-warning" })
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fa fa-user"></span>
@@ -44,8 +44,8 @@
                                 </div>
                             </div>
                             <div class="input-group mb-3">
-                                @Html.TextBoxFor(l => l.senha, new { @class = "form-control", placeholder = "******", type = "password" })
-                                @Html.ValidationMessageFor(model => model.senha, null, new { @class = "text-warning" })
+                                @Html.TextBoxFor(l => l.Senha, new { @class = "form-control", placeholder = "******", type = "password" })
+                                @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-warning" })
                                 <div class="input-group-append">
                                     <div class="input-group-text">
                                         <span class="fas fa-lock"></span>
