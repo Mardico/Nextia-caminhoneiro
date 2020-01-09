@@ -3,10 +3,9 @@ using System.Web.Mvc;
 
 namespace Caminhoneiro.Web.Controllers
 {
+    [Authorize]
     public class SeguradoController : BaseController
     {
-
-
         public ActionResult ConsultarSegurado()
         {
             return View();
@@ -20,22 +19,42 @@ namespace Caminhoneiro.Web.Controllers
             }
             catch
             {
-                //implementar mensagem de erro ao consultar Serviço
 
             }
             return View();
         }
         public ActionResult KitProduto()
         {
+            try
+            {
+            }
+            catch
+            {
+
+            }
             return View();
         }
 
         public ActionResult EditarSegurado()
         {
+            try
+            {
+            }
+            catch
+            {
+
+            }
             return View();
         }
         public ActionResult DadosCadastrais()
         {
+            try
+            {
+            }
+            catch
+            {
+
+            }
             return View();
         }
     }

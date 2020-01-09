@@ -2,11 +2,13 @@
 
 namespace Caminhoneiro.Web.Controllers
 {
+    [Authorize]
     public class ApoliceController : BaseController
     {
         private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public ActionResult Index()
         {
+
             return View();
         }
         public ActionResult Adesao()
