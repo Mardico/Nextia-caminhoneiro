@@ -28,6 +28,15 @@ namespace Caminhoneiro.Servico.Produto
         //            client.DefaultRequestHeaders.Add(Constantes.HEADER_PARAM_API_VERSION, apiVersion);
         //            client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
 
+<<<<<<< HEAD
+                    Task<HttpResponseMessage> getTask = client.GetAsync($"?empresa={1}&usuario={"6goD{FZM+["}");
+                    getTask.Wait();
+                    HttpResponseMessage result = getTask.Result;
+                    
+                    var log = result.Content.ReadAsStringAsync().Result;
+                    JavaScriptSerializer js = new JavaScriptSerializer();
+                    ret= JsonConvert.DeserializeObject<List<RetornoProdutoModel>>(log);
+=======
         //            Task<HttpResponseMessage> getTask = client.GetAsync($"?empresa={1}&usuario={"6goD{FZM+["}");
         //            getTask.Wait();
         //            HttpResponseMessage result = getTask.Result;
@@ -36,6 +45,7 @@ namespace Caminhoneiro.Servico.Produto
         //            var log = result.Content.ReadAsStringAsync().Result;
         //            JavaScriptSerializer js = new JavaScriptSerializer();
         //            ret= JsonConvert.DeserializeObject<List<RetornoProdutoModel>>(log);
+>>>>>>> master
 
         //        }
         //            return ret;
