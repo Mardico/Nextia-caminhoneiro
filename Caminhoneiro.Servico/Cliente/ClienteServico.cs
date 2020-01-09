@@ -14,10 +14,11 @@ namespace Caminhoneiro.Servico.Cliente
 {
     public class ClienteServico
     {
-        public RetornoClienteModel getCliente(string clientId,string apiKey, string apiVersion,string token,string cpf)
+        public RetornoClienteModel getCliente(string clientId, string apiKey, string apiVersion, string token, string cpf)
         {
             RetornoClienteModel ret = new RetornoClienteModel();
-            try {
+            try
+            {
                 using (var client = new HttpClient())
                 {
                     client.BaseAddress = new Uri(Constantes.GPROXS_CONNECTOR_URI + "cliente/");

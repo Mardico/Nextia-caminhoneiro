@@ -1,19 +1,14 @@
-﻿using Caminhoneiro.Servico.Login;
-using Caminhoneiro.Servico.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using Caminhoneiro.DTO.Usuario;
+using Caminhoneiro.Util;
+using Caminhoneiro.ViewModel.Shared;
+using Caminhoneiro.ViewModel.Usuario;
 using System.Web.Mvc;
-using Caminhoneiro.Models;
-using Caminhoneiro.Models.Login;
-using Caminhoneiro.Web.Models;
-using System.Web.Security;
 
 namespace Caminhoneiro.Web.Controllers
 {
     public class LoginController : Controller
     {
+        private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         public ActionResult Login()
         {
@@ -21,51 +16,31 @@ namespace Caminhoneiro.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(LoginModels login)
+        public ActionResult Login(FiltroLoginViewModel login)
         {
-            try
+            logar.Debug("Inicio Logar");
+            RetornoGenericoViewModel<UsuarioViewModel> retorno = new RetornoGenericoViewModel<UsuarioViewModel>(0, "Falha");
+            using (var client = new HttpClientUtil<UsuarioViewModel>())
             {
-                LoginServico _loginS = new LoginServico();
-                RetornoLoginModel ret = _loginS.autenticacaoLogin(Constantes.clientId, Constantes.apiKey, Constantes.apiVersion, login.usuario, login.senha);
-                if (ret.token != null)
-                {
-                    Session["NomeUsuario"] = ret.nome.Substring(0, ret.nome.IndexOf(" "));
-                    Session["Token"] = ret.token;
-
-                    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(ret.nome, true);
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                    FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(
-                        ticket.Version,
-                        ticket.Name,
-                        DateTime.Now,
-                        DateTime.Now.AddDays(1),
-                        ticket.IsPersistent,
-                        FormsAuthentication.FormsCookiePath
-                    );
-                    authCookie.Value = FormsAuthentication.Encrypt(newTicket);
-
-                    Response.Cookies.Add(authCookie);
-
-                    return RedirectToAction("Index", "Apolice");
-                }
-                else
-                {
-                    ViewBag.Mensagem = "Usuário não encontrado!";
-                    return View();
-                }
-
+                FiltroLoginDTO filtroDTO = new FiltroLoginDTO(); //Mapper.Map<FiltroLoginViewModel, FiltroLoginDTO>(login);
+                //var listaDTO = client.Post("Configuracao/ListarPaginado", filtroDTO);
+                //retorno = listaDTO; //Mapper.Map<RetornoGenericoViewModel<UsuarioViewModel>, RetornoGenericoDTO<UsuarioDTO>>(listaDTO);
+                //if (retorno.ID > 0)
+                //{
+                //    HttpCookie authCookie = FormsAuthentication.GetAuthCookie(retorno.Item.nome, true);
+                //    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                //    FormsAuthenticationTicket newTicket = new FormsAuthenticationTicket(ticket.Version, ticket.Name, DateTime.Now, DateTime.Now.AddDays(1), ticket.IsPersistent, FormsAuthentication.FormsCookiePath);
+                //    authCookie.Value = FormsAuthentication.Encrypt(newTicket);
+                //    Response.Cookies.Add(authCookie);
+                //    return RedirectToAction("Index", "Apolice");
+                //}
+                //else
+                //{
+                //    ViewBag.Mensagem = "Erro ao conectar no serviço de Login!";
+                //    return View();
+                //}
             }
-            catch
-            {
-                ViewBag.Mensagem = "Erro ao conectar no serviço de Login!";
-                return View();
-            }
-        }
-
-        public ActionResult Sair()
-        {
-            Session.Remove("Token");
-            return RedirectToAction("Login", "Login");
+            return View();
         }
     }
 }
