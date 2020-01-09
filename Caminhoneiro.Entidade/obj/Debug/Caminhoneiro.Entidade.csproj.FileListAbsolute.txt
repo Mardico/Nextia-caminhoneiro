@@ -6,3 +6,12 @@ C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Entidade\bin\Debug\
 C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.csproj.CopyComplete
 C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.dll
 C:\Users\jedua\Source\Repos\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.pdb
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\bin\Debug\Caminhoneiro.Entidade.dll
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\bin\Debug\Caminhoneiro.Entidade.pdb
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\bin\Debug\Caminhoneiro.DTO.dll
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\bin\Debug\Caminhoneiro.DTO.pdb
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.csprojAssemblyReference.cache
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.csproj.CoreCompileInputs.cache
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.csproj.CopyComplete
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.dll
+C:\Users\matheus.correia\Desktop\Caminhoneiro\nextia-caminhoneiro\Caminhoneiro.Entidade\obj\Debug\Caminhoneiro.Entidade.pdb
