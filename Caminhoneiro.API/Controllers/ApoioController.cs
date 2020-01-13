@@ -1,13 +1,12 @@
 ﻿using Caminhoneiro.Business;
-using Caminhoneiro.DTO.Apolice;
-using Caminhoneiro.DTO.Shared;
+using Caminhoneiro.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
 
 namespace Caminhoneiro.API.Controllers
 {
-    public class Apoio : ApiController
+    public class ApoioController : ApiController
     {
         private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 

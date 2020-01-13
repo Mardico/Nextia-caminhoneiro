@@ -10,5 +10,11 @@ namespace Caminhoneiro.Web.Controllers
             ViewBag.Mensagem = "Erro ao consultar Serviço!";
             return View();
         }
+
+        public ActionResult Error()
+        {
+            ViewBag.Mensagem = "Erro ao consultar Serviço!";
+            return View("Index");
+        }
     }
 }

@@ -1,7 +1,7 @@
-﻿using Caminhoneiro.ViewModel.Cliente;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Caminhoneiro.ViewModel.Apolice
+namespace Caminhoneiro.ViewModel
 {
     public class ApoliceViewModel
     {
@@ -19,7 +19,10 @@ namespace Caminhoneiro.ViewModel.Apolice
         public int DadosVeiculoId { get; set; }
         public ApoliceDadosVeiculoViewModel DadosVeiculo { get; set; }
         public int DadosPagamentoId { get; set; }
+        public int Endosso { get; set; }
+        public DateTime DataInicio { get; set; }
         public int StatusId { get; set; }
+        public string Status { get; set; }
         public ApoliceDadosPagamentoViewModel DadosPagamento { get; set; }
     }
 }

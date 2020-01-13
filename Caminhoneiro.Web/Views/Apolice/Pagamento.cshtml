@@ -1,29 +1,36 @@
-﻿
+﻿@model Caminhoneiro.ViewModel.ApoliceViewModel
 @{
-    ViewBag.Title = "Pagamento";
     Layout = "~/Views/MasterPage.cshtml";
 }
-
-
+@section head
+{
+    <link rel="stylesheet" href="~/Assets/Css/Apolice/Pagamento.css" type="text/css">
+}
 <section class="content">
     <div class="card-body">
-        <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link  " href="@Url.Action("DadosCadastrais","Segurado")" role="tab" aria-selected="true">
-                    Segurado <i class="fas fa-user"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="@Url.Action("ListaTodos","Apolice")" role="tab" aria-selected="false">
-                    Produtos <i class="fa fa-list-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("CartaoDigital","Segurado")" role="tab" aria-selected="false">
-                    Cartão Digital <i class="fas fa-id-badge"></i>
-                </a>
-            </li>
-        </ul>
+        @using (Html.BeginForm("Pagamento", "Apolice", FormMethod.Post, new { id = "TabSegurado" }))
+        {
+            <input type="hidden" name="Id" id="Id" value="@Model.DadosClienteId" />
+            <input type="hidden" name="CPF" id="CPF" value="@Model.DadosCliente.CPF" />
+            <input type="hidden" name="ApoliceId" id="ApoliceId" value="@Model.Id" />
+            <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link " id="tabSegurado" role="tab" aria-selected="true" href="#">
+                        Segurado <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="tabProdutos" role="tab" aria-selected="false" href="#">
+                        Produtos <i class="fa fa-list-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="tabKit" role="tab" aria-selected="false">
+                        Cartão Digital <i class="fas fa-id-badge"></i>
+                    </a>
+                </li>
+            </ul>
+        }
 
         <div class="tab-custom-content">
             <p class="lead mb-0"></p>
@@ -32,12 +39,12 @@
             <div class="card-body">
                 <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("ConsultarApolice","Apolice")" role="tab" aria-selected="true">
+                        <a class="nav-link" href="#" id="tabApolice" role="tab" aria-selected="true">
                             Dados Gerais <i class="fas fa-user"></i>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active " href="@Url.Action("Pagamento","Apolice")" role="tab" aria-selected="false">
+                        <a class="nav-link active " href="#" id="tabPagamentos" role="tab" aria-selected="false">
                             Pagamentos <i class="fas fa-search-dollar"></i>
                         </a>
                     </li>
@@ -47,7 +54,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link " href="@Url.Action("Historico","Apolice")" role="tab" aria-selected="false">
+                        <a class="nav-link " href="#" id="tabHistorico" role="tab" aria-selected="false">
                             Histórico
                             <i class="fas fa-book-open"> </i>
                         </a>
@@ -207,4 +214,7 @@
         </div>
     </div>
 </section>
-
+@section scripts
+{
+    <script src="~/Assets/Js/Apolice/Pagamento.js"></script>
+}

@@ -1,13 +1,21 @@
-﻿using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    public static class QdadeViagens
+    public class QdadeViagens
     {
-        public static List<TabelaApoioDTO> GetViagens()
+        public QdadeViagens()
         {
-            return new List<TabelaApoioDTO>() {
+            GetViagens();
+        }
+
+        internal static List<TabelaApoioDTO> _Itens = null;
+        public static List<TabelaApoioDTO> Itens() { return _Itens; }
+
+        internal void GetViagens()
+        {
+            _Itens = new List<TabelaApoioDTO>() {
                 new TabelaApoioDTO() {Id =0, Codigo = "0000", Texto="Não Informado"},
                 new TabelaApoioDTO() {Id =1, Codigo = "0001", Texto="Até 5"},
                 new TabelaApoioDTO() { Id = 2, Codigo = "0002", Texto="5 a 10" },

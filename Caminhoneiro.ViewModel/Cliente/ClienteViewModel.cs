@@ -1,13 +1,16 @@
 ﻿using System;
 
-namespace Caminhoneiro.ViewModel.Cliente
+namespace Caminhoneiro.ViewModel
 {
     public class ClienteViewModel
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
-        public string DataNascimento { get; set; }
+        public int SexoId { get; set; }
+        public string Sexo { get; set; }
+        public DateTime DataNascimento { get; set; }
+        public int EstadoCivilId { get; set; }
         public string EstadoCivil { get; set; }
         public string Email { get; set; }
         public string CEP { get; set; }
@@ -20,8 +23,9 @@ namespace Caminhoneiro.ViewModel.Cliente
         public string TelefoneFixo { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneSecundario { get; set; }
+        public int ContactarPorId { get; set; }
         public string ContactarPor { get; set; }
         public DateTime DataAlteracao { get; set; }
-
+        public int NumeroApolices { get; set; }
     }
 }

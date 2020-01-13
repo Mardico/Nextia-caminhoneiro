@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using Caminhoneiro.DTO.Apolice;
-using Caminhoneiro.DTO.Cliente;
-using Caminhoneiro.DTO.Shared;
-using Caminhoneiro.DTO.Usuario;
-using Caminhoneiro.ViewModel.Apolice;
-using Caminhoneiro.ViewModel.Cliente;
-using Caminhoneiro.ViewModel.Shared;
-using Caminhoneiro.ViewModel.Usuario;
+using Caminhoneiro.DTO;
+using Caminhoneiro.ViewModel;
 
 namespace Caminhoneiro.MapViewModelDTO
 {
@@ -20,15 +14,21 @@ namespace Caminhoneiro.MapViewModelDTO
             CreateMap<ApoliceDadosPagamentoViewModel, ApoliceDadosPagamentoDTO>().ReverseMap();
             CreateMap<ApoliceDadosProdutoViewModel, ApoliceDadosProdutoDTO>().ReverseMap();
             CreateMap<ApoliceDadosVeiculoViewModel, ApoliceDadosVeiculoDTO>().ReverseMap();
-            //CreateMap<ApoliceViewModel, ApoliceDTO>().ReverseMap();
+            CreateMap<ApoliceViewModel, ApoliceDTO>().ReverseMap();
+            CreateMap<ApoliceKitProdutoViewModel, ApoliceKitProdutoDTO>().ReverseMap();
 
             //Dados do Cliente
             CreateMap<ClienteViewModel, ClienteDTO>().ReverseMap();
+            CreateMap<ClienteApoliceViewModel, ClienteDTO>().ReverseMap();
 
             //Dados do Usuario
             CreateMap<UsuarioViewModel, UsuarioDTO>().ReverseMap();
+            CreateMap<VinculoViewModel, VinculoDTO>().ReverseMap();
             CreateMap<AlteraSenhaViewModel, AlteraSenhaDTO>().ReverseMap();
             CreateMap <FiltroLoginViewModel,FiltroLoginDTO>().ReverseMap();
+
+            //Produto
+            CreateMap<ProdutoViewModel, ProdutoDTO>().ReverseMap();
 
             //Classes de Apoio
             CreateMap<FiltroGenericoViewModel, FiltroGenericoDTO>().ReverseMap();

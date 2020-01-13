@@ -1,16 +1,21 @@
-﻿using Caminhoneiro.DTO.Shared;
-using Caminhoneiro.DTO.Usuario;
+﻿using Caminhoneiro.DTO;
 using System.Collections.Generic;
 using System.Linq;
 namespace Caminhoneiro.Entidade
 {
-    public static class Usuarios
+    public class Usuarios
     {
-        public static List<UsuarioDTO> GetUsuario()
+        public Usuarios()
+        {
+            GetUsuario();
+        }
+        internal static List<UsuarioDTO> _Itens = null;
+        public static List<UsuarioDTO> Itens() { return _Itens; }
+        internal void GetUsuario()
         {
 
-            List<Vinculo> sindicatos = Sindicatos.GetSindicatos().Select(s => new Vinculo { Codigo = s.Codigo, Nome = s.Texto }).ToList();
-            return new List<UsuarioDTO>() {
+            List<VinculoDTO> sindicatos = Sindicatos.Itens().Select(s => new VinculoDTO { Id = s.Id,  Codigo = s.Codigo, Nome = s.Texto }).ToList();
+            _Itens= new List<UsuarioDTO>() {
                 new UsuarioDTO() {Id =1, Codigo = "522.083.521-14", Nome="Luis Paulo", Email="luis.paulo@gmail.com", Senha = "123@Mudar", Vinculos = sindicatos.Where(w=>w.Codigo=="0001").ToList() },
                 new UsuarioDTO() { Id = 2, Codigo = "402.027.612-90", Nome="Danilo Jose" , Email="danilo.jose@gmail.com" , Senha = "123@Mudar" , Vinculos = sindicatos.Where(w=>w.Codigo=="0002").ToList()},
                 new UsuarioDTO() { Id = 3, Codigo = "414.755.773-20", Nome="Jose Paulo da Silva", Email="jose.paulo@gmail.com" , Senha = "123@Mudar" , Vinculos = sindicatos.Where(w=>w.Codigo=="0003").ToList()},

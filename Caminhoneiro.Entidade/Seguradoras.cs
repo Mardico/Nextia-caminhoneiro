@@ -1,13 +1,19 @@
-﻿using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-	public static class Seguradoras
+	public class Seguradoras
     {
-        public static List<TabelaApoioDTO> GetSeguradoras()
+		public Seguradoras()
+		{
+			GetSeguradoras();
+		}
+		internal static List<TabelaApoioDTO> _Itens = null;
+		public static List<TabelaApoioDTO> Itens() { return _Itens; }
+		internal void GetSeguradoras()
         {
-            return new List<TabelaApoioDTO>() {
+			_Itens = new List<TabelaApoioDTO>() {
 				new TabelaApoioDTO  { Id = 1, Codigo = "3314", Texto = "Etiam Ligula LLP" },
 				new TabelaApoioDTO  { Id = 2, Codigo = "4408", Texto = "Luctus Felis Industries" },
 				new TabelaApoioDTO  { Id = 3, Codigo = "1090", Texto = "Nam Incorporated" },

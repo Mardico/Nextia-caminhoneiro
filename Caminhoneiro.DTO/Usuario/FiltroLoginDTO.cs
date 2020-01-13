@@ -1,4 +1,4 @@
-﻿namespace Caminhoneiro.DTO.Usuario
+﻿namespace Caminhoneiro.DTO
 {
     public class FiltroLoginDTO
     {

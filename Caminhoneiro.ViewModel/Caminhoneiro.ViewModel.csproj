@@ -45,17 +45,26 @@
     <Compile Include="Apolice\ApoliceDadosProdutoViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosVeiculoViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosDependenteViewModel.cs" />
+    <Compile Include="Apolice\ApoliceKitProdutoViewModel.cs" />
     <Compile Include="Apolice\ApoliceViewModel.cs" />
+    <Compile Include="Cliente\ClienteApoliceViewModel.cs" />
     <Compile Include="Cliente\ClienteViewModel.cs" />
     <Compile Include="Usuario\AlteraSenhaViewModel.cs" />
     <Compile Include="Usuario\FiltroLoginViewModel.cs" />
+    <Compile Include="Usuario\SolicitaAcessoViewModel.cs" />
     <Compile Include="Usuario\UsuarioViewModel.cs" />
     <Compile Include="Produto\ProdutoViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\TabelaApoioViewModel.cs" />
     <Compile Include="Shared\FiltroGenericoViewModel.cs" />
     <Compile Include="Shared\RetornoGenericoViewModel.cs" />
+    <Compile Include="Usuario\VinculoViewModel.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Caminhoneiro.DTO\Caminhoneiro.DTO.csproj">
+      <Project>{0691026E-2167-4DC5-BB10-C812A967563D}</Project>
+      <Name>Caminhoneiro.DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

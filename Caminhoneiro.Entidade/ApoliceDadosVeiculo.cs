@@ -1,30 +1,47 @@
-﻿using Caminhoneiro.DTO.Apolice;
+﻿using Caminhoneiro.DTO;
 using System;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    public static class ApoliceDadosVeiculo
+    public class ApoliceDadosVeiculo
     {
-        public static List<ApoliceDadosVeiculoDTO> ListaApoliceVeiculos()
+        public ApoliceDadosVeiculo()
         {
-            var retorno = new List<ApoliceDadosVeiculoDTO>();
+            ListaApoliceVeiculos();
+        }
+        public static List<ApoliceDadosVeiculoDTO> _Itens = null;
+        public static List<ApoliceDadosVeiculoDTO> Itens() { return _Itens; }
+        internal void ListaApoliceVeiculos()
+        {
+            _Itens = new List<ApoliceDadosVeiculoDTO>();
             for (int i = 0; i < 100; i++)
             {
                 int SeguradoraId = 0;
+                string SeguradoraNome = "";
                 bool Segurado = Convert.ToBoolean(new Random().Next(0, 1));
                 if (Segurado) {
-                    SeguradoraId = Seguradoras.GetSeguradoras()[new Random().Next(0, 99)].Id;
+                    var oSeguradora = Seguradoras.Itens()[new Random().Next(0, 99)];
+                    SeguradoraId = oSeguradora.Id;
+                    SeguradoraNome = oSeguradora.Texto;
                 }
-                int VeiculoProprioId = new Random().Next(1, 2);
-                int QdadeViagensId = new Random().Next(0, 4);
+                TabelaApoioDTO oVeiculoProprio = VeiculoProprio.Itens()[ new Random().Next(1, 2)];
+                TabelaApoioDTO oQdadeViagens = QdadeViagens.Itens()[ new Random().Next(0, 4)];
                 int TipoEntregaId = new Random().Next(0, 2);
-                int RendaLiquidaId =  new Random().Next(0, 3);
-                var oVeiculo = Veiculos.GetVeiculos()[new Random().Next(1, 15)];
+                TabelaApoioDTO oRendaLiquida = RendasLiquidas.Itens()[new Random().Next(0, 3)];
+                var oVeiculo = Veiculos.Itens()[new Random().Next(1, 15)];
                 bool SolicitouServApolice = Convert.ToBoolean(new Random().Next(0, 1));
-                retorno.Add(new ApoliceDadosVeiculoDTO() { Id = i, Codigo =oVeiculo.Codigo, VeiculoID = oVeiculo.Id, QdadeViagensId = QdadeViagensId, VeiculoProprioId = VeiculoProprioId, RendaLiquidaId = RendaLiquidaId, Segurado =Segurado, SeguradoraId = SeguradoraId, TipoEntregaId =TipoEntregaId, SolicitouServApolice = SolicitouServApolice  });
+                _Itens.Add(new ApoliceDadosVeiculoDTO() { Id = i, Codigo = oVeiculo.Codigo, 
+                    VeiculoID = oVeiculo.Id, Veiculo= oVeiculo.Texto, 
+                    QdadeViagensId = oQdadeViagens.Id, QdadeViagens = oQdadeViagens.Texto, 
+                    VeiculoProprioId = oVeiculoProprio.Id, VeiculoProprio = oVeiculoProprio.Texto, 
+                    RendaLiquidaId = oRendaLiquida.Id, RendaLiquida = oRendaLiquida.Texto,
+                    Segurado =Segurado, 
+                    SeguradoraId = SeguradoraId, Seguradora = SeguradoraNome,
+                    TipoEntregaId =TipoEntregaId, 
+                    TipoEntrega = (TipoEntregaId==1)?"Municipal":"Estadual",
+                    SolicitouServApolice = SolicitouServApolice  });
             }
-            return retorno;
         }
     }
 }

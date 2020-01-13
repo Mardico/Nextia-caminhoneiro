@@ -1,22 +1,26 @@
-﻿using Caminhoneiro.DTO.Apolice;
+﻿using Caminhoneiro.DTO;
 using System;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    class ApoliceDadosProduto
+    public class ApoliceDadosProduto
     {
-        public static List<ApoliceDadosProdutoDTO> ListaApoliceProdutos()
+        public ApoliceDadosProduto()
         {
-            var retorno = new List<ApoliceDadosProdutoDTO>();
+            ListaApoliceProdutos();
+        }
+        public static List<ApoliceDadosProdutoDTO> _Itens = null;
+        public static List<ApoliceDadosProdutoDTO> Itens() { return _Itens; }
+        internal void ListaApoliceProdutos()
+        {
+            _Itens = new List<ApoliceDadosProdutoDTO>();
             for (int i = 0; i < 100; i++)
             {
-                int randomNumber = new Random().Next(0, 99);
-                var oAgente = Usuarios.GetUsuario()[randomNumber];
-                var oProduto = Produtos.GetProdutos()[randomNumber];
-                retorno.Add(new ApoliceDadosProdutoDTO() { Id = i, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, ProdutoId = oProduto.Id, Valor = oProduto.Valor, Codigo = oProduto.Codigo });
+                var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
+                var oProduto = Produtos.Itens()[new Random().Next(1, 4)];
+                _Itens.Add(new ApoliceDadosProdutoDTO() { Id = i, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, ProdutoId = oProduto.Id, Valor = oProduto.ValorPrincipal, Codigo = oProduto.Codigo, Nome = oProduto.Nome });
             }
-            return retorno;
         }
     }
 }

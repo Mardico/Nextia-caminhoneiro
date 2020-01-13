@@ -1,12 +1,11 @@
 ﻿using Caminhoneiro.Business;
-using Caminhoneiro.DTO.Shared;
-using Caminhoneiro.DTO.Usuario;
+using Caminhoneiro.DTO;
 using System.Web.Http;
 using System.Web.Http.Results;
 
 namespace Caminhoneiro.API.Controllers
 {
-    public class Usuario : ApiController
+    public class UsuarioController : ApiController
     {
         private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -47,5 +46,25 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Item");
             return Json(retorno);
         }
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<UsuarioDTO>> SolicitaSenha(FiltroGenericoDTO filtro)
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<UsuarioDTO> retorno = new RetornoGenericoDTO<UsuarioDTO>();
+            try
+            {
+                UsuarioBLL oUsuario = new UsuarioBLL();
+                retorno = oUsuario.SolicitaSenha(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Item");
+            return Json(retorno);
+        }
+
+        
     }
 }
