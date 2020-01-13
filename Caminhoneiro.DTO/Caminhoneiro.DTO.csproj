@@ -46,6 +46,8 @@
     <Compile Include="Apolice\ApoliceDadosProdutoDTO.cs" />
     <Compile Include="Apolice\ApoliceDadosVeiculoDTO.cs" />
     <Compile Include="Apolice\ApoliceDTO.cs" />
+    <Compile Include="Apolice\ApoliceKitProdutoDTO.cs" />
+    <Compile Include="Apolice\ApoliceStatusDTO.cs" />
     <Compile Include="Cliente\ClienteDTO.cs" />
     <Compile Include="Usuario\AlteraSenhaDTO.cs" />
     <Compile Include="Usuario\FiltroLoginDTO.cs" />
@@ -55,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shared\RetornoGenericoDTO.cs" />
     <Compile Include="Shared\TabelaApoioDTO.cs" />
+    <Compile Include="Usuario\VinculoDTO.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

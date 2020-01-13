@@ -1,21 +1,23 @@
-﻿using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using Caminhoneiro.Entidade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caminhoneiro.Business
 {
     public class TabelasApoioBLL
     {
+        public TabelasApoioBLL()
+        {
+
+        }
         public RetornoGenericoDTO<List<TabelaApoioDTO>> ListarSeguradoras(FiltroGenericoDTO filtro)
         {
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Seguradoras.GetSeguradoras().ToList();
+                retorno.Item = Seguradoras.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -31,7 +33,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = QdadeViagens.GetViagens().ToList();
+                retorno.Item = QdadeViagens.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -47,7 +49,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = RendasLiquidas.GetRendas().ToList();
+                retorno.Item = RendasLiquidas.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -63,7 +65,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Sindicatos.GetSindicatos().ToList();
+                retorno.Item = Sindicatos.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -79,7 +81,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = VeiculoProprio.GetVeiculosProprios().ToList();
+                retorno.Item = VeiculoProprio.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -95,7 +97,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<List<TabelaApoioDTO>> retorno = new RetornoGenericoDTO<List<TabelaApoioDTO>>() { Mensagem = "Falha ao Processar", Item = new List<TabelaApoioDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Veiculos.GetVeiculos().ToList();
+                retorno.Item = Veiculos.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }

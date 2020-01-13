@@ -1,47 +1,63 @@
-﻿using Caminhoneiro.DTO.Apolice;
-using Caminhoneiro.DTO.Cliente;
+﻿using Caminhoneiro.DTO;
 using System;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    public static class Apolices
+    public class Apolices
     {
-        public static List<ApoliceDTO> GetApolices()
+        public Apolices()
         {
-            var retorno = new List<ApoliceDTO>();
-            for (int i = 0; i < 100; i++)
+            GetApolices();
+        }
+        internal static List<ApoliceDTO> _Itens = null;
+        public static List<ApoliceDTO> Itens() { return _Itens; }
+        internal void GetApolices()
+        {
+            _Itens = new List<ApoliceDTO>();
+            foreach (ClienteDTO oCliente in Clientes.Itens())
             {
-                int randomNumber = new Random().Next(0, 99);
-                int randomNumber2 = new Random().Next(0, 5);
-                var oAgente = Usuarios.GetUsuario()[randomNumber];
-                ClienteDTO oCliente = Clientes.GetClientes()[randomNumber];
-                ApoliceDadosProdutoDTO oProduto = ApoliceDadosProduto.ListaApoliceProdutos()[randomNumber];
-                ApoliceDadosVeiculoDTO oVeiculo = ApoliceDadosVeiculo.ListaApoliceVeiculos()[randomNumber];
-                ApoliceDadosPagamentoDTO oPagamento = ApoliceDadosPagamento.GetApoliceDadosPagamento()[randomNumber];
-                List<ApoliceDadosDependenteDTO> oDependentes = new List<ApoliceDadosDependenteDTO>();
-                if (randomNumber2 > 0)
-                    oDependentes = ApoliceDadosDependente.ListaDependentes().GetRange(randomNumber, randomNumber + randomNumber2);
-
-                string Codigo = new Random().Next(0, 99).ToString().PadLeft(8, '0');
-
-                retorno.Add(new ApoliceDTO()
+                bool randombool = Convert.ToBoolean(new Random().Next(0, 1));
+                if (randombool || oCliente.Id < 51)
                 {
-                    Id = i,
-                    Codigo = Codigo,
-                    VinculoId = oAgente.Vinculos[0].Id,
-                    Vinculo = oAgente.Vinculos[0].Nome,
-                    Usuario = oAgente.Nome,
-                    UsuarioId = oAgente.Id,
-                    DadosProduto = oProduto,
-                    DadosProdutoId = oProduto.Id,
-                    DadosPagamentoId = oPagamento.Id,
-                    DadosPagamento = oPagamento,
-                    DadosVeiculoId = oVeiculo.Id,
-                    DadosVeiculo = oVeiculo
-                });
+                    int randomNumber2 = new Random().Next(0, 5);
+                    var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
+                    ApoliceDadosProdutoDTO oProduto = ApoliceDadosProduto.Itens()[new Random().Next(0, 99)];
+                    ApoliceDadosVeiculoDTO oVeiculo = ApoliceDadosVeiculo.Itens()[new Random().Next(0, 99)];
+                    ApoliceDadosPagamentoDTO oPagamento = ApoliceDadosPagamento.Itens()[new Random().Next(0, 99)];
+                    List<ApoliceDadosDependenteDTO> oDependentes = new List<ApoliceDadosDependenteDTO>();
+                    if (randomNumber2 > 0)
+                        oDependentes = ApoliceDadosDependente.Itens().GetRange(new Random().Next(0, 99), new Random().Next(0, 4));
+                    else
+                        oDependentes = new List<ApoliceDadosDependenteDTO>();
+                    string Codigo = new Random().Next(0, 99).ToString().PadLeft(8, '0');
+                    ApoliceStatusDTO oStatus = ApoliceStatus.Itens()[new Random().Next(1, 5)];
+                    DateTime dataini = new DateTime();
+                    DateTime start = new DateTime(1995, 1, 1);
+                    _Itens.Add(new ApoliceDTO()
+                    {
+                        Id = oCliente.Id + 100,
+                        Codigo = Codigo,
+                        VinculoId = oAgente.Vinculos[0].Id,
+                        Vinculo = oAgente.Vinculos[0].Nome,
+                        Usuario = oAgente.Nome,
+                        UsuarioId = oAgente.Id,
+                        Endosso = randomNumber2,
+                        StatusId = oStatus.Id,
+                        Status = oStatus.Nome,
+                        DataInicio = dataini.AddDays(new Random().Next((DateTime.Today - start).Days)),
+                        DadosProduto = oProduto,
+                        DadosProdutoId = oProduto.Id,
+                        DadosPagamentoId = oPagamento.Id,
+                        DadosPagamento = oPagamento,
+                        DadosVeiculoId = oVeiculo.Id,
+                        DadosVeiculo = oVeiculo,
+                        DadosCliente = oCliente,
+                        DadosClienteId = oCliente.Id,
+                        DadosDependente = oDependentes
+                    });
+                }
             }
-            return retorno;
         }
     }
 }

@@ -1,13 +1,19 @@
-﻿using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    public static class Sindicatos
+    public class Sindicatos
     {
-        public static List<TabelaApoioDTO> GetSindicatos()
+        public Sindicatos()
         {
-            return new List<TabelaApoioDTO>() {
+            GetSindicatos();
+        }
+        internal static List<TabelaApoioDTO> _Itens = null;
+        public static List<TabelaApoioDTO> Itens() { return _Itens; }
+        internal void GetSindicatos()
+        {
+            _Itens =  new List<TabelaApoioDTO>() {
                 new TabelaApoioDTO() {Id =1, Codigo = "0001", Texto="Sem Sindicato"},
                 new TabelaApoioDTO() { Id = 2, Codigo = "0002", Texto="Sindicato 01"},
                 new TabelaApoioDTO() { Id = 3, Codigo = "0003", Texto="Sindicato 02"},

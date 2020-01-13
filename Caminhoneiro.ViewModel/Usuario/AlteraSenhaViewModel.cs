@@ -1,4 +1,4 @@
-﻿namespace Caminhoneiro.ViewModel.Usuario
+﻿namespace Caminhoneiro.ViewModel
 {
     public class AlteraSenhaViewModel
     {

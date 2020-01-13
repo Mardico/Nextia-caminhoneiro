@@ -130,11 +130,11 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\Apoio.cs" />
-    <Compile Include="Controllers\Apolice.cs" />
-    <Compile Include="Controllers\Cliente.cs" />
-    <Compile Include="Controllers\Usuario.cs" />
-    <Compile Include="Controllers\Produtos.cs" />
+    <Compile Include="Controllers\ApoioController.cs" />
+    <Compile Include="Controllers\ApoliceController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\ProdutosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -150,11 +150,6 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -170,6 +165,10 @@
     <ProjectReference Include="..\Caminhoneiro.DTO\Caminhoneiro.DTO.csproj">
       <Project>{0691026e-2167-4dc5-bb10-c812a967563d}</Project>
       <Name>Caminhoneiro.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Caminhoneiro.Entidade\Caminhoneiro.Entidade.csproj">
+      <Project>{D2736C08-BA8C-4004-BAEF-697913F23315}</Project>
+      <Name>Caminhoneiro.Entidade</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

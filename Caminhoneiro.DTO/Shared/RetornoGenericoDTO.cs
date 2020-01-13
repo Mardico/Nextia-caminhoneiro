@@ -1,4 +1,4 @@
-﻿namespace Caminhoneiro.DTO.Shared
+﻿namespace Caminhoneiro.DTO
 {
     public class RetornoGenericoDTO<T>
     {

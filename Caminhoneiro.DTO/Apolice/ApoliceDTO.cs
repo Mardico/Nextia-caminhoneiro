@@ -1,7 +1,7 @@
-﻿using Caminhoneiro.DTO.Cliente;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Caminhoneiro.DTO.Apolice
+namespace Caminhoneiro.DTO
 {
     public class ApoliceDTO
     {
@@ -19,7 +19,10 @@ namespace Caminhoneiro.DTO.Apolice
         public int DadosVeiculoId { get; set; }
         public ApoliceDadosVeiculoDTO DadosVeiculo { get; set; }
         public int DadosPagamentoId { get; set; }
+        public int Endosso { get; set; }
+        public DateTime DataInicio { get; set; }
         public int StatusId { get; set; }
+        public string Status { get; set; }
         public ApoliceDadosPagamentoDTO DadosPagamento { get; set; }
     }
 }

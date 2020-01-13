@@ -1,13 +1,19 @@
-﻿using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using System.Collections.Generic;
 
 namespace Caminhoneiro.Entidade
 {
-    public static class Veiculos
+    public class Veiculos
     {
-        public static List<TabelaApoioDTO> GetVeiculos()
+        public Veiculos()
         {
-            return new List<TabelaApoioDTO>() {
+            GetVeiculos();
+        }
+        internal static List<TabelaApoioDTO> _Itens = new List<TabelaApoioDTO>();
+        public static List<TabelaApoioDTO> Itens() { return _Itens; }
+        internal void GetVeiculos()
+        {
+            _Itens= new List<TabelaApoioDTO>() {
                 new TabelaApoioDTO() {Id =1, Codigo = "0001", Texto="Volks 24250"},
                 new TabelaApoioDTO() { Id = 2, Codigo = "0002", Texto="Volks 8150" },
                 new TabelaApoioDTO() { Id = 3, Codigo = "0003", Texto="Mercedes 710"},

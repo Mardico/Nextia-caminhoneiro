@@ -1,4 +1,4 @@
-﻿namespace Caminhoneiro.ViewModel.Shared
+﻿namespace Caminhoneiro.ViewModel
 {
     public class TabelaApoioViewModel
     {

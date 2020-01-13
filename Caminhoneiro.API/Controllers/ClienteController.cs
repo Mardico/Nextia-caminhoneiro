@@ -1,18 +1,17 @@
 ﻿using Caminhoneiro.Business;
-using Caminhoneiro.DTO.Cliente;
-using Caminhoneiro.DTO.Shared;
+using Caminhoneiro.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
 
 namespace Caminhoneiro.API.Controllers
 {
-    public class Cliente : ApiController
+    public class ClienteController : ApiController
     {
         private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         [HttpPost]
-        public JsonResult<RetornoGenericoDTO<List<ClienteDTO>>> Listar(FiltroGenericoDTO filtro)
+        public JsonResult<RetornoGenericoDTO<List<ClienteDTO>>> Listar(ClienteDTO filtro)
         {
             logar.Debug("Inicio Listar");
             RetornoGenericoDTO<List<ClienteDTO>> retorno = new RetornoGenericoDTO<List<ClienteDTO>>() { ID = -1, Mensagem = "Falha ao Requisitar" };
@@ -20,7 +19,6 @@ namespace Caminhoneiro.API.Controllers
             {
                 ClienteBLL oCliente = new ClienteBLL();
                 retorno = oCliente.Listar(filtro);
-
             }
             catch (System.Exception ex)
             {
@@ -32,7 +30,7 @@ namespace Caminhoneiro.API.Controllers
         }
 
         [HttpPost]
-        public JsonResult<RetornoGenericoDTO<ClienteDTO>> Item(FiltroGenericoDTO filtro)
+        public JsonResult<RetornoGenericoDTO<ClienteDTO>> Item(ClienteDTO filtro)
         {
             logar.Debug("Inicio Item");
             RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { ID = -1, Mensagem = "Falha ao Requisitar" };

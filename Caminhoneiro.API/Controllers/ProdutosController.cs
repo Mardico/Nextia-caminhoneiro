@@ -1,18 +1,17 @@
 ﻿using Caminhoneiro.Business;
-using Caminhoneiro.DTO.Produto;
-using Caminhoneiro.DTO.Shared;
+using Caminhoneiro.DTO;
 using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
 
 namespace Caminhoneiro.API.Controllers
 {
-    public class Produtos : ApiController
+    public class ProdutosController : ApiController
     {
         private readonly log4net.ILog logar = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
         [HttpPost]
-        public JsonResult<RetornoGenericoDTO<List<ProdutoDTO>>> ListaProdutos(FiltroGenericoDTO filtro)
+        public JsonResult<RetornoGenericoDTO<List<ProdutoDTO>>> ListaProdutos(UsuarioDTO filtro)
         {
             logar.Debug("Inicio ListaProdutos");
             RetornoGenericoDTO<List<ProdutoDTO>> retorno = new RetornoGenericoDTO<List<ProdutoDTO>>() { ID = -1, Mensagem = "Falha ao Requisitar" };

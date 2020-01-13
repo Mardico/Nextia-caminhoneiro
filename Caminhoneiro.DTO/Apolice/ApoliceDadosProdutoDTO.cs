@@ -1,4 +1,4 @@
-﻿namespace Caminhoneiro.DTO.Apolice
+﻿namespace Caminhoneiro.DTO
 {
     public class ApoliceDadosProdutoDTO
     {

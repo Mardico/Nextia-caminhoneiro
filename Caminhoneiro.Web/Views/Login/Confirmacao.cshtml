@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Login/_LayoutAlternativo.cshtml";
+}
+@section head
+{
+    <link rel="stylesheet" href="~/Assets/Css/Login/Login.css">
+    <script src="~/Assets/Js/Login/Login.js"></script>
+}
+@using (Html.BeginForm("Login", "Login", FormMethod.Get))
+{
+    <div class="input-group mb-3">
+        <div>Solicitação enviada com suscesso</div>
+    </div>
+    <div class="row float-lg-right">
+        <div class="col-15">
+            <button type="submit" class="btn btn-primary btn-block btn-flat">Voltar</button>
+        </div>
+    </div>
+}

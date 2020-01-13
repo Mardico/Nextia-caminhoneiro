@@ -1,22 +1,28 @@
-﻿using Caminhoneiro.DTO.Produto;
-using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using Caminhoneiro.Entidade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caminhoneiro.Business
 {
     public class ProdutosBLL
     {
-        public RetornoGenericoDTO<List<ProdutoDTO>> Listar(FiltroGenericoDTO filtro)
+        public ProdutosBLL()
+        {
+            
+        }
+
+        public RetornoGenericoDTO<List<ProdutoDTO>> Listar(UsuarioDTO filtro)
         {
             RetornoGenericoDTO<List<ProdutoDTO>> retorno = new RetornoGenericoDTO<List<ProdutoDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ProdutoDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Produtos.GetProdutos().Where(w => w.Vinculo.Any(a => a.Codigo == filtro.Texto)).ToList();
+                var Vinculo = filtro.Vinculos.FirstOrDefault();
+                if ((Vinculo != null) && (Vinculo.Codigo != "0001")) //Libera Produtos para CallCenter
+                    retorno.Item = Produtos.Itens().Where(w => w.Vinculo.Any(a => a.Codigo == Vinculo.Codigo)).ToList();
+                else
+                    retorno.Item = Produtos.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Listar";
             }

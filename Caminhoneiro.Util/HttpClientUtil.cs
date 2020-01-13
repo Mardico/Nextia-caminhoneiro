@@ -14,7 +14,7 @@ namespace Caminhoneiro.Util
 
         public HttpClientUtil()
         {
-            _client.BaseAddress = new Uri(ConfigurationUtil.BaseUrlServicos);
+            _client.BaseAddress = new Uri(ConfigurationUtil.GProxsConnectorURI);
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.Timeout = new TimeSpan(0, 1, 0);
@@ -106,7 +106,7 @@ namespace Caminhoneiro.Util
 
         public HttpClientUtil()
         {
-            _client.BaseAddress = new Uri(ConfigurationUtil.BaseUrlServicos);
+            _client.BaseAddress = new Uri(ConfigurationUtil.GProxsConnectorURI);
             _client.DefaultRequestHeaders.Accept.Clear();
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             _client.Timeout = new TimeSpan(0, 1, 0);

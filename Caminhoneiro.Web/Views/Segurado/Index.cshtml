@@ -1,0 +1,84 @@
+﻿@model Caminhoneiro.ViewModel.ClienteViewModel
+@{
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+@section head
+{
+    <link rel="stylesheet" href="~/Assets/Css/Segurado/ConsultarSegurado.css" type="text/css">
+}
+
+<section class="content">
+    <div class="card-body">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Consultar Cliente</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="invoice p-3 mb-3">
+            @using (Html.BeginForm("", "Segurado", FormMethod.Post, new { id = "frmBusca" }))
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-group">
+                            <label>CPF</label>
+                            @Html.TextBoxFor(l => l.CPF, new { @class = "form-control cpf search-group", placeholder = "CPF", Id = "CPF", name = "CPF" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label>NOME</label>
+                            @Html.TextBoxFor(l => l.Nome, new { @class = "form-control search-group", placeholder = "NOME", Id = "Nome", name = "Nome" })
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-lg-12">
+                    <button type="submit" class="btn btn-primary" id="btnConsultar">Consultar</button>
+                    <button type="button" class="btn btn-primary" id="btnLimpar">
+                        <i class="fa fa-eraser" aria-hidden="true"></i> Limpar
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <center><label class="text-danger text-center">@ViewBag.Mensagem</label></center>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row" id="ListaProdutos"></div>
+    </div>
+</section>
+
+@section scripts
+{
+    <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
+    <script src="~/Assets/Js/Segurado/ConsultarSegurado.js"></script>
+    <script id="tmpProdutos" type="text/x-jquery-tmpl">
+        <div class="col-lg-4 col-7">
+            <!-- small box -->
+            <div class="small-box ${Cor}">
+                <div class="inner">
+                    <h3>${Nome}</h3>
+                    <p>Planos</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-medkit"></i>
+                </div>
+                {{each Valores}}
+                <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ ${this} <i class="fas fa-arrow-circle-right"></i></a>
+                {{/each}}
+            </div>
+        </div>
+    </script>
+}

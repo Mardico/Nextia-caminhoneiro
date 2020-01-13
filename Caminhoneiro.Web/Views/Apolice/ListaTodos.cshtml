@@ -1,46 +1,71 @@
-﻿
+﻿@model List<Caminhoneiro.ViewModel.ApoliceViewModel>
 @{
-    ViewBag.Title = "ListaTodos";
     Layout = "~/Views/MasterPage.cshtml";
 }
-
+@section head
+{
+    <link rel="stylesheet" href="~/Assets/Css/Apolice/ListaTodos.css" type="text/css">
+}
 <section class="content">
     <div class="card-body">
-        <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
-            <li class="nav-item">
-                <a class="nav-link  " href="@Url.Action("DadosCadastrais","Segurado")" role="tab" aria-selected="true">
-                    Segurado <i class="fas fa-user"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" href="@Url.Action("ListaTodos","Apolice")" role="tab" aria-selected="false">
-                    Produtos <i class="fa fa-list-alt"></i>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("KitProduto","Segurado")" role="tab" aria-selected="false">
-                    Kit Produto  <i class="fas fa-id-badge"></i>
-                </a>    
-            </li>
-        </ul>
+        @using (Html.BeginForm("DadosCadastrais", "Segurado", FormMethod.Post, new { id = "TabSegurado" }))
+        {
+            if (Model.Count > 0)
+            {
+                <input type="hidden" name="Id" id="Id" value="@Model[0].DadosClienteId" />
+                <input type="hidden" name="CPF" id="CPF" value="@Model[0].DadosCliente.CPF" />
+                <input type="hidden" name="ApoliceId" id="ApoliceId" value="@Model[0].Id" />
+            }
+
+            <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="tabSegurado" role="tab" aria-selected="true" href="#">
+                        Segurado <i class="fas fa-user"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="tabProdutos" role="tab" aria-selected="false" href="#">
+                        Produtos <i class="fa fa-list-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabKit" role="tab" aria-selected="false" href="#">
+                        Kit Produto <i class="fas fa-id-badge"></i>
+                    </a>
+                </li>
+            </ul>
+        }
 
         <div class="tab-custom-content">
             <p class="lead mb-0">Produtos</p>
         </div>
         <div class="card card-primary card-outline">
-
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nome Caminhoneiro</label>
-                            <input type="text" class="form-control" value="Marcelo de Souza" disabled>
+                            @if (Model != null && Model.Count > 0 && Model[0].DadosCliente != null)
+                            {
+                                <input type="text" class="form-control" value="@Model[0].DadosCliente.Nome" disabled>
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" value="" disabled>
+                            }
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>CPF</label>
-                            <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" value="574.715.907-81" disabled>
+                            @if (Model != null && Model.Count > 0 && Model[0].DadosCliente != null)
+                            {
+                                <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" value="@Model[0].DadosCliente.CPF" disabled>
+                            }
+                            else
+                            {
+                                <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" value="" disabled>
+                            }
                         </div>
                     </div>
                 </div>
@@ -61,25 +86,41 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>RODOCARDMED</td>
-                            <td>001700807819</td>
-                            <td>2</td>
-                            <td>07/08/2019</td>
-                            <td>Vigente</td>
-                            <td> <a href="@Url.Action("ConsultarApolice", "Apolice")"><i class="fas fa-eye"></i></a></td>
-                            <td> <a href="@Url.Action("EditarApolice", "Apolice")"><i class="fas fa-pen"></i></a></td>
-                            <td> <a href="#"><i class="fas fa-times"></i></a></td>
-                            <td> <a href="#"><i class="fas fa-share-square"></i></a></td>
-                            <td> <a href="#"><i class="fas fa-print"></i></a></td>
-                        </tr>
+                        @if (Model != null && Model.Count > 0)
+                        {
+                            foreach (var Apolice in Model)
+                            {
+                                <tr>
+                                    @if (Apolice.DadosProduto != null)
+                                    {
+                                        <td>@Apolice.DadosProduto.Nome</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                    <td>@Apolice.Codigo</td>
+                                    <td>@Apolice.Endosso</td>
+                                    <td>@Apolice.DataInicio</td>
+                                    <td>@Apolice.Status</td>
+                                    <td><a href="#" class="Visualizar" data-item="@Apolice.Id"><i class="fas fa-eye"></i></a></td>
+                                    <td><a href="#" class="Editar" data-item="@Apolice.Id"><i class="fas fa-pen"></i></a></td>
+                                    <td><a href="#" class="Cancelar" data-item="@Apolice.Id" data-name="@Apolice.DadosProduto.Nome"><i class="fas fa-times"></i></a></td>
+                                    <td><a href="#" class="ReenviarKit" data-item="@Apolice.Id"><i class="fas fa-share-square"></i></a></td>
+                                    <td><a href="#" class="Imprimir" data-item="@Apolice.Id"><i class="fas fa-print"></i></a></td>
+                                </tr>
+                            }
+                        }
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </section>
-<script src="~/dist/js/adminlte.min.js"></script>
+@section scripts
+    {
+    <script src="~/Assets/Js/Apolice/ListaTodos.js"></script>
+}
 
 
 

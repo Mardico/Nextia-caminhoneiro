@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Caminhoneiro.ViewModel.Apolice
+namespace Caminhoneiro.ViewModel
 {
     public class ApoliceDadosPagamentoViewModel
     {

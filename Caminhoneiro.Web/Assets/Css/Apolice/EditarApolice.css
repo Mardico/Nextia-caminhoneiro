@@ -1,0 +1,18 @@
+﻿td {
+    padding: 100px;
+}
+
+.tdEspaco {
+    display: table;
+    float: left;
+    margin-right: 18px;
+}
+
+table {
+    border-spacing: 50px;
+}
+
+.deleteLinha {
+    color: blue;
+    cursor: pointer;
+}

@@ -1,22 +1,26 @@
-﻿using Caminhoneiro.DTO.Cliente;
-using Caminhoneiro.DTO.Shared;
+﻿using Caminhoneiro.DTO;
 using Caminhoneiro.Entidade;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Caminhoneiro.Business
 {
     public class ClienteBLL
     {
-        public RetornoGenericoDTO<List<ClienteDTO>> Listar(FiltroGenericoDTO filtro)
+        public ClienteBLL()
+        {
+                    }
+        public RetornoGenericoDTO<List<ClienteDTO>> Listar(ClienteDTO filtro)
         {
             RetornoGenericoDTO<List<ClienteDTO>> retorno = new RetornoGenericoDTO<List<ClienteDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ClienteDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Clientes.GetClientes().Where(w => w.CPF == filtro.Texto).ToList();
+                retorno.Item = Clientes.Itens().Where(w => (filtro.CPF!=null && w.CPF == filtro.CPF) || (filtro.Nome != null && w.Nome.Contains(filtro.Nome))).ToList();
+                foreach (var cliente in retorno.Item)
+                {
+                    cliente.NumeroApolices = Apolices.Itens().Count(w => (filtro.CPF != null && w.DadosCliente.CPF == filtro.CPF) || (filtro.Nome != null && w.DadosCliente.Nome.Contains(filtro.Nome)));
+                }
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Listar";
             }
@@ -32,17 +36,17 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { Mensagem = "Falha ao Processar", Item = new ClienteDTO(), ID = -1 };
             try
             {
-                var Apolice = Clientes.GetClientes().Where(w => w.Id == filtro.Id).FirstOrDefault();
+                var Apolice = Clientes.Itens().Where(w => w.Id == filtro.Id).FirstOrDefault();
                 if (Apolice != null)
                 {
-                    Clientes.GetClientes().Remove(Apolice);
-                    Clientes.GetClientes().Add(filtro);
+                    Clientes.Itens().Remove(Apolice);
+                    Clientes.Itens().Add(filtro);
                 }
                 else
                 {
-                    var IdApolice = Clientes.GetClientes().Max(w => w.Id);
+                    var IdApolice = Clientes.Itens().Max(w => w.Id);
                     filtro.Id = IdApolice++;
-                    Clientes.GetClientes().Add(filtro);
+                    Clientes.Itens().Add(filtro);
                 }
                 retorno.ID = retorno.Item.Id;
                 retorno.Mensagem = "Sucesso ao Processar";
@@ -59,10 +63,10 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<bool> retorno = new RetornoGenericoDTO<bool>() { Mensagem = "Falha ao Processar", Item = false, ID = -1 };
             try
             {
-                var Cliente = Clientes.GetClientes().Where(w => w.Id == filtro.ID).FirstOrDefault();
+                var Cliente = Clientes.Itens().Where(w => w.Id == filtro.ID).FirstOrDefault();
                 if (Cliente != null)
                 {
-                    Clientes.GetClientes().Remove(Cliente);
+                    Clientes.Itens().Remove(Cliente);
                 }
                 retorno.Item = true;
                 retorno.ID = filtro.ID;
@@ -75,19 +79,24 @@ namespace Caminhoneiro.Business
             return retorno;
         }
 
-        public RetornoGenericoDTO<ClienteDTO> Cliente(FiltroGenericoDTO filtro)
+        public RetornoGenericoDTO<ClienteDTO> Cliente(ClienteDTO filtro)
         {
             RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { Mensagem = "Falha ao Carregar", Item = new ClienteDTO(), ID = -1 };
             try
             {
-                var Cliente = Clientes.GetClientes().Where(w => w.Id == filtro.ID || w.CPF == filtro.Texto ).FirstOrDefault();
+                var Cliente = Clientes.Itens().Where(w => (filtro.Id > 0 && w.Id == filtro.Id) || (filtro.CPF!=null && w.CPF == filtro.CPF) || (filtro.Nome!=null && w.Nome == filtro.Nome)).FirstOrDefault();
                 if (Cliente != null)
                 {
                     retorno.Item = Cliente;
+                    retorno.ID = Cliente.Id;
+                    retorno.Mensagem = "Sucesso ao Carregar";
                 }
-
-                retorno.ID = filtro.ID;
-                retorno.Mensagem = "Sucesso ao Carregar";
+                else
+                {
+                    retorno.ID = 0;
+                    retorno.Mensagem = "Registro Não Localizado";
+                }
+                
             }
             catch (Exception ex)
             {
