@@ -39,16 +39,16 @@
         </div>
     </div>
     @Html.ValidationMessageFor(model => model.Senha, null, new { @class = "text-error", id = "txtSenhaErro" })
-    <div class="row float-lg-right">
+    <div class="row">
 
-        <div class="col-15">
+        <p class="col-md-12 col-lg-12 col-sm-12">
+            <a href="Esqueci">Esqueci minha senha</a>
+        </p>
+
+        <div class="col-md-12 col-lg-12 col-sm-12">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Entrar</button>
         </div>
     </div>
-
-    <p class="mb-1">
-        <a href="Esqueci">Esqueci minha senha</a>
-    </p>
     <center><label class="text-danger text-center">@ViewBag.Mensagem</label></center>
 }
 

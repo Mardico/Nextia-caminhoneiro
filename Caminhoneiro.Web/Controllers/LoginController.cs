@@ -57,7 +57,6 @@ namespace Caminhoneiro.Web.Controllers
                     if (Captcha.ErrorCodes != null)
                         if (Captcha.ErrorCodes.Count > 0)
                             ViewBag.Erro = string.Join("<br>", Captcha.ErrorCodes.ToArray());
-
                 }
                 else
                 {
@@ -67,7 +66,7 @@ namespace Caminhoneiro.Web.Controllers
                         var listaDTO = client.Post("Usuario/SolicitaSenha", new FiltroGenericoDTO() { Texto = filtro.Usuario });
                         if ((listaDTO != null) && (listaDTO.ID > 0))
                         {
-                            return RedirectToAction("Confirmacao", "Login");
+                            return RedirectToAction("Confirmacao");
                         }
                         else
                             return RedirectToAction("Error", "Error");
@@ -76,10 +75,12 @@ namespace Caminhoneiro.Web.Controllers
             }
             return View();
         }
+        [AllowAnonymous]
         public ActionResult Confirmacao()
         {
-            return View();
+            return View("Confirmacao");
         }
+
         public ActionResult Sair()
         {
             FormsAuthentication.SignOut();
