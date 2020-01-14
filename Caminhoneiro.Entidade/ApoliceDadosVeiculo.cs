@@ -19,7 +19,7 @@ namespace Caminhoneiro.Entidade
             {
                 int SeguradoraId = 0;
                 string SeguradoraNome = "";
-                bool Segurado = Convert.ToBoolean(new Random().Next(0, 1));
+                bool Segurado = Convert.ToBoolean(new Random().Next(-1, 1));
                 if (Segurado) {
                     var oSeguradora = Seguradoras.Itens()[new Random().Next(0, 99)];
                     SeguradoraId = oSeguradora.Id;
@@ -30,7 +30,7 @@ namespace Caminhoneiro.Entidade
                 int TipoEntregaId = new Random().Next(0, 2);
                 TabelaApoioDTO oRendaLiquida = RendasLiquidas.Itens()[new Random().Next(0, 3)];
                 var oVeiculo = Veiculos.Itens()[new Random().Next(1, 15)];
-                bool SolicitouServApolice = Convert.ToBoolean(new Random().Next(0, 1));
+                bool SolicitouServApolice = Convert.ToBoolean(new Random().Next(-1, 1));
                 _Itens.Add(new ApoliceDadosVeiculoDTO() { Id = i, Codigo = oVeiculo.Codigo, 
                     VeiculoID = oVeiculo.Id, Veiculo= oVeiculo.Texto, 
                     QdadeViagensId = oQdadeViagens.Id, QdadeViagens = oQdadeViagens.Texto, 

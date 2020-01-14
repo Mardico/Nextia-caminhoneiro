@@ -5,6 +5,8 @@ using System;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Caminhoneiro.Util;
+using System.Collections.Generic;
 
 namespace Caminhoneiro.Web.Controllers
 {
@@ -62,5 +64,72 @@ namespace Caminhoneiro.Web.Controllers
             }
             return false;
         }
+        public ApoliceViewModel NovaAdesao(ApoliceViewModel Apolice)
+        {
+            ApoliceViewModel retorno = new ApoliceViewModel();
+            if (Apolice != null)
+            {
+                if (Apolice.DadosProdutoId > 0 && Apolice.Id == 0)
+                {
+                    using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDadosProdutoDTO>>())
+                    {
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProdutoId, Valor = UsuarioAtual.Id};
+                        RetornoGenericoDTO<ApoliceDadosProdutoDTO> retDTO = client.Post("Apolice/DadosProduto", filtro);
+                        if (retDTO != null && retDTO.ID > 0)
+                        {
+                            var oItem = Mapper.Map<RetornoGenericoDTO<ApoliceDadosProdutoDTO>, RetornoGenericoViewModel<ApoliceDadosProdutoViewModel>>(retDTO);
+                            retorno.DadosProduto = oItem.Item;
+                        }
+                    }
+                }
+
+                if (Apolice.DadosClienteId > 0 && Apolice.Id == 0)
+                {
+                    using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
+                    {
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosClienteId };
+                        RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/Item", filtro);
+                        if (retDTO != null && retDTO.ID > 0)
+                        {
+                            var oItem = Mapper.Map<RetornoGenericoDTO<ClienteDTO>, RetornoGenericoViewModel<ClienteViewModel>>(retDTO);
+                            retorno.DadosCliente = oItem.Item;
+                        }
+                    }
+                }
+
+                if (Apolice.Id > 0)
+                {
+                    using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDTO>>())
+                    {
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() {ID = Apolice.Id } ;
+                        RetornoGenericoDTO<ApoliceDTO> retDTO = client.Post("Apolice/Item", filtro);
+                        if (retDTO != null && retDTO.ID > 0)
+                        {
+                            var oItem = Mapper.Map<RetornoGenericoDTO<ApoliceDTO>, RetornoGenericoViewModel<ApoliceViewModel>>(retDTO);
+                            retorno = oItem.Item;
+                        }
+                    }
+                }
+            }
+            return retorno;
+        }
+        public List<TabelaApoioViewModel> CarregaLista(string Url)
+        {
+            List<TabelaApoioViewModel> retorno = new List<TabelaApoioViewModel>();
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<List<TabelaApoioDTO>>>())
+            {
+                RetornoGenericoDTO<List<TabelaApoioDTO>> retDTO = client.Post(Url, null);
+                if (retDTO != null)
+                {
+                    var ret = Mapper.Map<RetornoGenericoDTO<List<TabelaApoioDTO>>, RetornoGenericoViewModel<List<TabelaApoioViewModel>>>(retDTO);
+                    if (ret.ID > -1)
+                    {
+                        retorno = ret.Item;
+                        retorno.Insert(0, new TabelaApoioViewModel() { ID = 0, Codigo = "", Texto = ":: Selecione ::" });
+                    }
+                }
+            }
+            return retorno;
+        } 
     }
 }

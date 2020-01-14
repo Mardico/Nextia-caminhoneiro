@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApoliceDadosProduto.cs" />
+    <Compile Include="ApoliceHistorico.cs" />
+    <Compile Include="ApolicePagamentos.cs" />
     <Compile Include="ApoliceDadosVeiculo.cs" />
     <Compile Include="Apolices.cs" />
     <Compile Include="ApoliceStatus.cs" />

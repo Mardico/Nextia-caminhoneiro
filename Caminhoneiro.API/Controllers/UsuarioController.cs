@@ -1,5 +1,6 @@
 ﻿using Caminhoneiro.Business;
 using Caminhoneiro.DTO;
+using System.Collections.Generic;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -65,6 +66,23 @@ namespace Caminhoneiro.API.Controllers
             return Json(retorno);
         }
 
-        
+        [HttpGet]
+        public JsonResult<RetornoGenericoDTO<List<UsuarioDTO>>> Todos()
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<List<UsuarioDTO>> retorno = new RetornoGenericoDTO<List<UsuarioDTO>>();
+            try
+            {
+                retorno.Item = Entidade.Usuarios.Itens();
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Item");
+            return Json(retorno);
+        }
+
     }
 }

@@ -41,12 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apolice\ApoliceDadosBeneficiarioViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosPagamentoViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosProdutoViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosVeiculoViewModel.cs" />
     <Compile Include="Apolice\ApoliceDadosDependenteViewModel.cs" />
     <Compile Include="Apolice\ApoliceKitProdutoViewModel.cs" />
     <Compile Include="Apolice\ApoliceViewModel.cs" />
+    <Compile Include="Apolice\ApoliceHistoricoViewModel.cs" />
+    <Compile Include="Apolice\ApolicePagamentoViewModel.cs" />
     <Compile Include="Cliente\ClienteApoliceViewModel.cs" />
     <Compile Include="Cliente\ClienteViewModel.cs" />
     <Compile Include="Usuario\AlteraSenhaViewModel.cs" />

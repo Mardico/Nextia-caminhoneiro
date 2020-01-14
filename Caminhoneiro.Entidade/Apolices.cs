@@ -17,8 +17,8 @@ namespace Caminhoneiro.Entidade
             _Itens = new List<ApoliceDTO>();
             foreach (ClienteDTO oCliente in Clientes.Itens())
             {
-                bool randombool = Convert.ToBoolean(new Random().Next(0, 1));
-                if (randombool || oCliente.Id < 51)
+                bool randombool = Convert.ToBoolean(new Random().Next(-1, 1));
+                if (1==1)
                 {
                     int randomNumber2 = new Random().Next(0, 5);
                     var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
@@ -27,7 +27,7 @@ namespace Caminhoneiro.Entidade
                     ApoliceDadosPagamentoDTO oPagamento = ApoliceDadosPagamento.Itens()[new Random().Next(0, 99)];
                     List<ApoliceDadosDependenteDTO> oDependentes = new List<ApoliceDadosDependenteDTO>();
                     if (randomNumber2 > 0)
-                        oDependentes = ApoliceDadosDependente.Itens().GetRange(new Random().Next(0, 99), new Random().Next(0, 4));
+                        oDependentes = ApoliceDadosDependente.Itens().GetRange(new Random().Next(0, 90), new Random().Next(0, 4));
                     else
                         oDependentes = new List<ApoliceDadosDependenteDTO>();
                     string Codigo = new Random().Next(0, 99).ToString().PadLeft(8, '0');

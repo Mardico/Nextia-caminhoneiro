@@ -23,6 +23,7 @@ namespace Caminhoneiro.ViewModel
         public string TelefoneFixo { get; set; }
         public string TelefoneCelular { get; set; }
         public string TelefoneSecundario { get; set; }
+        public string TelefoneAdicional { get; set; }
         public int ContactarPorId { get; set; }
         public string ContactarPor { get; set; }
         public DateTime DataAlteracao { get; set; }

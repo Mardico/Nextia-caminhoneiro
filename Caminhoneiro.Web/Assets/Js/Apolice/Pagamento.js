@@ -25,21 +25,21 @@
         });
 
         $('#tabApolice').on('click', function () {
-            $('#tabApolice').attr('target', '_self');
-            $('#tabApolice').attr('action', '/Apolice/ConsultarApolice');
-            $('#tabApolice').submit();
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/ConsultarApolice');
+            $('#TabSegurado').submit();
         });
 
         $('#tabPagamentos').on('click', function () {
-            $('#tabPagamentos').attr('target', '_self');
-            $('#tabPagamentos').attr('action', '/Apolice/Pagamento');
-            $('#tabPagamentos').submit();
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/Pagamento');
+            $('#TabSegurado').submit();
         });
 
         $('#tabHistorico').on('click', function () {
-            $('#tabHistorico').attr('target', '_self');
-            $('#tabHistorico').attr('action', '/Segurado/Historico');
-            $('#tabHistorico').submit();
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/Historico');
+            $('#TabSegurado').submit();
         });
 
     };

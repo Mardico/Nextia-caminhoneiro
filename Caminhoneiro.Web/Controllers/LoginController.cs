@@ -76,6 +76,8 @@ namespace Caminhoneiro.Web.Controllers
             }
             return View();
         }
+
+        [AllowAnonymous]
         public ActionResult Confirmacao()
         {
             return View();

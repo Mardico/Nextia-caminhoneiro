@@ -156,6 +156,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\PlugCaminhoneiro - Web Deploy.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Caminhoneiro.Business\Caminhoneiro.Business.csproj">

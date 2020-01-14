@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Apolice\ApoliceDadosBeneficiarioDTO.cs" />
     <Compile Include="Apolice\ApoliceDadosDependenteDTO.cs" />
     <Compile Include="Apolice\ApoliceDadosPagamentoDTO.cs" />
     <Compile Include="Apolice\ApoliceDadosProdutoDTO.cs" />
@@ -48,6 +49,8 @@
     <Compile Include="Apolice\ApoliceDTO.cs" />
     <Compile Include="Apolice\ApoliceKitProdutoDTO.cs" />
     <Compile Include="Apolice\ApoliceStatusDTO.cs" />
+    <Compile Include="Apolice\ApoliceHistoricoDTO.cs" />
+    <Compile Include="Apolice\ApolicePagamentoDTO.cs" />
     <Compile Include="Cliente\ClienteDTO.cs" />
     <Compile Include="Usuario\AlteraSenhaDTO.cs" />
     <Compile Include="Usuario\FiltroLoginDTO.cs" />

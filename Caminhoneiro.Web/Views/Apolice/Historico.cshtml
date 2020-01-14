@@ -1,4 +1,4 @@
-﻿@model Caminhoneiro.ViewModel.ApoliceViewModel
+﻿@model List<Caminhoneiro.ViewModel.ApoliceHistoricoViewModel>
 @{
     Layout = "~/Views/MasterPage.cshtml";
 }
@@ -10,9 +10,12 @@
     <div class="card-body">
         @using (Html.BeginForm("Pagamento", "Apolice", FormMethod.Post, new { id = "TabSegurado" }))
         {
-            <input type="hidden" name="Id" id="Id" value="@Model.DadosClienteId" />
-            <input type="hidden" name="CPF" id="CPF" value="@Model.DadosCliente.CPF" />
-            <input type="hidden" name="ApoliceId" id="ApoliceId" value="@Model.Id" />
+            if (Model != null && Model.Count > 0)
+            {
+                <input type="hidden" name="Id" id="Id" value="@Model[0].ClienteId" />
+                <input type="hidden" name="CPF" id="CPF" value="" />
+                <input type="hidden" name="ApoliceId" id="ApoliceId" value="@Model[0].ApoliceId" />
+            }
             <ul class="nav nav-tabs" id="custom-content-above-tab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link " id="tabSegurado" role="tab" aria-selected="true" href="#">
@@ -80,30 +83,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>00000000000001</td>
-                                    <td>0</td>
-                                    <td>Inclusão de Proposta</td>
-                                    <td>Inclusao de Proposta</td>
-                                    <td>07/07/2019</td>
-                                    <td>antonio.barbosa</td>
-                                </tr>
-                                <tr>
-                                    <td>00000000000001</td>
-                                    <td>1</td>
-                                    <td>Alteração dados do Segurado</td>
-                                    <td>Alteração Endereço</td>
-                                    <td>07/08/2019</td>
-                                    <td>antonio.barbosa</td>
-                                </tr>
-                                <tr>
-                                    <td>00000000000001</td>
-                                    <td>2</td>
-                                    <td>Alteração dados do Caminhão</td>
-                                    <td>Alteração Placa</td>
-                                    <td>14/08/2019</td>
-                                    <td>maria.felicia</td>
-                                </tr>
+                                @if (Model != null && Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.Codigo</td>
+                                            <td>@item.NrEndosso</td>
+                                            <td>@item.TipoEndosso</td>
+                                            <td>@item.Endosso</td>
+                                            <td>@item.Data</td>
+                                            <td>@item.Usuario</td>
+                                        </tr>
+                                    }
+                                }
 
                             </tbody>
                         </table>

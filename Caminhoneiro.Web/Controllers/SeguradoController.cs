@@ -18,7 +18,6 @@ namespace Caminhoneiro.Web.Controllers
                 ViewBag.Mensagem = TempData["Mensagem"];
             return View();
         }
-
         public ActionResult EditarSegurado()
         {
             try

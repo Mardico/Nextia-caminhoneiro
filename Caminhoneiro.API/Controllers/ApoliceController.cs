@@ -30,6 +30,44 @@ namespace Caminhoneiro.API.Controllers
         }
 
         [HttpPost]
+        public JsonResult<RetornoGenericoDTO<List<ApoliceHistoricoDTO>>> ListarHistorico(ApoliceDTO filtro)
+        {
+            logar.Debug("Inicio ListarHistorico");
+            RetornoGenericoDTO<List<ApoliceHistoricoDTO>> retorno = new RetornoGenericoDTO<List<ApoliceHistoricoDTO>>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ApoliceBLL oApolice = new ApoliceBLL();
+                retorno = oApolice.ListarHistorico(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino ListarHistorico");
+            return Json(retorno);
+        }
+
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<List<ApolicePagamentoDTO>>> ListarPagamento(ApoliceDTO filtro)
+        {
+            logar.Debug("Inicio ListarPagamento");
+            RetornoGenericoDTO<List<ApolicePagamentoDTO>> retorno = new RetornoGenericoDTO<List<ApolicePagamentoDTO>>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ApoliceBLL oApolice = new ApoliceBLL();
+                retorno = oApolice.ListarPagamento(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino ListarPagamento");
+            return Json(retorno);
+        }
+
+        [HttpPost]
         public JsonResult<RetornoGenericoDTO<ApoliceDTO>> Item(FiltroGenericoDTO filtro)
         {
             logar.Debug("Inicio Item");
@@ -47,6 +85,26 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Item");
             return Json(retorno);
         }
+
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<ApoliceDadosProdutoDTO>> DadosProduto(FiltroGenericoDTO filtro)
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<ApoliceDadosProdutoDTO> retorno = new RetornoGenericoDTO<ApoliceDadosProdutoDTO>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ApoliceBLL oApolice = new ApoliceBLL();
+                retorno = oApolice.DadosProduto(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Item");
+            return Json(retorno);
+        }
+
 
         [HttpPost]
         public JsonResult<RetornoGenericoDTO<ApoliceDTO>> Salvar(ApoliceDTO filtro)
@@ -87,7 +145,6 @@ namespace Caminhoneiro.API.Controllers
             return Json(retorno);
         }
 
-
         [HttpPost]
         public JsonResult<RetornoGenericoDTO<bool>> SolicitarKitProduto(ApoliceKitProdutoDTO filtro)
         {
@@ -108,6 +165,7 @@ namespace Caminhoneiro.API.Controllers
             return Json(retorno);
         }
 
+        [HttpPost]
         public JsonResult<RetornoGenericoDTO<System.Web.Mvc.FileContentResult>> Impressao(FiltroGenericoDTO filtro)
         {
             logar.Debug("Inicio Excluir");
@@ -124,6 +182,24 @@ namespace Caminhoneiro.API.Controllers
             }
 
             logar.Debug("Termino Excluir");
+            return Json(retorno);
+        }
+
+        [HttpGet]
+        public JsonResult<RetornoGenericoDTO<List<ApoliceDTO>>> Todos()
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<List<ApoliceDTO>> retorno = new RetornoGenericoDTO<List<ApoliceDTO>>();
+            try
+            {
+                retorno.Item = Entidade.Apolices.Itens();
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Item");
             return Json(retorno);
         }
 

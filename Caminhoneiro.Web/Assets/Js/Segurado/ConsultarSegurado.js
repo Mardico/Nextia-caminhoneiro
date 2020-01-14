@@ -2,8 +2,8 @@
     this.Limpar = function () {
         $('#Nome').val('');
         $('#CPF').val('');
+        $('#ListaProdutos').empty();
     };
-
     this.AoAssociar = function () {
         $('#btnConsultar').on('click', function () {
             if ($("#frmBusca").valid())
@@ -14,7 +14,6 @@
             ojsPage.Limpar();
             $('#CPF').focus();
         });
-
         $('#frmBusca').validate({
             rules: {
                 CPF: {
@@ -30,8 +29,10 @@
 
             }
         });
+        $('#ListaProdutos').on('click', '.itemproduto', function () {
+            ojsPage.NovoPedido(this);
+        });
     };
-
     this.CarregaProdutos = function () {
         var form = $("#frmBusca");
         var oURL = "/Apolice/ProdutosUsuario";
@@ -44,7 +45,12 @@
                 if (returnedData.ID < 0) {  //Invalido
                     swal("Oops", returnedData.Mensagem, "error");
                 } else {
+                    if (returnedData.ID === 0) {
+                        $("#tmpProdutostmpProdutosVazio").tmpl().appendTo("#ListaProdutos");
+                        return;
+                    }
                     //Carrega Lista de Produtos
+                    $("#ListaProdutos").empty();
                     $("#tmpProdutos").tmpl(returnedData.Item).appendTo("#ListaProdutos");
                 }
             }
@@ -84,6 +90,14 @@
     };
     this.Inicio = function () {
         this.AoAssociar();
+    };
+    this.NovoPedido = function (obj) {
+        var IdProduto = $(obj).data('item');
+        $('#DadosProdutoId').val(IdProduto);
+        
+        var form = $("#frmBusca");
+        form.attr("action", "/Apolice/Adesao");
+        form.submit();
     };
 };
 

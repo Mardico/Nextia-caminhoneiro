@@ -49,6 +49,8 @@ namespace Caminhoneiro.API
             ApoliceDadosDependente oApoliceDadosDependente = new ApoliceDadosDependente();
             ApoliceStatus oApoliceStatus = new ApoliceStatus();
             Apolices oApolices = new Apolices();
+            ApoliceHistorico oApoliceHistorico = new ApoliceHistorico();
+            ApolicePagamentos oApolicePagamentos = new ApolicePagamentos();
 
         }
     }

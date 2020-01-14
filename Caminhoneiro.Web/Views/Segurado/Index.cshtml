@@ -2,12 +2,15 @@
 @{
     Layout = "~/Views/MasterPage.cshtml";
 }
-
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Segurado/ConsultarSegurado.css" type="text/css">
+    <style>
+        .itemproduto{
+            cursor:pointer;
+        }
+    </style>
 }
-
 <section class="content">
     <div class="card-body">
         <div class="content-header">
@@ -22,6 +25,8 @@
         <div class="invoice p-3 mb-3">
             @using (Html.BeginForm("", "Segurado", FormMethod.Post, new { id = "frmBusca" }))
             {
+                <input id="Id" type="hidden" name="Id" value="0" />
+                <input id="DadosProdutoId" type="hidden" name="DadosProdutoId" value="" />
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <div class="form-group">
@@ -59,7 +64,6 @@
         <div class="row" id="ListaProdutos"></div>
     </div>
 </section>
-
 @section scripts
 {
     <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
@@ -76,8 +80,22 @@
                     <i class="ion ion-medkit"></i>
                 </div>
                 {{each Valores}}
-                <a href="@Url.Action("Adesao", "Apolice")" class="small-box-footer">R$ ${this} <i class="fas fa-arrow-circle-right"></i></a>
+                <a class="small-box-footer itemproduto" data-item="${Id}" data-valor="${this}">R$ ${this} <i class="fas fa-arrow-circle-right"></i></a>
                 {{/each}}
+            </div>
+        </div>
+    </script>
+    <script id="tmpProdutosVazio" type="text/x-jquery-tmpl">
+        <div class="col-lg-4 col-7">
+            <!-- small box -->
+            <div class="small-box ">
+                <div class="inner">
+                    <h3>Nenhuma Oferta Disponível</h3>
+                    <p>Planos</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-medkit"></i>
+                </div>
             </div>
         </div>
     </script>

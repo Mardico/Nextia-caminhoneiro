@@ -12,14 +12,14 @@ namespace Caminhoneiro.Business
     {
         public ApoliceBLL()
         {
-            
+
         }
         public RetornoGenericoDTO<List<ApoliceDTO>> Listar(ClienteDTO filtro)
         {
             RetornoGenericoDTO<List<ApoliceDTO>> retorno = new RetornoGenericoDTO<List<ApoliceDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ApoliceDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Apolices.Itens().Where(w => (!string.IsNullOrEmpty(filtro.CPF) && w.DadosCliente.CPF == filtro.CPF) || (filtro.Id > 0  && w.DadosCliente.Id == filtro.Id)).ToList();
+                retorno.Item = Apolices.Itens().Where(w => (!string.IsNullOrEmpty(filtro.CPF) && w.DadosCliente.CPF == filtro.CPF) || (filtro.Id > 0 && w.DadosCliente.Id == filtro.Id)).ToList();
                 retorno.ID = retorno.Item.Count;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
@@ -29,7 +29,6 @@ namespace Caminhoneiro.Business
             }
             return retorno;
         }
-
         public RetornoGenericoDTO<ApoliceDTO> Salvar(ApoliceDTO filtro)
         {
             RetornoGenericoDTO<ApoliceDTO> retorno = new RetornoGenericoDTO<ApoliceDTO>() { Mensagem = "Falha ao Processar", Item = new ApoliceDTO(), ID = -1 };
@@ -100,6 +99,59 @@ namespace Caminhoneiro.Business
             return retorno;
         }
 
+        public RetornoGenericoDTO<ApoliceDadosProdutoDTO> DadosProduto(FiltroGenericoDTO filtro)
+        {
+            RetornoGenericoDTO<ApoliceDadosProdutoDTO> retorno = new RetornoGenericoDTO<ApoliceDadosProdutoDTO>() { Mensagem = "Falha ao Processar", Item = new ApoliceDadosProdutoDTO(), ID = -1 };
+            try
+            {
+
+
+                var oAgente = Usuarios.Itens().Where(w=> w.Id == filtro.Valor).FirstOrDefault();
+                var oProduto = Produtos.Itens().Where(w => w.Id == filtro.ID).FirstOrDefault();
+                retorno.Item = new ApoliceDadosProdutoDTO() { Id = 0, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, Campanha = oProduto.Campanha, ProdutoId = oProduto.Id, Valor = oProduto.ValorPrincipal, Codigo = oProduto.Codigo, Nome = oProduto.Nome };
+                if (retorno.Item != null)
+                    retorno.ID = 1;
+                else
+                    retorno.ID = 0;
+                retorno.Mensagem = "Sucesso ao Processar";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
+
+        public RetornoGenericoDTO<List<ApolicePagamentoDTO>> ListarPagamento(ApoliceDTO filtro)
+        {
+            RetornoGenericoDTO<List<ApolicePagamentoDTO>> retorno = new RetornoGenericoDTO<List<ApolicePagamentoDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ApolicePagamentoDTO>(), ID = -1 };
+            try
+            {
+                retorno.Item = ApolicePagamentos.Itens().Where(w => (filtro.Id > 0 && w.ApoliceId == filtro.Id)).ToList();
+                retorno.ID = retorno.Item.Count;
+                retorno.Mensagem = "Sucesso ao Processar";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
+        public RetornoGenericoDTO<List<ApoliceHistoricoDTO>> ListarHistorico(ApoliceDTO filtro)
+        {
+            RetornoGenericoDTO<List<ApoliceHistoricoDTO>> retorno = new RetornoGenericoDTO<List<ApoliceHistoricoDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ApoliceHistoricoDTO>(), ID = -1 };
+            try
+            {
+                retorno.Item = ApoliceHistorico.Itens().Where(w => (filtro.Id > 0 && w.ApoliceId == filtro.Id)).ToList();
+                retorno.ID = retorno.Item.Count;
+                retorno.Mensagem = "Sucesso ao Processar";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
         public RetornoGenericoDTO<bool> SolicitarKitProduto(ApoliceKitProdutoDTO filtro)
         {
             RetornoGenericoDTO<bool> retorno = new RetornoGenericoDTO<bool>() { Mensagem = "Falha ao Processar", Item = false, ID = -1 };
@@ -111,7 +163,6 @@ namespace Caminhoneiro.Business
 
             return retorno;
         }
-
         public RetornoGenericoDTO<FileContentResult> Impressao(int filtro)
         {
             RetornoGenericoDTO<FileContentResult> retorno = new RetornoGenericoDTO<FileContentResult>();
@@ -125,7 +176,6 @@ namespace Caminhoneiro.Business
 
 
         }
-
         public RetornoGenericoDTO<bool> Excluir(FiltroGenericoDTO filtro)
         {
             RetornoGenericoDTO<bool> retorno = new RetornoGenericoDTO<bool>() { Mensagem = "Falha ao Processar", Item = false, ID = -1 };
@@ -146,7 +196,6 @@ namespace Caminhoneiro.Business
             }
             return retorno;
         }
-
         public RetornoGenericoDTO<ApoliceDTO> Apolice(FiltroGenericoDTO filtro)
         {
             RetornoGenericoDTO<ApoliceDTO> retorno = new RetornoGenericoDTO<ApoliceDTO>() { Mensagem = "Falha ao Listar", Item = new ApoliceDTO(), ID = -1 };

@@ -1,14 +1,11 @@
-﻿@{
+﻿@model Caminhoneiro.ViewModel.ApoliceViewModel
+@{
     Layout = "~/Views/MasterPage.cshtml";
 }
-
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/Adesao.css" type="text/css">
 }
-
-<head>
-</head>
 
 <div class="content-header">
     <div class="container-fluid">
@@ -35,25 +32,25 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Produto</label>
-                            <input type="text" class="form-control" placeholder="Nome do Produto" disabled>
+                            @Html.TextBoxFor(l => l.DadosProduto.Nome, new { @class = "form-control", @readonly = true, placeholder = "Nome do Produto" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Campanha</label>
-                            <input type="text" class="form-control" placeholder="Campanha" disabled>
+                            @Html.TextBoxFor(l => l.DadosProduto.Campanha, new { @class = "form-control", @readonly = true, placeholder = "Campanha" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Valor</label>
-                            <input type="text" class="form-control" placeholder="Valor" disabled>
+                            @Html.TextBoxFor(l => l.DadosProduto.Valor, new { @class = "form-control", @readonly = true, placeholder = "Valor do Produto" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Agente</label>
-                            <input type="text" class="form-control" placeholder="Nome Agente" disabled>
+                            @Html.TextBoxFor(l => l.DadosProduto.Agente, new { @class = "form-control", @readonly = true, placeholder = "Nome do Agente" })
                         </div>
                     </div>
                 </div>
@@ -79,15 +76,16 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome </label>
-                                <input type="text" class="form-control" placeholder="Nome Cônjuge">
+                                @Html.TextBox("DadosDependente.0.Nome", null, new { @class = "form-control", placeholder = "Nome Cônjuge" })
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Data Nascimento </label>
-                                <input oninput="mascara(this, 'data')" type="text" class="form-control" placeholder="Data Nascimento Cônjuge">
+                                @Html.TextBox("DadosDependente.0.DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Cônjuge" })
                             </div>
                         </div>
+                        @Html.Hidden("Dependente.0.Tipo", "Cônjuge")
                         <div id="linha"></div>
                     </div>
                 </div>
@@ -95,17 +93,17 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-lg-12">
-                            <table class="table" id="products-table">
-
+                            <table class="table" id="ListaDependentes">
                                 <tr>
                                     <td>
                                         <label>Nome</label>
-                                        <input type="text" class="form-control" placeholder="Nome Filho(a)" name="first_name" />
+                                        @Html.TextBox("DadosDependente.1.Nome", null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
                                     </td>
                                     <td>
                                         <label>Data de Nascimento</label>
-                                        <input oninput="mascara(this, 'data')" type="text" class="form-control" placeholder="Data Nascimento Filho" name="last_name" />
+                                        @Html.TextBox("DadosDependente.1.DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento" })
                                     </td>
+                                    @Html.Hidden("Dependente.1.Tipo", "Filho(s)")
                                 </tr>
                             </table>
                             <div class="float-right">
@@ -114,9 +112,7 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-
         </div>
     </div>
 </section>
@@ -138,41 +134,37 @@
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <label>Nome</label>
-                                <input type="text" class="form-control" placeholder="Nome do Beneficiário">
+                                @Html.TextBox("Beneficiario.Nome", null, new { @class = "form-control", placeholder = "Nome do Beneficiário" })
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Doc. Identificação</label>
-                                <input type="text" class="form-control rg-beneficiario" placeholder="Doc. Identificação">
+                                @Html.TextBox("Beneficiario.NDocumento", null, new { @class = "form-control rg-beneficiario", placeholder = "Doc. Identificação" })
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Data Nascimento</label>
-                                <input oninput="mascara(this, 'data')" class="form-control" placeholder="dd/mm/aaaa">
+                                @Html.TextBox("Beneficiario.DataNasc", null, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa" })
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Sexo</label>
-                                <select class="form-control">
-                                    <option>Feminino</option>
-                                    <option>Masculino</option>
-                                    <option>Outro</option>
-                                </select>
+                                @Html.DropDownList("Beneficiario.SexoId", (SelectList)ViewData["Sexo"], new { @class = "form-control" })
                             </div>
                         </div>
                         <div class="col-lg-5">
                             <div class="form-group">
                                 <label>Grau de parentesco</label>
-                                <input type="text" class="form-control" max="100" placeholder="Grau">
+                                @Html.TextBox("Beneficiario.Parentesco", null, new { @class = "form-control", placeholder = "Grau" })
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Porcentagem(%) do Beneficiário</label>
-                                <input type="number" class="form-control" placeholder="Porcentagem">
+                                @Html.TextBox("Beneficiario.Porcentagem", null, new { @class = "form-control", placeholder = "Porcentagem", type = "number" })
                             </div>
                         </div>
                     </div>
@@ -200,83 +192,49 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Modelo</label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>Volks-24250</option>
-                                <option>Volks-8150</option>
-                                <option>Mercedes-710</option>
-                                <option>Volvo-FH 460</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, (SelectList)ViewBag.Veiculos, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Já existe seguro?</label>
-                            <select class="form-control">
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, (SelectList)ViewBag.SimNao, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Qual empresa seguro/assistência? </label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Veículo próprio ou financiado? </label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>Própio</option>
-                                <option>Fianciado</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Quantidade Viagens</label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>Até 5</option>
-                                <option>5 a 10</option>
-                                <option>Acima de 10</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Entregas Carga</label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>Municipal</option>
-                                <option>Intermunicipal</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.TipoEntregaId, (SelectList)ViewBag.Cargas, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Renda Líquida</label>
-                            <select class="form-control">
-                                <option>-------</option>
-                                <option>Até 5000</option>
-                                <option>De 5001 até 10000</option>
-                                <option>Acima 10000</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
-                            <select class="form-control">
-                                <option>Sim</option>
-                                <option>Não</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, (SelectList)ViewBag.SimNao, new { @class = "form-control" })
                         </div>
                     </div>
                 </div>
@@ -300,99 +258,91 @@
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>CPF</label>
-                            <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" placeholder="CPF" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.CPF, new { @class = "form-control cpf", @required = "required", placeholder = "CPF" })
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>Nome Caminhoneiro</label>
-                            <input type="text" class="form-control" placeholder="Nome Caminhoneiro" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Caminhoneiro" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Data Nascimento</label>
-                            <input oninput="mascara(this, 'data')" class="form-control" placeholder="dd/mm/aaaa" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.DataNascimento, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/yyyy" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Sexo</label>
-                            <select class="form-control">
-                                <option>Feminino</option>
-                                <option>Masculino</option>
-                                <option>Outro</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosCliente.SexoId, (SelectList)ViewBag.Sexo, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Estado Civil</label>
-                            <select class="form-control">
-                                <option>Casada(o)</option>
-                                <option>Divorciada(o)</option>
-                                <option>Solteira(o)</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label>E-mail</label>
-                            <input type="email" class="form-control" placeholder="E-mail" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control ", @required = "required", placeholder = "Email", type = "email" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>CEP</label>
-                            <input oninput="mascara(this, 'cep')" type="text" class="form-control" placeholder="CEP" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.CEP, new { @class = "form-control cep", @required = "required", placeholder = "CEP" })
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Endereço</label>
-                            <input type="text" class="form-control" placeholder="Endereço" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Endereco, new { @class = "form-control cep", @required = "required", placeholder = "Endereço" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Número</label>
-                            <input type="text" class="form-control" placeholder="Número" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Numero, new { @class = "form-control ", @required = "required", placeholder = "Número" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Complento</label>
-                            <input type="text" class="form-control" placeholder="Complento">
+                            @Html.TextBoxFor(l => l.DadosCliente.Complemento, new { @class = "form-control ", @required = "required", placeholder = "Complemento" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Bairro</label>
-                            <input type="text" class="form-control" placeholder="Bairro" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Bairro, new { @class = "form-control ", @required = "required", placeholder = "Bairro" })
                         </div>
                     </div>
                     <div class="col-lg-3">
                         <div class="form-group">
                             <label>Cidade</label>
-                            <input type="text" class="form-control" placeholder="Cidade" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.Cidade, new { @class = "form-control ", @required = "required", placeholder = "Cidade" })
                         </div>
                     </div>
                     <div class="col-lg-1">
                         <div class="form-group">
                             <label>UF</label>
-                            <input type="text" class="form-control" placeholder="UF" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.UF, new { @class = "form-control ", @required = "required", placeholder = "UF" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Fixo</label>
-                            <input type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO">
+                            @Html.TextBoxFor(l => l.DadosCliente.TelefoneFixo, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
                         </div>
                     </div>
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Celular</label>
-                            <input id="celular1" name="celular1" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                            @Html.TextBoxFor(l => l.DadosCliente.TelefoneCelular, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
                             <input id="whatsapp1" type="checkbox" name="whatsapp1" value="" />
                             <label for="whatsapp1" style="cursor:pointer;">
                                 WhatsApp
@@ -402,7 +352,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Celular(2)</label>
-                            <input id="celular2" name="celular2" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO">
+                            @Html.TextBoxFor(l => l.DadosCliente.TelefoneSecundario, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
                             <input id="whatsapp2" type="checkbox" name="whatsapp2" value="" />
                             <label for="whatsapp2" style="cursor:pointer;">
                                 WhatsApp
@@ -412,7 +362,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Telefone Celular(3)</label>
-                            <input id="celular3" name="celular3" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO">
+                            @Html.TextBoxFor(l => l.DadosCliente.TelefoneAdicional, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
                             <input id="whatsapp3" type="checkbox" name="whatsapp3" value="" />
                             <label for="whatsapp3" style="cursor:pointer;">
                                 WhatsApp
@@ -422,11 +372,7 @@
                     <div class="col-lg-2">
                         <div class="form-group">
                             <label>Vínculo</label>
-                            <select class="form-control">
-                                <option>Sindicato</option>
-                                <option>Associação</option>
-                                <option>Rodobens</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control" })
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -441,10 +387,7 @@
                     <div class="col-lg-4">
                         <div class="form-group">
                             <label>Como Prefere ser conectado?</label>
-                            <select class="form-control">
-                                <option>WhatsApp</option>
-                                <option>E-mail</option>
-                            </select>
+                            @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control" })
                         </div>
                     </div>
 
@@ -470,57 +413,52 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Meio de Pagamento</label>
-                                <select class="form-control">
-                                    <option>----------------</option>
-                                    <option value="um">Cartão de Crédito</option>
-                                    <option>Conta Digital</option>
-                                </select>
+                                @Html.DropDownListFor(l => l.DadosPagamento.MeioPgtoId, (SelectList)ViewBag.MeioPgto, new { @class = "form-control" })
                             </div>
                         </div>
                     </div>
-                    <div id="minhaDiv" style="display:none">
+                    <div id="divCartao">
                         <div class="card-body">
                             <div class="row">
 
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Número do cartão</label>
-                                        <input type="text" class="form-control" placeholder="Número do cartão" required>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control tel", placeholder = "Número do cartão", @required = "required" })
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label>Nome no cartao</label>
-                                        <input type="text" class="form-control" placeholder="Nome no cartao" required>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control tel", placeholder = "Nome no cartão", @required = "required" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Data de expiração</label>
-                                        <input type="text" class="form-control" placeholder="Data de expiração" required>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control datasimple", placeholder = "Data de expiração", @required = "required" })
                                     </div>
                                 </div>
 
                                 <div class="col-lg-1">
                                     <div class="form-group">
                                         <label>CVV</label>
-                                        <input type="text" class="form-control" placeholder="CVV" required>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.CVV, new { @class = "form-control datasimple", placeholder = "CVV", @required = "required" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Parcelamento</label>
-                                        <select class="form-control">
-                                            <option>12x50</option>
-                                            <option>12x80</option>
-                                            <option>12x120</option>
-                                        </select>
+                                        @Html.DropDownListFor(l => l.DadosPagamento.NParcelasId, (SelectList)ViewBag.Parcelas, new { @class = "form-control" })
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer">
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                            <button type="button" class="btn btn-info" id="btnRascunho">
+                                Rascunho
+                            </button>
+                            <button type="button" class="btn btn-primary" id="btnSalvar">
                                 Salvar
                             </button>
                         </div>
@@ -541,16 +479,67 @@
                 <p>Apólice 0000000001 efetivada com sucesso!</p>
             </div>
             <div class="modal-footer float-lg-right">
-                <button type="button" class="btn btn-outline-light"
-                        onclick="location.href='@Url.Action("ConsultarApolice", "Apolice")'">
-                    Ok
-                </button>
-
+                <button type="button" id="btnConfirmar" class="btn btn-outline-light">Ok</button>
             </div>
         </div>
     </div>
 </div>
 @section scripts
 {
+    <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
     <script src="~/Assets/Js/Apolice/Adesao.js"></script>
+    <script id="tmpDependente" type="text/x-jquery-tmpl">
+        <tr>
+            <td>
+                <label>Nome</label>
+                @Html.TextBox("Dependente.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
+            </td>
+            <td>
+                <label>Data de Nascimento</label>
+                @Html.TextBox("Dependente.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Filho" })
+            </td>
+            @Html.Hidden("Dependente.${Proximo}.Tipo", "Filho(a)")
+        </tr>
+    </script>
+    <script id="tmpBeneficiario" type="text/x-jquery-tmpl">
+        <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nome</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome do Beneficiário" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Doc. Identificação</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.NDocumento", null, new { @class = "form-control rg-beneficiario", placeholder = "Doc. Identificação" })
+                    <input type="text" class="form-control rg-beneficiario" placeholder="Doc. Identificação">
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Data Nascimento</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Sexo</label>
+                    @Html.DropDownList("Beneficiario.${Proximo}.SexoId", (SelectList)ViewData["Sexo"], new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label>Grau de parentesco</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Parentesco", null, new { @class = "form-control", placeholder = "Grau" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Porcentagem(%) do Beneficiário</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Porcentagem", null, new { @class = "form-control", placeholder = "Porcentagem", type = "number" })
+                </div>
+            </div>
+        </div>
+    </script>
 }

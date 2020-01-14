@@ -38,7 +38,7 @@
 
         $('#tabHistorico').on('click', function () {
             $('#TabSegurado').attr('target', '_self');
-            $('#TabSegurado').attr('action', '/Segurado/Historico');
+            $('#TabSegurado').attr('action', '/Apolice/Historico');
             $('#TabSegurado').submit();
         });
 

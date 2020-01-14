@@ -86,6 +86,23 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Excluir");
             return Json(retorno);
         }
-
+        
+        [HttpGet]
+        public JsonResult<RetornoGenericoDTO<List<ClienteDTO>>> Todos()
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<List<ClienteDTO>> retorno = new RetornoGenericoDTO<List<ClienteDTO>>();
+            try
+            {
+                retorno.Item = Entidade.Clientes.Itens();
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Item");
+            return Json(retorno);
+        }
     }
 }
