@@ -16,6 +16,10 @@
         .mb-3 {
             margin-bottom: 15px !important;
         }
+
+        .recaptcha {
+            justify-content:center;
+        }
     </style>
 }
 @using (Html.BeginForm("Esqueci", "Login", FormMethod.Post, new { id = "frmEsqueci", name = "frmEsqueci" }))
@@ -28,15 +32,28 @@
             </div>
         </div>
     </div>
-    @Html.ValidationMessageFor(model => model.Usuario, null, new { @class = "text-error", id = "txtUsuarioErro"  })
-    <div class="input-group mb-3">
-        <div class="g-recaptcha" data-sitekey="@ViewBag.SiteKey"></div>
-    </div>
     <div class="row float-lg-right">
-        <div class="col-15">
+        @Html.ValidationMessageFor(model => model.Usuario, null, new { @class = "text-error", id = "txtUsuarioErro"  })
+        <div class="input-group recaptcha mb-3">
+            <div class="g-recaptcha" data-sitekey="@ViewBag.SiteKey"></div>
+        </div>
+        <div class="col-md-12">
             <button type="submit" class="btn btn-primary btn-block btn-flat">Solicitar</button>
         </div>
     </div>
     <center><label class="text-danger text-center">@ViewBag.Erro</label></center>
 }
 <script src='https://www.google.com/recaptcha/api.js?hl=pt-BR'></script>
+<style>
+    .rc-anchor-light {
+        background: transparent;
+    }
+
+    .rc-anchor {
+        box-shadow: none !important;
+    }
+
+    .rc-anchor-light.rc-anchor-normal {
+        border: none !important;
+    }
+</style>
