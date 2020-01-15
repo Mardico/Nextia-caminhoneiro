@@ -78,7 +78,7 @@
                     } else {
                         if (returnedData.ID > 0) {
                             var data = returnedData.Item;
-                            var dia = moment(data.DataNascimento).format('dd/MM/yyyy');
+                            var dia = moment(data.DataNascimento).format('dd/mm/yyyy');
                             $('#DadosCliente_Nome').val(data.Nome);
                             $('#DadosCliente_DataNascimento').val(dia);
                             $('#DadosCliente_SexoId').val(data.SexoId);
@@ -91,6 +91,8 @@
                             $('#DadosCliente_Bairro').val(data.Bairro);
                             $('#DadosCliente_Cidade').val(data.Cidade);
                             $('#DadosCliente_UF').val(data.UF);
+                        } else {
+                            swal("Informe do Sistema", "CPF não localizado nas bases do sistema", "info");
                         }
                     }
                 }
@@ -118,6 +120,8 @@
                             $('#DadosCliente_Bairro').val(data.Bairro);
                             $('#DadosCliente_Cidade').val(data.Cidade);
                             $('#DadosCliente_UF').val(data.UF);
+                        } else {
+                            swal("Oops", "CEP não localizado", "info");
                         }
                     }
                 }

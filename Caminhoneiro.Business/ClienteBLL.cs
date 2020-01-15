@@ -120,6 +120,7 @@ namespace Caminhoneiro.Business
                     retorno.Item.Bairro = ret.bairro;
                     retorno.Item.Cidade = ret.localidade;
                     retorno.Item.UF = ret.uf;
+                    retorno.ID = 0;
                     if (ret.erro == null)
                         retorno.ID = 1;
                 }

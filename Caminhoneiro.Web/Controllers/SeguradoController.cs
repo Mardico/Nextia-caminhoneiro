@@ -111,11 +111,15 @@ namespace Caminhoneiro.Web.Controllers
             using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
             {
                 ClienteDTO filtro = Mapper.Map<ClienteViewModel, ClienteDTO>(FiltroCliente);
-                RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/BuscaCEP", filtro);
+                RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/Item", filtro);
                 if (retDTO != null)
                 {
                     retorno = Mapper.Map<RetornoGenericoDTO<ClienteDTO>, RetornoGenericoViewModel<ClienteViewModel>>(retDTO);
                     retorno.Item = retorno.Item;
+                    retorno.ID = retorno.Item.Id;
+                    if (retorno.ID == 0)
+                        retorno.Mensagem = "Usuário não localizado";
+
                 }
             }
             return Json(retorno, JsonRequestBehavior.AllowGet);

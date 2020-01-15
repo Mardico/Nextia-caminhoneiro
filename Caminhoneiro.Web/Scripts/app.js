@@ -69,6 +69,13 @@ $(function () {
             }
         });
 
+    $('input[type="time"]').each(function () {
+        $(this).rules('add', {
+            required: true
+            // another rule, etc.
+        });
+    });
+
     $(document).ajaxError(function (event, request, settings) {
         swal("Oops", "Falha na chamada: " + settings.url, "error");
     });

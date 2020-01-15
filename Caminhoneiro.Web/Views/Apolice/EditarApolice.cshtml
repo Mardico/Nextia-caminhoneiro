@@ -23,8 +23,8 @@
                         Segurado <i class="fas fa-user"></i>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" id="tabProdutos" role="tab" aria-selected="false" href="#">
+                <li class="nav-item active">
+                    <a class="nav-link " id="tabProdutos" role="tab" aria-selected="false" href="#">
                         Produtos <i class="fa fa-list-alt"></i>
                     </a>
                 </li>
@@ -53,7 +53,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" id="tabHistorico" role="tab" aria-selected="false">
+                        <a class="nav-link " href="#" id="tabHistorico" role="tab" aria-selected="false">
                             Histórico
                             <i class="fas fa-book-open"> </i>
                         </a>
@@ -76,99 +76,92 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Nome Caminhoneiro</label>
-                                    <input type="text" class="form-control" placeholder="Nome Caminhoneiro" value="Marcelo de Souza" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>CPF</label>
-                                    <input type="text" id="cpfcnpj" name="cpfcnpj" class="form-control" placeholder="CPF" value="026.735.630-75	" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Caminhoneiro" })
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Data Nascimento</label>
-                                    <input type="text" class="form-control" placeholder="Data Nascimento" value="10/06/1985" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.DataNascimento, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/yyyy" })
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Sexo</label>
-                                    <select class="form-control">
-                                        <option>Feminino</option>
-                                        <option>Masculino</option>
-                                        <option>Outro</option>
-                                    </select>
+                                    @Html.DropDownListFor(l => l.DadosCliente.SexoId, (SelectList)ViewBag.Sexo, new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Estado Civil</label>
-                                    <select class="form-control">
-                                        <option>Casada(o)</option>
-                                        <option>Divorciada(o)</option>
-                                        <option>Solteira(o)</option>
-                                    </select>
+                                    @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>E-mail</label>
-                                    <input type="text" class="form-control" placeholder="E-mail" value="marceloa@email.com" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control email", @required = "required", placeholder = "Email", type = "email" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>CEP</label>
-                                    <input type="text" class="form-control" placeholder="CEP" value="04044-904" required>
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(l => l.DadosCliente.CEP, new { @class = "form-control cep", @required = "required", placeholder = "CEP" })
+                                        <div class="input-group-append">
+                                            <button class="btn btn-secondary" type="button" id="btnBuscaCEP">
+                                                <i class="fa fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Endereço</label>
-                                    <input type="text" class="form-control" placeholder="Endereço" value="Rua Machado Bittencourt" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Endereco, new { @class = "form-control ", @required = "required", placeholder = "Endereço" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Número</label>
-                                    <input type="text" class="form-control" placeholder="Número" value="205" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Numero, new { @class = "form-control ", @required = "required", placeholder = "Número" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Complento</label>
-                                    <input type="text" class="form-control" placeholder="Complento" value="Apto 124">
+                                    @Html.TextBoxFor(l => l.DadosCliente.Complemento, new { @class = "form-control ", @required = "required", placeholder = "Complemento" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Bairro</label>
-                                    <input type="text" class="form-control" placeholder="Bairro" value="Vila Clementino" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Bairro, new { @class = "form-control ", @required = "required", placeholder = "Bairro" })
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Cidade</label>
-                                    <input type="text" class="form-control" placeholder="Cidade" value="São Paulo" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.Cidade, new { @class = "form-control ", @required = "required", placeholder = "Cidade" })
                                 </div>
                             </div>
                             <div class="col-lg-1">
                                 <div class="form-group">
                                     <label>UF</label>
-                                    <input type="text" class="form-control" placeholder="UF" value="SP" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.UF, new { @class = "form-control ", @required = "required", placeholder = "UF" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Telefone Fixo</label>
-                                    <input type="text" class="form-control" placeholder="(DDD)+NÚMERO" value="(11)32569874">
+                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneFixo, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
                                 </div>
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Telefone Celular</label>
-                                    <input id="celular1" name="celular1" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneCelular, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
                                     <input id="whatsapp1" type="checkbox" name="whatsapp1" value="" />
                                     <label for="whatsapp1" style="cursor:pointer;">
                                         WhatsApp
@@ -177,8 +170,8 @@
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>Telefone Celular</label>
-                                    <input id="celular2" name="celular2" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                                    <label>Telefone Celular(2)</label>
+                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneSecundario, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
                                     <input id="whatsapp2" type="checkbox" name="whatsapp2" value="" />
                                     <label for="whatsapp2" style="cursor:pointer;">
                                         WhatsApp
@@ -187,8 +180,8 @@
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <label>Telefone Celular</label>
-                                    <input id="celular3" name="celular3" type="text" class="form-control telefone" placeholder="(DDD)+NÚMERO" required>
+                                    <label>Telefone Celular(3)</label>
+                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneAdicional, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
                                     <input id="whatsapp3" type="checkbox" name="whatsapp3" value="" />
                                     <label for="whatsapp3" style="cursor:pointer;">
                                         WhatsApp
@@ -198,31 +191,23 @@
                             <div class="col-lg-2">
                                 <div class="form-group">
                                     <label>Vínculo</label>
-                                    <select class="form-control">
-                                        <option>Sindicato</option>
-                                        <option>Associação</option>
-                                        <option>Rodobens</option>
-                                    </select>
+                                    @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control" })
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Usuário</label>
-                                    <select class="form-control">
-                                        <option>option 1</option>
-                                        <option>option 2</option>
+                                    <select class="form-control" id="Usuario_id" name="Usuario_id">
                                     </select>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Como Prefere ser conectado?</label>
-                                    <select class="form-control">
-                                        <option>WhatsApp</option>
-                                        <option>E-mail</option>
-                                    </select>
+                                    @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control" })
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -236,281 +221,263 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h5 class="mb-2">Cônjuje</h5>
-                        <div class="form-group">
+                        @for (var i = 0; i < Model.DadosDependente.Count(); i++)
+                        {
+                            if (Model.DadosDependente[i].Tipo == "Cônjuge")
+                            {
+                                <h5 class="mb-2">@Model.DadosDependente[i].Tipo</h5>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Nome </label>
+                                                @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", placeholder = "Nome Cônjuge" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Data Nascimento </label>
+                                                @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Cônjuge", })
+                                            </div>
+                                        </div>
+                                        <div id="linha"></div>
+                                    </div>
+                                </div>
+                                @Html.HiddenFor(m => m.DadosDependente[i].Id, null)
+                                @Html.HiddenFor(m => m.DadosDependente[i].Tipo, null)
+                            }
+                            else
+                            {
+                                <h5 class="mb-2">@Model.DadosDependente[i].Tipo</h5>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <table class="table" id="ListaDependentes">
+                                                <tr>
+                                                    <td>
+                                                        <label>Nome</label>
+                                                        @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
+                                                    </td>
+                                                    <td>
+                                                        <label>Data de Nascimento</label>
+                                                        @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento" })
+                                                    </td>
+                                                    @Html.HiddenFor(m => m.DadosDependente[i].Id, null)
+                                                    @Html.HiddenFor(m => m.DadosDependente[i].Tipo, null)
+                                                </tr>
+                                            </table>
+                                            <div class="float-right">
+                                                <button class="btn btn-primary" id="addLinha" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Filha(o)</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+
+                    <div class="card card-primary">
+
+                        <div class="card-header">
+                            <h3 class="card-title">Dados Beneficiário</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div id="tableBeneficiario">
+                                <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label>Nome</label>
+                                            <input type="text" class="form-control" placeholder="Nome do Beneficiário">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Doc. Identificação</label>
+                                            <input type="text" class="form-control rg-beneficiario" placeholder="Doc. Identificação">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Data Nascimento</label>
+                                            <input oninput="mascara(this, 'data')" class="form-control" placeholder="dd/mm/aaaa">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Sexo</label>
+                                            <select class="form-control">
+                                                <option>Feminino</option>
+                                                <option>Masculino</option>
+                                                <option>Outro</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <label>Grau de parentesco</label>
+                                            <input type="text" class="form-control" max="100" placeholder="Grau">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Porcentagem(%) do Beneficiário</label>
+                                            <input type="number" class="form-control" placeholder="Porcentagem">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="float-right">
+                                <button class="btn btn-primary" id="addLinhaBeneficiario" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Beneficiáiro(o)</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Dados Caminhão</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label>Nome </label>
-                                        <input type="text" class="form-control" placeholder="Nome Cônjuje" value="Maria Tereza">
+                                        <label>Modelo</label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, (SelectList)ViewBag.Veiculos, new { @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Data Nascimento </label>
-                                        <input type="text" class="form-control" placeholder="Data Nascimento Cônjuje" value="04/05/1984">
+                                        <label>Já existe seguro?</label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, (SelectList)ViewBag.SimNao, new { @class = "form-control" })
                                     </div>
                                 </div>
-                                <div id="linha"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Qual empresa seguro/assistência? </label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Veículo próprio ou financiado? </label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group">
+                                        <label>Quantidade Viagens</label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Entregas Carga</label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.TipoEntregaId, (SelectList)ViewBag.Cargas, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Renda Líquida</label>
+                                        @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, (SelectList)ViewBag.SimNao, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <h5 class="mb-2">Filho(s)</h5>
-                        <div class="form-group">
+                    </div>
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Dados Pagamento</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                            </div>
+                        </div>
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <table class="table" id="products-table">
-
-                                        <tr>
-                                            <td>
-                                                <label>Nome</label>
-                                                <input type="text" class="form-control" placeholder="Nome Filho(a)" name="first_name" />
-                                            </td>
-                                            <td>
-                                                <label>Data de Nascimento</label>
-                                                <input type="text" class="form-control" placeholder="Data Nascimento Filho" name="last_name" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                    <div class="float-right">
-                                        <button class="btn btn-primary" id="addLinha" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Filha(o)</button>
+                                    <div class="form-group">
+                                        <label>Possui conta Digital?</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
+                                            <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
+                                            <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                                        </div>
+                                        <div class="float-right">
+                                            <button class="btn btn-primary" type="button"><i class="fas fa-credit-card" aria-hidden="true"></i> Abrir Conta Digital</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="card card-primary">
-
-                    <div class="card-header">
-                        <h3 class="card-title">Dados Beneficiário</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div id="tableBeneficiario">
-                            <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label>Nome</label>
-                                        <input type="text" class="form-control" placeholder="Nome do Beneficiário">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Doc. Identificação</label>
-                                        <input type="text" class="form-control rg-beneficiario" placeholder="Doc. Identificação">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Data Nascimento</label>
-                                        <input oninput="mascara(this, 'data')" class="form-control" placeholder="dd/mm/aaaa">
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Sexo</label>
-                                        <select class="form-control">
-                                            <option>Feminino</option>
-                                            <option>Masculino</option>
-                                            <option>Outro</option>
-                                        </select>
+                                        <label>Número do cartão</label>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control credicard", placeholder = "Número do cartão", @required = "required" })
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="form-group">
-                                        <label>Grau de parentesco</label>
-                                        <input type="text" class="form-control" max="100" placeholder="Grau">
+                                        <label>Nome no cartao</label>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required" })
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-3">
                                     <div class="form-group">
-                                        <label>Porcentagem(%) do Beneficiário</label>
-                                        <input type="number" class="form-control" placeholder="Porcentagem">
+                                        <label>Data de expiração</label>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control datacartao", placeholder = "Data de expiração", @required = "required" })
                                     </div>
                                 </div>
+
+                                <div class="col-lg-1">
+                                    <div class="form-group">
+                                        <label>CVV</label>
+                                        @Html.TextBoxFor(l => l.DadosPagamento.CVV, new
+                                        {
+                                            @class = "form-control",
+                                            placeholder = "CVV",
+                                            @required = "required"
+                                        })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Parcelamento</label>
+                                       @* @Html.DropDownListFor(l => l.DadosPagamento.NParcelasId, (SelectList)ViewBag.Parcelas, new { @class = "form-control" })*@
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
-                        <div class="float-right">
-                            <button class="btn btn-primary" id="addLinhaBeneficiario" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Beneficiáiro(o)</button>
-                        </div>
                     </div>
+
                 </div>
-
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Dados Caminhão</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Modelo</label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>Volks-24250</option>
-                                        <option>Volks-8150</option>
-                                        <option>Mercedes-710</option>
-                                        <option>Volvo-FH 460</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Já existe seguro?</label>
-                                    <select class="form-control">
-                                        <option>Sim</option>
-                                        <option>Não</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Qual empresa seguro/assistência? </label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>option 1</option>
-                                        <option>option 2</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Veículo próprio ou financiado? </label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>Própio</option>
-                                        <option>Fianciado</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Quantidade Viagens</label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>Até 5</option>
-                                        <option>5 a 10</option>
-                                        <option>Acima de 10</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Entregas Carga</label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>Municipal</option>
-                                        <option>Intermunicipal</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Renda Líquida</label>
-                                    <select class="form-control">
-                                        <option>-------</option>
-                                        <option>Até 5000</option>
-                                        <option>De 5001 até 10000</option>
-                                        <option>Acima 10000</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
-                                    <select class="form-control">
-                                        <option>Sim</option>
-                                        <option>Não</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
+                        Salvar
+                    </button>
                 </div>
-
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Dados Pagamento</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Possui conta Digital?</label>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                        <label class="form-check-label" for="inlineCheckbox1">Sim</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                        <label class="form-check-label" for="inlineCheckbox2">Não</label>
-                                    </div>
-                                    <div class="float-right">
-                                        <button class="btn btn-primary" type="button"><i class="fas fa-credit-card" aria-hidden="true"></i> Abrir Conta Digital</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5">
-                                <div class="form-group">
-                                    <label>Nome no cartao</label>
-                                    <input type="text" class="form-control" placeholder="Nome no cartao" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Número do cartão</label>
-                                    <input type="text" class="form-control" placeholder="Número do cartão" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Data de expiração</label>
-                                    <input type="text" class="form-control" placeholder="Data de expiração" required>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-1">
-                                <div class="form-group">
-                                    <label>CVV</label>
-                                    <input type="text" class="form-control" placeholder="CVV" required>
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Parcelamento</label>
-                                    <select class="form-control">
-                                        <option>12x50</option>
-                                        <option>12x80</option>
-                                        <option>12x120</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="card-footer">
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
-                    Editar
-                </button>
             </div>
         </div>
-    </div>
 </section>
 
 <div class="modal fade" id="modal-primary">
@@ -533,7 +500,63 @@
 
     </div>
 </div>
-@section scripts
-{
+@section scripts{
+    <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
     <script src="~/Assets/Js/Apolice/EditarApolice.js"></script>
+    <script id="tmpDependente" type="text/x-jquery-tmpl">
+        <tr>
+            <td>
+                <label>Nome</label>
+                @Html.TextBox("Dependente.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
+            </td>
+            <td>
+                <label>Data de Nascimento</label>
+                @Html.TextBox("Dependente.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Filho" })
+            </td>
+            <td><a class="deleteLinha nav-icon far fa-arrow-alt-circle-up display4"></a></td>
+            @Html.Hidden("Dependente.${Proximo}.Tipo", "Filho(a)")
+        </tr>
+    </script>
+    <script id="tmpBeneficiario" type="text/x-jquery-tmpl">
+        <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label>Nome</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome do Beneficiário" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Doc. Identificação</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.NDocumento", null, new { @class = "form-control rg-beneficiario", placeholder = "Doc. Identificação" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Data Nascimento</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa" })
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <label>Sexo</label>
+                    @Html.DropDownList("Beneficiario.${Proximo}.SexoId", (SelectList)ViewData["Sexo"], new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="form-group">
+                    <label>Grau de parentesco</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Parentesco", null, new { @class = "form-control", placeholder = "Grau" })
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <label>Porcentagem(%) do Beneficiário</label>
+                    @Html.TextBox("Beneficiario.${Proximo}.Porcentagem", null, new { @class = "form-control", placeholder = "Porcentagem", type = "number" })
+                </div>
+            </div>
+            <div class="col-lg-11"></div>
+            <div class="col-lg-1"><a class='deleteLinhaBeneficiario nav-icon far fa-arrow-alt-circle-up' style='margin:5px; cursor:pointer'></a></div>
+        </div>
+    </script>
 }

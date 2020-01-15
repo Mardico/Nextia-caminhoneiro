@@ -33,7 +33,7 @@
         });
         $('.Editar').on('click', function () {
             var ID = $(this).data('item');
-            $('#ApoliceId').val(ID);
+            $('#Id').val(ID);
             $('#TabSegurado').attr('action', '/Apolice/EditarApolice');
             $('#TabSegurado').attr('target', '_self');
             $('#TabSegurado').submit();

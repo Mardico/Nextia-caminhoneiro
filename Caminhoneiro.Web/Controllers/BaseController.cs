@@ -75,7 +75,7 @@ namespace Caminhoneiro.Web.Controllers
                     retorno.DadosCliente.CPF = Apolice.Codigo;
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDadosProdutoDTO>>())
                     {
-                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProdutoId, Valor = UsuarioAtual.Id};
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProdutoId, Valor = UsuarioAtual.Id };
                         RetornoGenericoDTO<ApoliceDadosProdutoDTO> retDTO = client.Post("Apolice/DadosProduto", filtro);
                         if (retDTO != null && retDTO.ID > 0)
                         {
@@ -85,11 +85,11 @@ namespace Caminhoneiro.Web.Controllers
                     }
                 }
 
-                if (Apolice.DadosClienteId > 0 && Apolice.Id == 0)
+                if ((Apolice.DadosClienteId > 0 || !string.IsNullOrEmpty(Apolice.Codigo)) && Apolice.Id == 0)
                 {
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
                     {
-                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosClienteId };
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosClienteId, Texto = Apolice.Codigo };
                         RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/Item", filtro);
                         if (retDTO != null && retDTO.ID > 0)
                         {
@@ -103,12 +103,14 @@ namespace Caminhoneiro.Web.Controllers
                 {
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDTO>>())
                     {
-                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() {ID = Apolice.Id } ;
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.Id };
                         RetornoGenericoDTO<ApoliceDTO> retDTO = client.Post("Apolice/Item", filtro);
                         if (retDTO != null && retDTO.ID > 0)
                         {
                             var oItem = Mapper.Map<RetornoGenericoDTO<ApoliceDTO>, RetornoGenericoViewModel<ApoliceViewModel>>(retDTO);
                             retorno = oItem.Item;
+                            Apolice.DadosProdutoId = oItem.Item.DadosProdutoId;
+                            Apolice.DadosClienteId = oItem.Item.DadosClienteId;
                         }
                     }
                 }
@@ -123,8 +125,8 @@ namespace Caminhoneiro.Web.Controllers
             ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", retorno.DadosVeiculo.TipoEntregaId);
 
             var oProduto = CarregaProduto(Apolice.DadosProdutoId);
-            var ListPgto = oProduto.Item.Valores.Select(s => new SelectListItem() { Value = s.ToString(), Text = "12x" + s.ToString()});
-            ViewBag.Parcelas = new SelectList(ListPgto, "Value", "Text", 0);
+            //var ListPgto = oProduto.Item.Valores.Select(s => new SelectListItem() { Value = s.ToString(), Text = "12x" + s.ToString() });
+            //ViewBag.Parcelas = new SelectList(ListPgto, "Value", "Text", 0);
             ViewBag.Seguradoras = new SelectList(CarregaLista("Apoio/ListarSeguradoras"), "Id", "Texto", retorno.DadosVeiculo.SeguradoraId);
             ViewBag.QdadeViagens = new SelectList(CarregaLista("Apoio/ListarQdadeViagens"), "Id", "Texto", retorno.DadosVeiculo.QdadeViagensId);
             ViewBag.RendasLiquidas = new SelectList(CarregaLista("Apoio/ListarRendasLiquidas"), "Id", "Texto", retorno.DadosVeiculo.RendaLiquidaId);
@@ -157,7 +159,7 @@ namespace Caminhoneiro.Web.Controllers
             RetornoGenericoViewModel<ProdutoViewModel> retorno = new RetornoGenericoViewModel<ProdutoViewModel>();
             using (var client = new HttpClientUtil<RetornoGenericoDTO<ProdutoDTO>>())
             {
-                ProdutoDTO filtro = new ProdutoDTO() {Id = ProdutoID };
+                ProdutoDTO filtro = new ProdutoDTO() { Id = ProdutoID };
                 RetornoGenericoDTO<ProdutoDTO> retDTO = client.Post("Produtos/Item", filtro);
                 if (retDTO != null)
                 {

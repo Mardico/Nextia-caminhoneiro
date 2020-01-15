@@ -1,6 +1,7 @@
 ﻿using Caminhoneiro.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Caminhoneiro.Entidade
 {
@@ -17,8 +18,11 @@ namespace Caminhoneiro.Entidade
             _Itens = new List<ApoliceDTO>();
             foreach (ClienteDTO oCliente in Clientes.Itens())
             {
+                if (oCliente.CPF == "197.612.188-48")
+                    continue;
+
                 bool randombool = Convert.ToBoolean(new Random().Next(-1, 1));
-                if (1==1)
+                if (1 == 1)
                 {
                     int randomNumber2 = new Random().Next(0, 5);
                     var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
@@ -47,7 +51,7 @@ namespace Caminhoneiro.Entidade
                         Status = oStatus.Nome,
                         DataInicio = dataini.AddDays(new Random().Next((DateTime.Today - start).Days)),
                         DadosProduto = oProduto,
-                        DadosProdutoId = oProduto.Id,
+                        DadosProdutoId = oProduto.ProdutoId,
                         DadosPagamentoId = oPagamento.Id,
                         DadosPagamento = oPagamento,
                         DadosVeiculoId = oVeiculo.Id,

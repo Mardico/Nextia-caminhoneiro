@@ -83,20 +83,21 @@
         }
         if (ret.ID === 1) {
             //valida se tem apolice pendentes
-            ojsPage.CarregaApolicesPendentes();
+            ojsPage.CarregaApolicesUsuario();
             return;
         }
         if (ret.ID > 1) {
+            var form = $("#frmDados");
             form.attr('action', '/Segurado/ListaTodos');
             form.submit();
             return;
         }
 
     };
-    this.CarregaApolicesPendentes = function () {
+    this.CarregaApolicesUsuario = function (ret) {
         var form = $("#frmDados");
         var oData = form.serialize();
-        var oURL = "/Apolice/ApolicesPendentes";
+        var oURL = "/Apolice/ListarApolices";
         return $.ajax({
             data: oData,
             url: oURL,
@@ -107,14 +108,25 @@
                 if (returnedData.ID < 0) {  //Invalido
                     swal("Oops", returnedData.Mensagem, "error");
                 } else {
-                    //se tem 1 valida se 
                     if (returnedData.ID > 0) {
-                        $('#Id').val(returnedData.Item[0].Id);
-                        form.attr('action', '/Apolice/Adesao');
-                    } else {
+                        //Valida se tem uma proposta em rascunho
+                        for (var apolice in returnedData.Item) {
+                            if (apolice.StatusId === 0) {
+                                $('#Id').val(returnedData.Item[0].Id);
+                                form.attr('action', '/Apolice/Adesao');
+                                form.submit();
+                                break;
+                            }
+                        }
+
+                        //Carrega dados do usuario
                         form.attr('action', '/Segurado/DadosCadastrais');
+                        form.submit();
+
+                    } else {
+                        //Carrega Produtos
+                        ojsPage.CarregaProdutos();
                     }
-                    form.submit();
                 }
             }
         });

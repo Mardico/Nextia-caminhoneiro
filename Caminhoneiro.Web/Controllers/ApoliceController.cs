@@ -56,7 +56,8 @@ namespace Caminhoneiro.Web.Controllers
         }
         public ActionResult EditarApolice(ApoliceViewModel filtro)
         {
-            return View();
+            ApoliceViewModel retorno = NovaAdesao(filtro);
+            return View(retorno);
         }
         public ActionResult Pagamento(ClienteApoliceViewModel cliente)
         {
@@ -162,13 +163,13 @@ namespace Caminhoneiro.Web.Controllers
             }
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult ApolicesPendentes(ClienteViewModel cliente)
+        public JsonResult ListarApolices(ClienteViewModel cliente)
         {
             RetornoGenericoViewModel<List<ApoliceViewModel>> retorno = new RetornoGenericoViewModel<List<ApoliceViewModel>>(-1, "Falha ao Acessar API");
             using (var client = new HttpClientUtil<RetornoGenericoDTO<List<ApoliceDTO>>>())
             {
                 var filtro = Mapper.Map<ClienteViewModel, ClienteDTO>(cliente);
-                RetornoGenericoDTO<List<ApoliceDTO>> retDTO = client.Post("Apolice/ApolicesPendentes", filtro);
+                RetornoGenericoDTO<List<ApoliceDTO>> retDTO = client.Post("Apolice/Listar", filtro);
                 if (retDTO != null)
                 {
                     retorno = Mapper.Map<RetornoGenericoDTO<List<ApoliceDTO>>, RetornoGenericoViewModel<List<ApoliceViewModel>>>(retDTO);
