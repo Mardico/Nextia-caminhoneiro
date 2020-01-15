@@ -180,7 +180,7 @@
     <Content Include="Assets\Js\Apolice\Historico.js" />
     <Content Include="Assets\Js\Apolice\Produtos.js" />
     <Content Include="Assets\Js\Login\Esqueci.js" />
-    <Content Include="Assets\Js\Segurado\ConsultarSegurado.js" />
+    <Content Include="Assets\Js\Segurado\Index.js" />
     <Content Include="Assets\Js\Segurado\DadosCadastrais.js" />
     <Content Include="Assets\Js\Segurado\EditarSegurado.js" />
     <Content Include="Assets\Js\Segurado\KitProduto.js" />

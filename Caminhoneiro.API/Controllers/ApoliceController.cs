@@ -105,7 +105,6 @@ namespace Caminhoneiro.API.Controllers
             return Json(retorno);
         }
 
-
         [HttpPost]
         public JsonResult<RetornoGenericoDTO<ApoliceDTO>> Salvar(ApoliceDTO filtro)
         {
@@ -124,6 +123,26 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Salvar");
             return Json(retorno);
         }
+
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<List<ApoliceDTO>>> ApolicesPendentes(ClienteDTO filtro)
+        {
+            logar.Debug("Inicio Salvar");
+            RetornoGenericoDTO<List<ApoliceDTO>> retorno = new RetornoGenericoDTO<List<ApoliceDTO>>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ApoliceBLL oApolice = new ApoliceBLL();
+                retorno = oApolice.ApolicesPendentes(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino Salvar");
+            return Json(retorno);
+        }
+
 
         [HttpPost]
         public JsonResult<RetornoGenericoDTO<bool>> Excluir(FiltroGenericoDTO filtro)

@@ -86,7 +86,28 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Excluir");
             return Json(retorno);
         }
-        
+
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<ClienteDTO>> BuscaCEP(FiltroGenericoDTO filtro)
+        {
+            logar.Debug("Inicio BuscaCEP");
+            RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ClienteBLL oCliente = new ClienteBLL();
+                retorno = oCliente.BuscaCEP(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+
+            logar.Debug("Termino BuscaCEP");
+            return Json(retorno);
+        }
+
+
         [HttpGet]
         public JsonResult<RetornoGenericoDTO<List<ClienteDTO>>> Todos()
         {

@@ -28,7 +28,6 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Logar");
             return Json(retorno);
         }
-
         [HttpPost]
         public JsonResult<RetornoGenericoDTO<UsuarioDTO>> Item(FiltroGenericoDTO filtro)
         {
@@ -65,7 +64,25 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino Item");
             return Json(retorno);
         }
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<List<UsuarioDTO>>> ListaUsuariosDoVinculo(FiltroGenericoDTO filtro)
+        {
+            logar.Debug("Inicio ListaUsuariosDoVinculo");
+            RetornoGenericoDTO<List<UsuarioDTO>> retorno = new RetornoGenericoDTO<List<UsuarioDTO>>();
+            try
+            {
+                UsuarioBLL oUsuario = new UsuarioBLL();
+                retorno = oUsuario.ListaUsuariosDoVinculo(filtro);
 
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+                logar.Error(ex);
+            }
+            logar.Debug("Termino ListaUsuariosDoVinculo");
+            return Json(retorno);
+        }
         [HttpGet]
         public JsonResult<RetornoGenericoDTO<List<UsuarioDTO>>> Todos()
         {

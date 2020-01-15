@@ -1,119 +1,121 @@
-﻿$(document).ready(function () {
-    var contador = 1;
-    //adiciona nova linha
-    $("#addLinha").on("click", function () {
-        var newRow = $("<tr>");
-        var cols = "";
-        cols += '<td><input type="text" class="form-control" placeholder="Nome Filho(a)" name="first_name" /></td>';
-        cols += '<td><input  oninput="mascara(this, "data")" type="text" class="form-control" placeholder="Data Nascimento Filho" name="last_name" /></td>';
-        cols += '<td><a class=" deleteLinha nav-icon far fa-arrow-alt-circle-up"></a></td>';
-        newRow.append(cols);
-        contador++;
+﻿function jsPage() {
+    this.Limpar = function () {
+    };
+    this.AoAssociar = function () {
+        $('#tabSegurado').on('click', function () {
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Segurado/DadosCadastrais');
+            $('#TabSegurado').submit();
+        });
 
-        if (contador <= 10) {
-            $("#products-table").append(newRow);
-        } if (contador == 10) {
-            $("#addLinha").attr("disabled", true);
-        }
-    });
-    //remove linha
-    $("#products-table").on("click", "a.deleteLinha", function (event) {
-        $(this).closest("tr").remove();
-        $("#addLinha").attr("disabled", false);
-        contador--;
-    });
-});
+        $('#tabProdutos').on('click', function () {
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/ListaTodos');
+            $('#TabSegurado').submit();
+        });
 
-$(document).ready(function () {
-    var contador = 1;
-    //adiciona nova linha
-    $("#addLinhaBeneficiario").on("click", function () {
-        var newRow = $("<div class='row linha-beneficiario' style='border-bottom: 1px solid rgba(0, 0, 0, 0.2); margin: 5px;'>");
-        var cols = "";
+        $('#tabKit').on('click', function () {
+            if ($('#IdApolice').val() === null) {
+                SweetAlert('Selecione antes o produto');
+                return;
+            }
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Segurado/KitProduto');
+            $('#TabSegurado').submit();
+        });
 
-        cols += "<div class='col-lg-6'>"
-            + "<div class='form-group'>"
-            + "<label>Nome</label>"
-            + "<input type='text' class='form-control' placeholder='Nome do Beneficiário'>"
-            + "</div>"
-            + "</div>";
+        $('#tabApolice').on('click', function () {
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/ConsultarApolice');
+            $('#TabSegurado').submit();
+        });
 
-        cols += "<div class='col-lg-3'>"
-            + "<div class='form-group'>"
-            + "<label>Doc. Identificação</label>"
-            + "<input type='text' class='form-control rg-beneficiario' placeholder='Doc. Identificação'>"
-            + "</div>"
-            + "</div>";
+        $('#tabPagamentos').on('click', function () {
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/Pagamento');
+            $('#TabSegurado').submit();
+        });
 
-        cols += "<div class='col-lg-3'>"
-            + "<div class='form-group'>"
-            + "<label>Data Nascimento</label>"
-            + "<input oninput='mascara(this, 'data')' class='form-control' placeholder='dd/mm/aaaa'>"
-            + "</div>"
-            + "</div>";
+        $('#tabHistorico').on('click', function () {
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/Historico');
+            $('#TabSegurado').submit();
+        });
 
-        cols += "<div class='col-lg-3'>"
-            + "<div class='form-group'>"
-            + "<label>Sexo</label>"
-            + "<select class='form-control'>"
-            + "<option>Feminino</option>"
-            + "<option>Masculino</option>"
-            + "<option>Outro</option>"
-            + "</select>"
-            + "</div>"
-            + "</div>";
+        //Adicinona Dependente
+        $("#addLinha").on("click", function () {
+            var Dados = { Proximo: $("#ListaDependentes").children.length };
+            if ($("#ListaDependentes").children().length <= 10) {
+                $("#tmpDependente").tmpl(Dados).appendTo("#ListaDependentes");
+            } if ($("#ListaDependentes").children().length > 10) {
+                $("#addLinha").attr("disabled", true);
+            }
+        });
+        //remove linha
+        $("#ListaDependentes").on("click", "a.deleteLinha", function (event) {
+            $(this).closest("tr").remove();
+            $("#addLinha").attr("disabled", false);
+        });
+        //Adicinona Beneficiario
+        $("#addLinhaBeneficiario").on("click", function () {
+            var Dados = { Proximo: $("#ListaDependentes").children.length };
+            if ($("#tableBeneficiario").children().length <= 3) {
+                $("#tmpBeneficiario").tmpl(Dados).appendTo("#tableBeneficiario");
+            } if ($("#tableBeneficiario").children().length > 3) {
+                $("#addLinhaBeneficiario").attr("disabled", true);
+            }
+        });
+        //remove linha
+        $("#tableBeneficiario").on("click", "a.deleteLinhaBeneficiario", function (event) {
+            $(this).parent().parent().remove();
+            $("#addLinhaBeneficiario").attr("disabled", false);
+        });
+        //Alterna meio pgto
+        $("#DadosPagamento_MeioPgtoId").on("change", function () {
+            $('#divCartao').toggle();
+        });
 
-        cols += "<div class='col-lg-5'>"
-            + "<div class='form-group'>"
-            + "<label>Grau de parentesco</label>"
-            + "<input type='text' class='form-control' max='100' placeholder='Grau'>"
-            + "</div>"
-            + "</div>";
+        $('#frmDados').validate({
+            rules: {
+                DadosCliente_CPF: {
+                    required: true,
+                    CPF: true
+                },
+                DadosCliente_Email: {
+                    required: true,
+                    email: true
+                },
+                DadosCliente_DataNascimento: {
+                    datanasc: true
+                },
+                DadosDependente_0_DataNasc: {
+                    datanasc: true
+                },
+                DadosDependente_1_DataNasc: {
+                    datanasc: true
+                },
+                Beneficiario_0_DataNasc: {
+                    datanasc: true
+                },
+                DadosPagamento_Conta: {
+                    required: true,
+                    creditcard: true
+                }
+            },
+            messages: {
+                CPF: { require_from_group: "" },
+                Nome: { require_from_group: "Informe pelo menos um campo de busca" }
 
-        cols += "<div class='col-lg-4'>"
-            + "<div class='form-group'>"
-            + "<label>Porcentagem(%) do Beneficiário</label>"
-            + "<input type='number' class='form-control' placeholder='Porcentagem'>"
-            + "</div>"
-            + "</div>"
-            + "<div class='col-lg-11'></div>"
-            + "<div class='col-lg-1'><a class='deleteLinhaBeneficiario nav-icon far fa-arrow-alt-circle-up' style='margin:5px; cursor:pointer'></a></div>"
-            + "</div>";
+            }
+        });
 
-        newRow.append(cols);
-        contador++;
+    };
+    this.Inicio = function () {
+        this.AoAssociar();
+    };
+}
 
-        if (contador <= 3) {
-            $("#tableBeneficiario").append(newRow);
-        } if (contador == 3) {
-            $("#addLinhaBeneficiario").attr("disabled", true);
-        }
-    });
-    //remove linha
-    $("#tableBeneficiario").on("click", "a.deleteLinhaBeneficiario", function (event) {
-        $(this).closest(".linha-beneficiario").remove();
-        $("#addLinhaBeneficiario").attr("disabled", false);
-        contador--;
-    });
-});
-
-var maskCpfOuCnpj = IMask(document.getElementById('cpfcnpj'), {
-    mask: [
-        {
-            mask: '000.000.000-00',
-            maxLength: 11
-        },
-        {
-            mask: '00.000.000/0000-00'
-        }
-    ]
-});
-
-var maskBeneficiarioRg = IMask(document.getElementById('rg-beneficiario'), {
-    mask: [
-        {
-            mask: '00.000.000-0',
-            maxLength: 9
-        }
-    ]
+var ojsPage = new jsPage();
+$(function () {
+    ojsPage.Inicio();
 });

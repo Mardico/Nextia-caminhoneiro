@@ -1,5 +1,6 @@
 ﻿using Caminhoneiro.DTO;
 using Caminhoneiro.Entidade;
+using Caminhoneiro.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,13 +11,13 @@ namespace Caminhoneiro.Business
     {
         public ClienteBLL()
         {
-                    }
+        }
         public RetornoGenericoDTO<List<ClienteDTO>> Listar(ClienteDTO filtro)
         {
             RetornoGenericoDTO<List<ClienteDTO>> retorno = new RetornoGenericoDTO<List<ClienteDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ClienteDTO>(), ID = -1 };
             try
             {
-                retorno.Item = Clientes.Itens().Where(w => (filtro.CPF!=null && w.CPF == filtro.CPF) || (filtro.Nome != null && w.Nome.Contains(filtro.Nome))).ToList();
+                retorno.Item = Clientes.Itens().Where(w => (filtro.CPF != null && w.CPF == filtro.CPF) || (filtro.Nome != null && w.Nome.Contains(filtro.Nome))).ToList();
                 foreach (var cliente in retorno.Item)
                 {
                     cliente.NumeroApolices = Apolices.Itens().Count(w => (filtro.CPF != null && w.DadosCliente.CPF == filtro.CPF) || (filtro.Nome != null && w.DadosCliente.Nome.Contains(filtro.Nome)));
@@ -84,7 +85,7 @@ namespace Caminhoneiro.Business
             RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { Mensagem = "Falha ao Carregar", Item = new ClienteDTO(), ID = -1 };
             try
             {
-                var Cliente = Clientes.Itens().Where(w => (filtro.Id > 0 && w.Id == filtro.Id) || (filtro.CPF!=null && w.CPF == filtro.CPF) || (filtro.Nome!=null && w.Nome == filtro.Nome)).FirstOrDefault();
+                var Cliente = Clientes.Itens().Where(w => (filtro.Id > 0 && w.Id == filtro.Id) || (filtro.CPF != null && w.CPF == filtro.CPF) || (filtro.Nome != null && w.Nome == filtro.Nome)).FirstOrDefault();
                 if (Cliente != null)
                 {
                     retorno.Item = Cliente;
@@ -96,11 +97,36 @@ namespace Caminhoneiro.Business
                     retorno.ID = 0;
                     retorno.Mensagem = "Registro Não Localizado";
                 }
-                
+
             }
             catch (Exception ex)
             {
                 retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
+
+        public RetornoGenericoDTO<ClienteDTO> BuscaCEP(FiltroGenericoDTO filtro)
+        {
+            RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { Mensagem = "Falha ao Carregar", Item = new ClienteDTO(), ID = -1 };
+            using (var client = new HttpClientUtil<dynamic>())
+            {
+                try
+                {
+                    var ret = client.Get(filtro.Texto.Replace("-", "") + "/json/");
+                    retorno.Item.CEP = ret.cep;
+                    retorno.Item.Endereco = ret.logradouro;
+                    retorno.Item.Complemento = ret.complemento;
+                    retorno.Item.Bairro = ret.bairro;
+                    retorno.Item.Cidade = ret.localidade;
+                    retorno.Item.UF = ret.uf;
+                    if (ret.erro == null)
+                        retorno.ID = 1;
+                }
+                catch (Exception ex)
+                {
+                    retorno.Mensagem = ex.Message;
+                }
             }
             return retorno;
         }

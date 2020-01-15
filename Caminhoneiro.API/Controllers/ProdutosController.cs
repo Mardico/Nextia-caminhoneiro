@@ -27,5 +27,23 @@ namespace Caminhoneiro.API.Controllers
             logar.Debug("Termino ListaProdutos");
             return Json(retorno);
         }
+
+        [HttpPost]
+        public JsonResult<RetornoGenericoDTO<ProdutoDTO>> Item(ProdutoDTO filtro)
+        {
+            logar.Debug("Inicio Item");
+            RetornoGenericoDTO<ProdutoDTO> retorno = new RetornoGenericoDTO<ProdutoDTO>() { ID = -1, Mensagem = "Falha ao Requisitar" };
+            try
+            {
+                ProdutosBLL produtos = new ProdutosBLL();
+                retorno = produtos.Produto(filtro);
+            }
+            catch (System.Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            logar.Debug("Termino Item");
+            return Json(retorno);
+        }
     }
 }

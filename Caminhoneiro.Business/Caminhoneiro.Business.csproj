@@ -58,6 +58,10 @@
       <Project>{D2736C08-BA8C-4004-BAEF-697913F23315}</Project>
       <Name>Caminhoneiro.Entidade</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Caminhoneiro.Util\Caminhoneiro.Util.csproj">
+      <Project>{CE8783B8-C19F-4944-AFAC-76782E9BB950}</Project>
+      <Name>Caminhoneiro.Util</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

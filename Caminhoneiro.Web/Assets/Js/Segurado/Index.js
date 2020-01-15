@@ -6,18 +6,19 @@
     };
     this.AoAssociar = function () {
         $('#btnConsultar').on('click', function () {
-            if ($("#frmBusca").valid())
-                ojsPage.Consultar(ojsPage.CarregaProdutos);
+            if ($("#frmDados").valid())
+                ojsPage.Consultar(ojsPage.TrataRetornoConsulta);
             return false;
         });
         $('#btnLimpar').on('click', function () {
             ojsPage.Limpar();
             $('#CPF').focus();
         });
-        $('#frmBusca').validate({
+        $('#frmDados').validate({
             rules: {
                 CPF: {
-                    require_from_group: [1, ".search-group"]
+                    require_from_group: [1, ".search-group"],
+                    CPF: true
                 },
                 Nome: {
                     require_from_group: [1, ".search-group"]
@@ -34,7 +35,7 @@
         });
     };
     this.CarregaProdutos = function () {
-        var form = $("#frmBusca");
+        var form = $("#frmDados");
         var oURL = "/Apolice/ProdutosUsuario";
         return $.ajax({
             url: oURL,
@@ -57,7 +58,7 @@
         });
     };
     this.Consultar = function (acao) {
-        var form = $("#frmBusca");
+        var form = $("#frmDados");
         var oData = form.serialize();
         var oURL = "/Segurado/ConsultaSegurados";
         return $.ajax({
@@ -70,20 +71,50 @@
                 if (returnedData.ID < 0) {  //Invalido
                     swal("Oops", returnedData.Mensagem, "error");
                 } else {
-                    if (returnedData.ID === 0) {
-                        acao();
-                        return;
-                    }
-                    if (returnedData.ID === 1) {
+                    acao(returnedData);
+                }
+            }
+        });
+    };
+    this.TrataRetornoConsulta = function (ret) {
+        if (ret.ID === 0) {
+            ojsPage.CarregaProdutos();
+            return;
+        }
+        if (ret.ID === 1) {
+            //valida se tem apolice pendentes
+            ojsPage.CarregaApolicesPendentes();
+            return;
+        }
+        if (ret.ID > 1) {
+            form.attr('action', '/Segurado/ListaTodos');
+            form.submit();
+            return;
+        }
+
+    };
+    this.CarregaApolicesPendentes = function () {
+        var form = $("#frmDados");
+        var oData = form.serialize();
+        var oURL = "/Apolice/ApolicesPendentes";
+        return $.ajax({
+            data: oData,
+            url: oURL,
+            cache: false,
+            type: "POST",
+            dataType: 'json',
+            success: function (returnedData) {
+                if (returnedData.ID < 0) {  //Invalido
+                    swal("Oops", returnedData.Mensagem, "error");
+                } else {
+                    //se tem 1 valida se 
+                    if (returnedData.ID > 0) {
+                        $('#Id').val(returnedData.Item[0].Id);
+                        form.attr('action', '/Apolice/Adesao');
+                    } else {
                         form.attr('action', '/Segurado/DadosCadastrais');
-                        form.submit();
-                        return;
                     }
-                    if (returnedData.ID > 1) {
-                        form.attr('action', '/Segurado/ListaTodos');
-                        form.submit();
-                        return;
-                    }
+                    form.submit();
                 }
             }
         });
@@ -94,8 +125,9 @@
     this.NovoPedido = function (obj) {
         var IdProduto = $(obj).data('item');
         $('#DadosProdutoId').val(IdProduto);
-        
-        var form = $("#frmBusca");
+        var CPF = $('#CPF').val();
+        $('#Codigo').val(CPF);
+        var form = $("#frmDados");
         form.attr("action", "/Apolice/Adesao");
         form.submit();
     };

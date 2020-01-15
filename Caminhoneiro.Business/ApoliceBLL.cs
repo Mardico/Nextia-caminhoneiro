@@ -122,6 +122,22 @@ namespace Caminhoneiro.Business
             return retorno;
         }
 
+        public RetornoGenericoDTO<List<ApoliceDTO>> ApolicesPendentes(ClienteDTO filtro)
+        {
+            RetornoGenericoDTO<List<ApoliceDTO>> retorno = new RetornoGenericoDTO<List<ApoliceDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ApoliceDTO>(), ID = -1 };
+            try
+            {
+                retorno.Item = Apolices.Itens().Where(w => (w.DadosCliente.CPF == filtro.CPF && w.StatusId == 0)).ToList();
+                retorno.ID = retorno.Item.Count;
+                retorno.Mensagem = "Sucesso ao Processar";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
+
         public RetornoGenericoDTO<List<ApolicePagamentoDTO>> ListarPagamento(ApoliceDTO filtro)
         {
             RetornoGenericoDTO<List<ApolicePagamentoDTO>> retorno = new RetornoGenericoDTO<List<ApolicePagamentoDTO>>() { Mensagem = "Falha ao Processar", Item = new List<ApolicePagamentoDTO>(), ID = -1 };

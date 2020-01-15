@@ -31,24 +31,7 @@ namespace Caminhoneiro.Web.Controllers
         }
         public ActionResult Adesao(ApoliceViewModel filtro)
         {
-
             ApoliceViewModel retorno = NovaAdesao(filtro);
-
-            //Carrega combos
-            ViewBag.SimNao = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } }, "Value", "Text", 0);
-            ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", 0);
-            ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", 0);
-            ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", 0);
-            ViewBag.MeioPgto = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Cartão de Crédito" }, new SelectListItem() { Value = "1", Text = "Conta Digital" } }, "Value", "Text", 0);
-            ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", 0);
-            ViewBag.Parcelas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "12x50" }, new SelectListItem() { Value = "1", Text = "12x80" }, new SelectListItem() { Value = "2", Text = "12x120" } }, "Value", "Text", 0);
-
-            ViewBag.Seguradoras = new SelectList(CarregaLista("Apoio/ListarSeguradoras"), "Id", "Texto", 0);
-            ViewBag.QdadeViagens = new SelectList(CarregaLista("Apoio/ListarQdadeViagens"), "Id", "Texto", 0);
-            ViewBag.RendasLiquidas = new SelectList(CarregaLista("Apoio/ListarRendasLiquidas"), "Id", "Texto", 0);
-            ViewBag.Sindicatos = new SelectList(CarregaLista("Apoio/ListarSindicatos"), "Id", "Texto", 0);
-            ViewBag.VeiculoProprio = new SelectList(CarregaLista("Apoio/ListarVeiculoProprio"), "Id", "Texto", 0);
-            ViewBag.Veiculos = new SelectList(CarregaLista("Apoio/ListarVeiculos"), "Id", "Texto", 0);
             return View(retorno);
         }
         public ActionResult ListaTodos(ClienteApoliceViewModel cliente)
@@ -71,7 +54,7 @@ namespace Caminhoneiro.Web.Controllers
             else
                 return RedirectToAction("Index", "Segurado", new { retorno.Mensagem });
         }
-        public ActionResult EditarApolice()
+        public ActionResult EditarApolice(ApoliceViewModel filtro)
         {
             return View();
         }
@@ -161,6 +144,34 @@ namespace Caminhoneiro.Web.Controllers
                 if (retDTO != null)
                 {
                     retorno = Mapper.Map<RetornoGenericoDTO<bool>, RetornoGenericoViewModel<bool>>(retDTO);
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult UsuariosFromVinculo(FiltroGenericoViewModel UsuarioAtual)
+        {
+            RetornoGenericoViewModel<List<UsuarioViewModel>> retorno = new RetornoGenericoViewModel<List<UsuarioViewModel>>(-1, "Falha ao Acessar API");
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<List<UsuarioDTO>>>())
+            {
+                FiltroGenericoDTO filtro = Mapper.Map<FiltroGenericoViewModel, FiltroGenericoDTO>(UsuarioAtual);
+                RetornoGenericoDTO<List<UsuarioDTO>> retDTO = client.Post("Usuario/ListaUsuariosDoVinculo", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<List<UsuarioDTO>>, RetornoGenericoViewModel<List<UsuarioViewModel>>>(retDTO);
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ApolicesPendentes(ClienteViewModel cliente)
+        {
+            RetornoGenericoViewModel<List<ApoliceViewModel>> retorno = new RetornoGenericoViewModel<List<ApoliceViewModel>>(-1, "Falha ao Acessar API");
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<List<ApoliceDTO>>>())
+            {
+                var filtro = Mapper.Map<ClienteViewModel, ClienteDTO>(cliente);
+                RetornoGenericoDTO<List<ApoliceDTO>> retDTO = client.Post("Apolice/ApolicesPendentes", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<List<ApoliceDTO>>, RetornoGenericoViewModel<List<ApoliceViewModel>>>(retDTO);
                 }
             }
             return Json(retorno, JsonRequestBehavior.AllowGet);

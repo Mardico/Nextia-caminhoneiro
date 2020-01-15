@@ -105,5 +105,35 @@ namespace Caminhoneiro.Web.Controllers
             }
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult ConsultaDadosSegurado(ClienteViewModel FiltroCliente)
+        {
+            RetornoGenericoViewModel<ClienteViewModel> retorno = new RetornoGenericoViewModel<ClienteViewModel>(-1, "Falha ao Acessar API");
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
+            {
+                ClienteDTO filtro = Mapper.Map<ClienteViewModel, ClienteDTO>(FiltroCliente);
+                RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/BuscaCEP", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<ClienteDTO>, RetornoGenericoViewModel<ClienteViewModel>>(retDTO);
+                    retorno.Item = retorno.Item;
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult ConsultaCEP(FiltroGenericoViewModel Filtro)
+        {
+            RetornoGenericoViewModel<ClienteViewModel> retorno = new RetornoGenericoViewModel<ClienteViewModel>(-1, "Falha ao Acessar API");
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
+            {
+                FiltroGenericoDTO filtro = Mapper.Map<FiltroGenericoViewModel, FiltroGenericoDTO>(Filtro);
+                RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/BuscaCEP", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<ClienteDTO>, RetornoGenericoViewModel<ClienteViewModel>>(retDTO);
+                    retorno.Item = retorno.Item;
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
     }
 }

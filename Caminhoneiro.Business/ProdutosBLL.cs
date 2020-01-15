@@ -10,7 +10,7 @@ namespace Caminhoneiro.Business
     {
         public ProdutosBLL()
         {
-            
+
         }
 
         public RetornoGenericoDTO<List<ProdutoDTO>> Listar(UsuarioDTO filtro)
@@ -24,6 +24,23 @@ namespace Caminhoneiro.Business
                 else
                     retorno.Item = Produtos.Itens().ToList();
                 retorno.ID = retorno.Item.Count;
+                retorno.Mensagem = "Sucesso ao Listar";
+            }
+            catch (Exception ex)
+            {
+                retorno.Mensagem = ex.Message;
+            }
+            return retorno;
+        }
+
+        public RetornoGenericoDTO<ProdutoDTO> Produto(ProdutoDTO filtro)
+        {
+            RetornoGenericoDTO<ProdutoDTO> retorno = new RetornoGenericoDTO<ProdutoDTO>() { Mensagem = "Falha ao Processar", Item = new ProdutoDTO(), ID = -1 };
+            try
+            {
+                retorno.Item = Produtos.Itens().Where(w => w.Id == filtro.Id).FirstOrDefault();
+                if (retorno.Item != null)
+                    retorno.ID = retorno.Item.Id;
                 retorno.Mensagem = "Sucesso ao Listar";
             }
             catch (Exception ex)

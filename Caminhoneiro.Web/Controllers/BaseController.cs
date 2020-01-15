@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Caminhoneiro.Util;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Caminhoneiro.Web.Controllers
 {
@@ -71,6 +72,7 @@ namespace Caminhoneiro.Web.Controllers
             {
                 if (Apolice.DadosProdutoId > 0 && Apolice.Id == 0)
                 {
+                    retorno.DadosCliente.CPF = Apolice.Codigo;
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDadosProdutoDTO>>())
                     {
                         FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProdutoId, Valor = UsuarioAtual.Id};
@@ -111,6 +113,25 @@ namespace Caminhoneiro.Web.Controllers
                     }
                 }
             }
+            //Carrega combos
+            ViewBag.SimNao = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } }, "Value", "Text", 0);
+            ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", 0);
+            ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", 0);
+            ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", 0);
+
+            ViewBag.MeioPgto = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Cartão de Crédito" }, new SelectListItem() { Value = "1", Text = "Conta Digital" } }, "Value", "Text", retorno.DadosPagamentoId);
+            ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", retorno.DadosVeiculo.TipoEntregaId);
+
+            var oProduto = CarregaProduto(Apolice.DadosProdutoId);
+            var ListPgto = oProduto.Item.Valores.Select(s => new SelectListItem() { Value = s.ToString(), Text = "12x" + s.ToString()});
+            ViewBag.Parcelas = new SelectList(ListPgto, "Value", "Text", 0);
+            ViewBag.Seguradoras = new SelectList(CarregaLista("Apoio/ListarSeguradoras"), "Id", "Texto", retorno.DadosVeiculo.SeguradoraId);
+            ViewBag.QdadeViagens = new SelectList(CarregaLista("Apoio/ListarQdadeViagens"), "Id", "Texto", retorno.DadosVeiculo.QdadeViagensId);
+            ViewBag.RendasLiquidas = new SelectList(CarregaLista("Apoio/ListarRendasLiquidas"), "Id", "Texto", retorno.DadosVeiculo.RendaLiquidaId);
+            ViewBag.Sindicatos = new SelectList(CarregaLista("Apoio/ListarSindicatos"), "Id", "Texto", retorno.VinculoId);
+            ViewBag.VeiculoProprio = new SelectList(CarregaLista("Apoio/ListarVeiculoProprio"), "Id", "Texto", retorno.DadosVeiculo.VeiculoProprioId);
+            ViewBag.Veiculos = new SelectList(CarregaLista("Apoio/ListarVeiculos"), "Id", "Texto", retorno.DadosVeiculo.VeiculoID);
+
             return retorno;
         }
         public List<TabelaApoioViewModel> CarregaLista(string Url)
@@ -130,6 +151,20 @@ namespace Caminhoneiro.Web.Controllers
                 }
             }
             return retorno;
-        } 
+        }
+        public RetornoGenericoViewModel<ProdutoViewModel> CarregaProduto(int ProdutoID)
+        {
+            RetornoGenericoViewModel<ProdutoViewModel> retorno = new RetornoGenericoViewModel<ProdutoViewModel>();
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<ProdutoDTO>>())
+            {
+                ProdutoDTO filtro = new ProdutoDTO() {Id = ProdutoID };
+                RetornoGenericoDTO<ProdutoDTO> retDTO = client.Post("Produtos/Item", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<ProdutoDTO>, RetornoGenericoViewModel<ProdutoViewModel>>(retDTO);
+                }
+            }
+            return retorno;
+        }
     }
 }

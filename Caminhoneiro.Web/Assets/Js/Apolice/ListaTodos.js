@@ -31,6 +31,14 @@
             $('#TabSegurado').attr('action', '/Segurado/KitProduto');
             $('#TabSegurado').submit();
         });
+        $('.Editar').on('click', function () {
+            var ID = $(this).data('item');
+            $('#ApoliceId').val(ID);
+            $('#TabSegurado').attr('action', '/Apolice/EditarApolice');
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').submit();
+        });
+
         $('.Visualizar').on('click', function () {
             var ID = $(this).data('item');
             $('#ApoliceId').val(ID);

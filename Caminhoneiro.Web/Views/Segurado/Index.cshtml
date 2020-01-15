@@ -23,10 +23,11 @@
             </div>
         </div>
         <div class="invoice p-3 mb-3">
-            @using (Html.BeginForm("", "Segurado", FormMethod.Post, new { id = "frmBusca" }))
+            @using (Html.BeginForm("", "Segurado", FormMethod.Post, new { id = "frmDados", name = "frmDados" }))
             {
                 <input id="Id" type="hidden" name="Id" value="0" />
                 <input id="DadosProdutoId" type="hidden" name="DadosProdutoId" value="" />
+                <input id="Codigo" type="hidden" name="Codigo" value="" />
                 <div class="row">
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <div class="form-group">
@@ -34,7 +35,6 @@
                             @Html.TextBoxFor(l => l.CPF, new { @class = "form-control cpf search-group", placeholder = "CPF", Id = "CPF", name = "CPF" })
                         </div>
                     </div>
-
                     <div class="col-lg-6 col-md-6 col-sm-6">
                         <div class="form-group">
                             <label>NOME</label>
@@ -67,7 +67,7 @@
 @section scripts
 {
     <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
-    <script src="~/Assets/Js/Segurado/ConsultarSegurado.js"></script>
+    <script src="~/Assets/Js/Segurado/index.js"></script>
     <script id="tmpProdutos" type="text/x-jquery-tmpl">
         <div class="col-lg-4 col-7">
             <!-- small box -->
