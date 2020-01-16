@@ -1,8 +1,10 @@
 ﻿$.extend($.fn.dataTable.defaults, {
     autoFill: true,
     responsive: true,
+    bFilter: false,
+    lengthChange: false,
     pagingType: window.innerWidth > 1024 ? "simple_numbers" : "simple",
-    pageLength: window.innerWidth < 1300 ? 5 : 10,
+    pageLength: window.innerWidth < 1300 ? 7:7,
     lengthMenu: window.innerWidth < 1300 ? [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]] : [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
     language: {
         url: "/Scripts/Portuguese-Brasil.txt"

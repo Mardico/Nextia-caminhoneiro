@@ -55,6 +55,20 @@
     this.Inicio = function () {
         this.AoAssociar();
     };
+    var table = $('.table');
+    table.on('error.dt', function (e, settings, techNote, message) {
+        swal("Oops", message, "error");
+    }).DataTable({
+        "processing": false,
+        "serverSide": false,
+        "deferRender": true,
+        "columns": [
+            { "data": "Nome", "name": "Nome", "Type": "Text" },
+            { "data": "CPF", "name": "CPF", "Type": "Text" },
+            { "data": "DataNascimento", "name": "Data", "Type": "Date" },
+            { "data": "", "name": "View" },
+        ],
+    });
 };
 
 var ojsPage = new jsPage();
