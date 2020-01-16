@@ -9,7 +9,7 @@ namespace Caminhoneiro.DTO
         public int MeioPgtoId { get; set; }
         public string Conta { get; set; }
         public string NomeResponsavel { get; set; }
-        public DateTime DataExpiracao { get; set; }
+        public string DataExpiracao { get; set; }
         public string CVV { get; set; }
         public int NParcelasId { get; set; }
     }

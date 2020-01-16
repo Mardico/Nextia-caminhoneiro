@@ -1,5 +1,4 @@
-﻿using Caminhoneiro.DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Caminhoneiro.ViewModel
 {
@@ -20,6 +19,6 @@ namespace Caminhoneiro.ViewModel
         public float ValorPrincipal { get; set; }
         public List<float> Valores { get; set; }
         public int VinculoID { get; set; }
-        public List<TabelaApoioDTO> Vinculo { get; set; }
+        public List<TabelaApoioViewModel> Vinculo { get; set; }
     }
 }

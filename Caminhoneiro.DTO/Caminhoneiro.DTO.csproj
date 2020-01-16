@@ -52,6 +52,10 @@
     <Compile Include="Apolice\ApoliceHistoricoDTO.cs" />
     <Compile Include="Apolice\ApolicePagamentoDTO.cs" />
     <Compile Include="Cliente\ClienteDTO.cs" />
+    <Compile Include="Shared\DataTablesColunasDTO.cs" />
+    <Compile Include="Shared\DataTablesFiltroDTO.cs" />
+    <Compile Include="Shared\DataTablesOrdemDTO.cs" />
+    <Compile Include="Shared\FiltroDataTablesDTO.cs" />
     <Compile Include="Usuario\AlteraSenhaDTO.cs" />
     <Compile Include="Usuario\FiltroLoginDTO.cs" />
     <Compile Include="Usuario\UsuarioDTO.cs" />
@@ -62,6 +66,11 @@
     <Compile Include="Shared\TabelaApoioDTO.cs" />
     <Compile Include="Usuario\VinculoDTO.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Caminhineiro.Enumeradores\Caminhineiro.Enumeradores.csproj">
+      <Project>{e04144d4-8b5e-4e1a-b1ec-b89c28f8eebc}</Project>
+      <Name>Caminhineiro.Enumeradores</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

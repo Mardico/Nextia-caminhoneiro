@@ -332,6 +332,13 @@
     <Content Include="plugins\chart.js\docs\notes\index.html" />
     <Content Include="plugins\chart.js\docs\notes\license.html" />
     <Content Include="plugins\chart.js\docs\style.css" />
+    <Content Include="plugins\datatables-plugins\dataTables.bootstrap.css" />
+    <Content Include="plugins\datatables-plugins\dataTables.bootstrap.js" />
+    <Content Include="plugins\datatables-plugins\dataTables.bootstrap.min.js" />
+    <Content Include="plugins\datatables-responsive\dataTables.responsive.css" />
+    <Content Include="plugins\datatables-responsive\dataTables.responsive.js" />
+    <Content Include="plugins\datatables-responsive\dataTables.responsive.min.js" />
+    <Content Include="plugins\datatables-responsive\responsive.dataTables.min.css" />
     <Content Include="plugins\datatables\dataTables.bootstrap4.css" />
     <Content Include="plugins\datatables\dataTables.bootstrap4.js" />
     <Content Include="plugins\datatables\dataTables.bootstrap4.min.css" />
@@ -2034,6 +2041,7 @@
     <Content Include="plugins\bootstrap-datepicker\css\bootstrap-datepicker.standalone.css.map" />
     <Content Include="plugins\bootstrap-datepicker\css\bootstrap-datepicker3.css.map" />
     <Content Include="plugins\bootstrap-datepicker\css\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="plugins\datatables-responsive\dataTables.responsive.scss" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\PlugCaminhoneiroWeb - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -2053,6 +2061,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Portuguese-Brasil.txt" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />

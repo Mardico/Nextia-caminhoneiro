@@ -166,8 +166,129 @@
 
             }
         });
+        $('input[required="required"').rules('add', 'required');
+        $('.credicard').rules('add', 'credicard');
+
+        //Salvar Rascunho
+        $('#btnRascunho').on('click', function () {
+            var valido = $('#frmDados').valid();
+            if (valido)
+                ojsPage.Salvar(0);
+        });
+        //Salvar
+        $('#btnSalvar').on('click', function () {
+            var valido = $('#frmDados').valid();
+            if (valido)
+                ojsPage.Salvar(1);
+
+        });
+    };
+
+    this.Salvar = function (Status) {
+        var dataBene = [];
+        var dataDep = [];
+        for (var i = 0; i < $("#ListaDependentes").children().length; i++) {
+            if ($('#DadosDependente_Nome')[i].val() !== "")
+                dataDep.push({
+                    DadosDependente_Nome: $('#DadosDependente_Nome')[i].val(),
+                    DadosDependente_DataNasc: $('#DadosDependente_DataNasc')[i].val()
+                });
+        }
+
+        for (var a = 0; a < $("#ListaDependentes").children().length; a++) {
+            if ($('#Beneficiario_Nome')[a].val() !== "")
+                dataBene.push({
+                    DadosBeneficiario_Nome: $('#Beneficiario_Nome')[a].val(),
+                    NDocumento: $('#Beneficiario_NDocumento')[a].val(),
+                    DataNasc: $('#Beneficiario_DataNasc')[a].val(),
+                    SexoId: $('#Beneficiario_SexoId')[a].val(),
+                    Parentesco: $('#Beneficiario_Parentesco')[a].val(),
+                    Porcentagem: $('#Beneficiario_Porcentagem')[a].val()
+                });
+        }
+
+        var data = {
+            "Id": $("#Id").val(),
+            "VinculoId": $("#VinculoId").val(),
+            "UsuarioId": $("#UsuarioId").val(),
+            "DadosBeneficiario": dataBene,
+            "DadosDependente": dataDep,
+            "DadosProdutoId": $("#UsuarioId").val(),
+            "DadosCliente": {
+                "Id": $("#UsuarioId").val(),
+                "Nome": $("#DadosCliente.Nome").val(),
+                "CPF": $("#DadosCliente.CPF").val(),
+                "SexoId": $("#DadosCliente.SexoId").val(),
+                "DataNascimento": $("#DadosCliente.DataNascimento").val(),
+                "EstadoCivilId": $("#DadosCliente.EstadoCivilId").val(),
+                "Email": $("#DadosCliente.Email").val(),
+                "CEP": $("#DadosCliente.CEP").val(),
+                "Endereco": $("#DadosCliente.Endereco").val(),
+                "Numero": $("#DadosCliente.Numero").val(),
+                "Complemento": $("#DadosCliente.Complemento").val(),
+                "Bairro": $("#DadosCliente.Bairro").val(),
+                "Cidade": $("#DadosCliente.Cidade").val(),
+                "UF": $("#DadosCliente.UF").val(),
+                "TelefoneFixo": $("#DadosCliente.TelefoneFixo").val(),
+                "TelefoneCelular": $("#DadosCliente.TelefoneCelular").val(),
+                "TelefoneSecundario": $("#DadosCliente.TelefoneSecundario").val(),
+                "TelefoneAdicional": $("#DadosCliente.TelefoneAdicional").val(),
+                "ContactarPorId": $("#DadosCliente.ContactarPorId").val()
+            },
+            "DadosClienteId": $("#DadosClienteId").val(),
+            "DadosVeiculoId": $("#DadosVeiculoId").val(),
+            "DadosVeiculo": {
+                "Id": $("#DadosVeiculoId").val(),
+                "VeiculoID": $("#DadosVeiculo.VeiculoID").val(),
+                "Segurado": $("#DadosVeiculo.Segurado").val(),
+                "SeguradoraId": $("#DadosVeiculo.SeguradoraId").val(),
+                "VeiculoProprioId": $("#DadosVeiculo.VeiculoProprioId").val(),
+                "QdadeViagensId": $("#DadosVeiculo.QdadeViagensId").val(),
+                "TipoEntregaId": $("#DadosVeiculo.TipoEntregaId").val(),
+                "RendaLiquidaId": $("#DadosVeiculo.RendaLiquidaId").val(),
+                "SolicitouServApolice": $("#DadosVeiculo.SolicitouServApolice").val()
+            },
+            "DadosPagamentoId": $("#DadosPagamentoId").val(),
+            "StatusId": Status,
+            "DadosPagamento": {
+                "Id": $("#DadosPagamentoId").val(),
+                "MeioPgtoId": $("#DadosPagamento.MeioPgtoId").val(),
+                "Conta": $("#DadosPagamento.Conta").val(),
+                "NomeResponsavel": $("#DadosPagamento.NomeResponsavel").val(),
+                "DataExpiracao": $("#DadosPagamento.DataExpiracao").val(),
+                "CVV": $("#DadosPagamento.CVV").val()
+            }
+        };
+
+        return $.ajax({
+            data: data,
+            url: oURL,
+            cache: false,
+            type: "POST",
+            dataType: 'json',
+            success: function (returnedData) {
+                if (returnedData.ID === 0) {  //Invalido
+                    Mensagem.Erro(returnedData.Mensagem);
+                } else {
+                    var lista = returnedData.Item;
+                    $('#Usuario_id')
+                        .find('option')
+                        .remove()
+                        .end()
+                        .append('<option value="">:: Selecione ::</option>');
+                    for (var i = 0; i < lista.length; i++) {
+                        $('#Usuario_id').append($('<option></option>').val(lista[i].Id).data('item', lista[i].TipoUsuario).html(lista[i].Nome));
+                    }
+                    $('#Usuario_id').val(valor + '');
+                }
+            }
+        });
+    };
+
+    this.SalvaAdesao = function () {
 
     };
+
     this.Inicio = function () {
         this.AoAssociar();
     };

@@ -5,19 +5,59 @@
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Segurado/ListaTodos.css" type="text/css">
+    <link rel="stylesheet" href="~/Assets/Css/Segurado/ConsultarSegurado.css" type="text/css">
+    <style>
+        .itemproduto {
+            cursor: pointer;
+        }
+    </style>
 }
 
-<div class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="m-0 text-dark">Todos Segurados</h1>
+<section class="content">
+    <div class="card-body">
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Consultar Cliente</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="invoice p-3 mb-3">
+            @using (Html.BeginForm("ListaTodos", "Segurado", FormMethod.Post, new { id = "frmDados", name = "frmDados" }))
+            {
+                <input id="DadosProdutoId" type="hidden" name="DadosProdutoId" value="" />
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <div class="form-group">
+                            <label>CPF</label>
+                            @Html.TextBox("CPF", ((Caminhoneiro.ViewModel.ClienteViewModel)ViewData["Filtro"]).CPF, new { @class = "form-control cpf search-group", placeholder = "CPF", Id = "CPF", name = "CPF" })
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="form-group">
+                            <label>NOME</label>
+                            @Html.TextBox("Codigo", ((Caminhoneiro.ViewModel.ClienteViewModel)ViewData["Filtro"]).Nome, new { @class = "form-control search-group", placeholder = "NOME", Id = "Nome", name = "Nome" })
+                        </div>
+                    </div>
+                    <div class="col-lg-3" style="padding-top:30px">
+                        <button type="submit" class="btn btn-primary" id="btnConsultar">Consultar</button>
+                        <button type="button" class="btn btn-primary" id="btnLimpar">
+                            <i class="fa fa-eraser" aria-hidden="true"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+            }
+            <div class="row">
+                <div class="col-lg-12">
+                    <center><label class="text-danger text-center">@ViewBag.Mensagem</label></center>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 <section class="content">
-
     <div class="card">
         <div class="card card-primary card-outline">
             <div class="card-header">
@@ -31,10 +71,9 @@
                     <table id="example1" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>CPF</th>
                                 <th>Nome</th>
+                                <th>CPF</th>
                                 <th>Data Nascimento</th>
-                                <th>Data Alteração</th>
                                 <th>Ver</th>
                             </tr>
                         </thead>
@@ -42,10 +81,9 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.CPF</td>
                                     <td>@item.Nome</td>
+                                    <td>@item.CPF</td>
                                     <td>@item.DataNascimento</td>
-                                    <td>@item.DataAlteracao</td>
                                     <td><a href="#" data-item="@item.CPF" data-id="@item.Id" class="btnDetalhe"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                             }

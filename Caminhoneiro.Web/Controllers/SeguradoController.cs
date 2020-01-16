@@ -53,6 +53,7 @@ namespace Caminhoneiro.Web.Controllers
         public ActionResult ListaTodos(ClienteViewModel Cliente)
         {
             RetornoGenericoViewModel<List<ClienteViewModel>> retorno = new RetornoGenericoViewModel<List<ClienteViewModel>>(-1, "Falha ao Acessar API");
+            ViewData["Filtro"] = Cliente;
             using (var client = new HttpClientUtil<RetornoGenericoDTO<List<ClienteDTO>>>())
             {
                 ClienteDTO filtro = Mapper.Map<ClienteViewModel, ClienteDTO>(Cliente);

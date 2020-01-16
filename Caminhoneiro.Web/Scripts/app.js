@@ -1,11 +1,11 @@
 ﻿$.extend($.fn.dataTable.defaults, {
     autoFill: true,
     responsive: true,
-    "pagingType": window.innerWidth > 1024 ? "simple_numbers" : "simple",
+    pagingType: window.innerWidth > 1024 ? "simple_numbers" : "simple",
     pageLength: window.innerWidth < 1300 ? 5 : 10,
     lengthMenu: window.innerWidth < 1300 ? [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]] : [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
     language: {
-        url: "/Scripts/Portuguese-Brasil.json"
+        url: "/Scripts/Portuguese-Brasil.txt"
     }
 });
 $.fn.dataTable.ext.errMode = 'none';
