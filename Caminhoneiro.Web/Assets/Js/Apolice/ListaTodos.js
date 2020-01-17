@@ -99,6 +99,22 @@
             }
         });
     };
+    var table = $('.table');
+    table.on('error.dt', function (e, settings, techNote, message) {
+        swal("Oops", message, "error");
+    }).DataTable({
+        "processing": false,
+        "serverSide": false,
+        "deferRender": true,
+        "columns": [
+            { "data": "DadosProduto.Nome", "name": "Nome do Produto", "Type": "Text" },
+            { "data": "Codigo", "name": "Número da Proposta", "Type": "Text" },
+            { "data": "Endosso", "name": "Endosso", "Type": "Date" },
+            { "data": "DataInicio", "name": "Data Inicio", "Type":"Date"},
+            { "data": "Status", "name": "Status", "Type":"Date"},
+            { "data": "", "name": "Ação"},
+        ],
+    });
 }
 
 var ojsPage = new jsPage();

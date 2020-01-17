@@ -42,6 +42,24 @@
             $('#TabSegurado').submit();
         });
 
+        var table = $('.table');
+        table.on('error.dt', function (e, settings, techNote, message) {
+            swal("Oops", message, "error");
+        }).DataTable({
+            "processing": false,
+            "serverSide": false,
+            "deferRender": true,
+            "columns": [
+                { "data": "DataVencimento", "name": "Data do Vencimento", "Type": "Date" },
+                { "data": "DataPagamento", "name": "Data do Pagamento", "Type": "Date" },
+                { "data": "TipoPagamento", "name": "Tipo do Pagamento", "Type": "Text" },
+                { "data": "MeioPagamento", "name": "Meio de Pagamento", "Type": "Text" },
+                { "data": "NrParcelas", "name": "NrParcelas", "Type":"Number" },
+                { "data": "Valor", "name": "Valor Parcela(R$)", "Type":"Number" },
+                { "data": "TipoTransacao", "name": "Tipo de Transacao", "Type": "Text" },
+                { "data": "StatusPagamento", "name": "Status do Pagamento", "Type": "Text" },
+            ],
+        });
     };
     this.Inicio = function () {
         this.AoAssociar();
