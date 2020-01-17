@@ -53,6 +53,7 @@
                     //Carrega Lista de Produtos
                     $("#ListaProdutos").empty();
                     $("#tmpProdutos").tmpl(returnedData.Item).appendTo("#ListaProdutos");
+                    $('.moeda').autoNumeric('init', { digitGroupSeparator: '.', decimalCharacter: ',', aSign: 'R$ ' });
                 }
             }
         });

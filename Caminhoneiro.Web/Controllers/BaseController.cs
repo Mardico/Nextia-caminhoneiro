@@ -68,11 +68,11 @@ namespace Caminhoneiro.Web.Controllers
         public ApoliceViewModel NovaAdesao(ApoliceViewModel Apolice)
         {
             ApoliceViewModel retorno = new ApoliceViewModel();
-            retorno.DadosCliente.ContactarPorId = -1;
-            retorno.DadosCliente.EstadoCivilId = -1;
-            retorno.DadosCliente.SexoId = -1;
-            retorno.DadosPagamento.MeioPgtoId = -1;
-            retorno.DadosVeiculo.TipoEntregaId = -1;
+            retorno.DadosCliente.ContactarPorId = null;
+            retorno.DadosCliente.EstadoCivilId = null;
+            retorno.DadosCliente.SexoId = null;
+            retorno.DadosPagamento.MeioPgtoId = 0;
+            retorno.DadosVeiculo.TipoEntregaId = null;
             if (Apolice != null)
             {
                 if (Apolice.DadosProdutoId > 0 && Apolice.Id == 0)
@@ -121,13 +121,13 @@ namespace Caminhoneiro.Web.Controllers
                 }
             }
             //Carrega combos
-            ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" },  new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
-            ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", retorno.DadosCliente.ContactarPorId);
-            ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", retorno.DadosCliente.EstadoCivilId);
-            ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", retorno.DadosCliente.SexoId);
+            ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" },  new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
+            ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", retorno.DadosCliente.ContactarPorId);
+            ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", retorno.DadosCliente.EstadoCivilId);
+            ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", retorno.DadosCliente.SexoId);
 
-            ViewBag.MeioPgto = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Cartão de Crédito" }, new SelectListItem() { Value = "1", Text = "Conta Digital" } }, "Value", "Text", retorno.DadosPagamento.MeioPgtoId);
-            ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "-1", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", retorno.DadosVeiculo.TipoEntregaId);
+            ViewBag.MeioPgto = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Cartão de Crédito" }, new SelectListItem() { Value = "1", Text = "Conta Digital" } }, "Value", "Text", retorno.DadosPagamento.MeioPgtoId);
+            ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", retorno.DadosVeiculo.TipoEntregaId);
 
             var oProduto = CarregaProduto(Apolice.DadosProdutoId);
             ViewBag.Seguradoras = new SelectList(CarregaLista("Apoio/ListarSeguradoras"), "Id", "Texto", retorno.DadosVeiculo.SeguradoraId);

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Caminhoneiro.ViewModel
 {
@@ -30,7 +31,9 @@ namespace Caminhoneiro.ViewModel
         public ApoliceDadosVeiculoViewModel DadosVeiculo { get; set; }
         public int DadosPagamentoId { get; set; }
         public int Endosso { get; set; }
-        public DateTime DataInicio { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DataInicio { get; set; }
         public int StatusId { get; set; }
         public string Status { get; set; }
         public ApoliceDadosPagamentoViewModel DadosPagamento { get; set; }

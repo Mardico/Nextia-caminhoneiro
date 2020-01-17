@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Caminhoneiro.ViewModel
 {
@@ -12,6 +9,7 @@ namespace Caminhoneiro.ViewModel
         public string Codigo { get; set; }
         public string Tipo { get; set; }
         public string Nome { get; set; }
-        public DateTime DataNasc { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DataNasc { get; set; }
     }
 }

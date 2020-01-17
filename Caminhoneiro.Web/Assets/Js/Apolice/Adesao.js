@@ -171,19 +171,22 @@
 
         //Salvar Rascunho
         $('#btnRascunho').on('click', function () {
-            var valido = $('#frmDados').valid();
-            if (valido)
+            $('#frmDados').valid();
+            if ($('.error:visible').length === 0)
                 ojsPage.Salvar(0);
         });
         //Salvar
         $('#btnSalvar').on('click', function () {
-            var valido = $('#frmDados').valid();
-            if (valido)
+            $('#frmDados').valid();
+            if ($('.error:visible').length === 0)
                 ojsPage.Salvar(1);
 
         });
-    };
+        $('.moeda').autoNumeric('init', { digitGroupSeparator: '.', decimalCharacter: ',', aSign: 'R$ ' });
 
+        if ($('#Id').val() == "0")
+            $('.datanasc').val('');
+    };
     this.Salvar = function (Status) {
         var dataBene = [];
         var dataDep = [];
@@ -284,11 +287,9 @@
             }
         });
     };
-
     this.SalvaAdesao = function () {
 
     };
-
     this.Inicio = function () {
         this.AoAssociar();
     };

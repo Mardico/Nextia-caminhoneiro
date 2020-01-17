@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Caminhoneiro.DTO
 {
@@ -23,6 +24,8 @@ namespace Caminhoneiro.DTO
         }
         public int SexoId { get; set; }
         public string Sexo { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
         public int EstadoCivilId { get; set; }
         public string EstadoCivil { get; set; }

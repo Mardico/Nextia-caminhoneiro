@@ -50,7 +50,7 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label>Valor</label>
-                                @Html.TextBoxFor(l => l.DadosProduto.Valor, new { @class = "form-control", @readonly = true, placeholder = "Valor do Produto" })
+                                @Html.TextBoxFor(l => l.DadosProduto.Valor, new { @class = "form-control moeda", @readonly = true, placeholder = "Valor do Produto" })
                             </div>
                         </div>
                         <div class="col-lg-4">
@@ -406,7 +406,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label>Meio de Pagamento</label>
-                                    @Html.DropDownListFor(l => l.DadosPagamento.MeioPgtoId, (SelectList)ViewBag.MeioPgto, new { @class = "form-control" })
+                                    @Html.DropDownListFor(l => l.DadosPagamento.MeioPgtoId, (SelectList)ViewBag.MeioPgto, new { @class = "form-control", @disabled = "disabled" })
                                 </div>
                             </div>
                         </div>

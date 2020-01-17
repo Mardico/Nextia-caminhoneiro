@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Caminhoneiro.ViewModel
+﻿namespace Caminhoneiro.ViewModel
 {
     public class ApoliceDadosVeiculoViewModel
     {
@@ -19,7 +13,7 @@ namespace Caminhoneiro.ViewModel
         public string VeiculoProprio { get; set; }
         public int QdadeViagensId { get; set; }
         public string QdadeViagens { get; set; }
-        public int TipoEntregaId { get; set; }
+        public int? TipoEntregaId { get; set; }
         public string TipoEntrega { get; set; }
         public int RendaLiquidaId { get; set; }
         public string RendaLiquida { get; set; }

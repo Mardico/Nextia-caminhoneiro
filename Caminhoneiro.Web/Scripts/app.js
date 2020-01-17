@@ -2,7 +2,7 @@
     autoFill: true,
     responsive: true,
     pagingType: window.innerWidth > 1024 ? "simple_numbers" : "simple",
-    pageLength: window.innerWidth < 1300 ? 5 : 10,
+    pageLength: 7,
     lengthMenu: window.innerWidth < 1300 ? [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]] : [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
     language: {
         url: "/Scripts/Portuguese-Brasil.txt"
@@ -16,6 +16,8 @@ jQuery.validator.addMethod("CPF", function (value, element) {
 
 jQuery.validator.addMethod("datanasc", function (value, element) {
     if (value === "") return true;
+    if (value === "__/__/____") return true;
+    if (value === "__/__/____   :  ") return true;
     if (value.length !== 10) return false;
     return value.match(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/);
 }, "Data inválida");
@@ -68,13 +70,6 @@ $(function () {
                 element.mask("(99) 9999-9999?9");
             }
         });
-
-    $('input[type="time"]').each(function () {
-        $(this).rules('add', {
-            required: true
-            // another rule, etc.
-        });
-    });
 
     $(document).ajaxError(function (event, request, settings) {
         swal("Oops", "Falha na chamada: " + settings.url, "error");

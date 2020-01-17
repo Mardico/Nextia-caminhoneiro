@@ -9,10 +9,13 @@
 }
 
 table {
-    border - spacing: 50px;
+    border-spacing: 50px;
 }
 
 .deleteLinha {
     color: blue;
     cursor: pointer;
+}
+.error{
+    font-size:12px;
 }

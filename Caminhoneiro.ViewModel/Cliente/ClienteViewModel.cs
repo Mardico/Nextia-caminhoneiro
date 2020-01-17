@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Caminhoneiro.ViewModel
 {
@@ -7,10 +8,12 @@ namespace Caminhoneiro.ViewModel
         public int Id { get; set; }
         public string Nome { get; set; }
         public string CPF { get; set; }
-        public int SexoId { get; set; }
+        public int? SexoId { get; set; }
         public string Sexo { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime DataNascimento { get; set; }
-        public int EstadoCivilId { get; set; }
+        public int? EstadoCivilId { get; set; }
         public string EstadoCivil { get; set; }
         public string Email { get; set; }
         public string CEP { get; set; }
@@ -24,9 +27,9 @@ namespace Caminhoneiro.ViewModel
         public string TelefoneCelular { get; set; }
         public string TelefoneSecundario { get; set; }
         public string TelefoneAdicional { get; set; }
-        public int ContactarPorId { get; set; }
+        public int? ContactarPorId { get; set; }
         public string ContactarPor { get; set; }
-        public DateTime DataAlteracao { get; set; }
+        public DateTime? DataAlteracao { get; set; }
         public int NumeroApolices { get; set; }
     }
 }
