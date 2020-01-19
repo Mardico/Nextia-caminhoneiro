@@ -14,11 +14,12 @@ namespace Caminhoneiro.Entidade
         public static List<ApoliceDadosProdutoDTO> Itens() { return _Itens; }
         internal void ListaApoliceProdutos()
         {
+            Random r = new Random();
             _Itens = new List<ApoliceDadosProdutoDTO>();
             for (int i = 0; i < 100; i++)
             {
-                var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
-                var oProduto = Produtos.Itens()[new Random().Next(1, 4)];
+                var oAgente = Usuarios.Itens()[r.Next(1, 11)];
+                var oProduto = Produtos.Itens()[r.Next(1, 4)];
                 _Itens.Add(new ApoliceDadosProdutoDTO() { Id = i, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, Campanha= oProduto.Campanha, ProdutoId = oProduto.Id, Valor = oProduto.ValorPrincipal, Codigo = oProduto.Codigo, Nome = oProduto.Nome });
             }
         }

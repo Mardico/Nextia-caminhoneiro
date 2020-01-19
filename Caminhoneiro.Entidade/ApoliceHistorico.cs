@@ -18,10 +18,11 @@ namespace Caminhoneiro.Entidade
             List<string> Endosso = new List<string>() { "Inclusao de Proposta", "Alteração Endereço", "Alteração Placa" };
 
             int ContId = 0;
+            Random r = new Random();
             _Itens = new List<ApoliceHistoricoDTO>();
             foreach (var itemApolice in Apolices.Itens())
             {
-                int numops = new Random().Next(1, 100);
+                int numops = r.Next(1, 100);
                 for (int i = 0; i < numops; i++)
                 {
                     ContId++;
@@ -30,14 +31,14 @@ namespace Caminhoneiro.Entidade
                     var ticks = new DateTime(2016, 1, 1).Ticks;
                     var ans = DateTime.Now.Ticks - ticks;
                     var uniqueId = ans.ToString("x");
-                    var intEndosso = new Random().Next(0, 2);
-                    var intUsuario = new Random().Next(1, 10);
+                    var intEndosso = r.Next(0, 2);
+                    var intUsuario = r.Next(1, 10);
                     _Itens.Add(new ApoliceHistoricoDTO()
                     {
                         Id = ContId,
                         ClienteId = itemApolice.DadosClienteId,
                         ApoliceId = itemApolice.Id,
-                        Data = dtPagamento.AddDays(new Random().Next((DateTime.Today - start).Days)),
+                        Data = dtPagamento.AddDays(r.Next((DateTime.Today - start).Days)),
                         Codigo = uniqueId,
                         Endosso= Endosso[intEndosso],
                         NrEndosso = intEndosso,

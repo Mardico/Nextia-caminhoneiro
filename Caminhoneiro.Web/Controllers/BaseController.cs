@@ -94,7 +94,7 @@ namespace Caminhoneiro.Web.Controllers
                 {
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ClienteDTO>>())
                     {
-                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosClienteId, Texto = Apolice.Codigo };
+                        ClienteDTO filtro = new ClienteDTO() { Id = Apolice.DadosClienteId, CPF = Apolice.Codigo };
                         RetornoGenericoDTO<ClienteDTO> retDTO = client.Post("Cliente/Item", filtro);
                         if (retDTO != null && retDTO.ID > 0)
                         {
@@ -119,9 +119,14 @@ namespace Caminhoneiro.Web.Controllers
                         }
                     }
                 }
+                else
+                {
+                    if (UsuarioAtual.Vinculos != null && UsuarioAtual.Vinculos.FirstOrDefault() != null)
+                        retorno.VinculoId = UsuarioAtual.Vinculos.FirstOrDefault().Id;
+                }
             }
             //Carrega combos
-            ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" },  new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
+            ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
             ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", retorno.DadosCliente.ContactarPorId);
             ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", retorno.DadosCliente.EstadoCivilId);
             ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", retorno.DadosCliente.SexoId);
@@ -151,7 +156,7 @@ namespace Caminhoneiro.Web.Controllers
                     if (ret.ID > -1)
                     {
                         retorno = ret.Item;
-                        retorno.Insert(0, new TabelaApoioViewModel() { ID = 0, Codigo = "", Texto = ":: Selecione ::" });
+                        retorno.Insert(0, new TabelaApoioViewModel() { ID = null, Codigo = "", Texto = ":: Selecione ::" });
                     }
                 }
             }

@@ -1,6 +1,8 @@
 ﻿$.extend($.fn.dataTable.defaults, {
     autoFill: true,
     responsive: true,
+    bFilter: false,
+    lengthChange: false,    
     pagingType: window.innerWidth > 1024 ? "simple_numbers" : "simple",
     pageLength: 7,
     lengthMenu: window.innerWidth < 1300 ? [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]] : [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
@@ -24,7 +26,7 @@ jQuery.validator.addMethod("datanasc", function (value, element) {
 
 jQuery.validator.addMethod("datacartao", function (value, element) {
     if (value === "") return true;
-    if (value.length !== 5) return false;
+    if (value.length !== 7) return false;
     var partes = value.split('/');
     if (partes.length !== 2) return false;
     if (isNaN(parseInt(partes[0])) || isNaN(parseInt(partes[1])) || parseInt(partes[0]) > 12 || parseInt(partes[1]) < 2020 || parseInt(partes[1]) > 2040) return false;

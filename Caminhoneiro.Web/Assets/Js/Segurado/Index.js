@@ -27,7 +27,6 @@
             messages: {
                 CPF: { require_from_group: "" },
                 Nome: { require_from_group: "Informe pelo menos um campo de busca" }
-
             }
         });
         $('#ListaProdutos').on('click', '.itemproduto', function () {
@@ -109,20 +108,25 @@
                 if (returnedData.ID < 0) {  //Invalido
                     swal("Oops", returnedData.Mensagem, "error");
                 } else {
+
                     if (returnedData.ID > 0) {
                         //Valida se tem uma proposta em rascunho
-                        for (var apolice in returnedData.Item) {
-                            if (apolice.StatusId === 0) {
-                                $('#Id').val(returnedData.Item[0].Id);
+                        var achou = false;
+                        for (var ap in returnedData.Item) {
+                            if (returnedData.Item[ap].StatusId === 0) {
+                                $('#Id').val(returnedData.Item[ap].Id);
                                 form.attr('action', '/Apolice/Adesao');
                                 form.submit();
+                                achou = true;
                                 break;
                             }
                         }
 
                         //Carrega dados do usuario
-                        form.attr('action', '/Segurado/DadosCadastrais');
-                        form.submit();
+                        if (!achou) {
+                            form.attr('action', '/Segurado/DadosCadastrais');
+                            form.submit();
+                        }
 
                     } else {
                         //Carrega Produtos

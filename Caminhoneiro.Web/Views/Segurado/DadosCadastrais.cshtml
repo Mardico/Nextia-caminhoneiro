@@ -43,7 +43,7 @@
                             <br>
                             <b>Nome :</b> @Model.Nome <br>
                             <b>CPF:</b> @Model.CPF<br>
-                            <b>Data Nascimento:</b> @Model.DataNascimento.ToString("dd/MM/yyyy")<br>
+                            <b>Data Nascimento:</b> @((Model.DataNascimento.HasValue)?Model.DataNascimento.Value.ToString("dd/MM/yyyy"):"")<br>
                             <b>Sexo:</b> @Model.Sexo<br>
                             <b>Estado Cívil:</b> @Model.EstadoCivil<br>
                             <b>E-mail:</b> @Model.Email<br>

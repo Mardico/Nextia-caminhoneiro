@@ -112,8 +112,8 @@
             { "data": "Endosso", "name": "Endosso", "Type": "Date" },
             { "data": "DataInicio", "name": "Data Inicio", "Type":"Date"},
             { "data": "Status", "name": "Status", "Type":"Date"},
-            { "data": "", "name": "Ação"},
-        ],
+            { "data": "", "name": "Ação"}
+        ]
     });
 }
 

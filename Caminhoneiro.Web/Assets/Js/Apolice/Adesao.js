@@ -1,12 +1,13 @@
 ﻿function jsPage() {
     this.Limpar = function () {
     };
+
     this.AoAssociar = function () {
         //Adicinona Dependente
         $("#addLinha").on("click", function () {
             var Dados = { Proximo: $("#ListaDependentes").children().children().length };
             if ($("#ListaDependentes").children().children().length <= 10) {
-                $("#tmpDependente").tmpl(Dados).appendTo("#ListaDependentes");
+                ojsPage.CarregaDepFilhos();
             } if ($("#ListaDependentes").children().children().length > 10) {
                 $("#addLinha").attr("disabled", true);
             }
@@ -18,9 +19,8 @@
         });
         //Adicinona Beneficiario
         $("#addLinhaBeneficiario").on("click", function () {
-            var Dados = { Proximo: $("#ListaDependentes").children().length };
             if ($("#tableBeneficiario").children().length <= 3) {
-                $("#tmpBeneficiario").tmpl(Dados).appendTo("#tableBeneficiario");
+                ojsPage.CarregaBeneficiario();
             } if ($("#tableBeneficiario").children().length > 3) {
                 $("#addLinhaBeneficiario").attr("disabled", true);
             }
@@ -33,35 +33,6 @@
         //Alterna meio pgto
         $("#DadosPagamento_MeioPgtoId").on("change", function () {
             $('#divCartao').toggle();
-        });
-        //Carrega Usuarios
-        $("#VinculoId").on("change", function () {
-            var Id = $(this).val();
-            var oURL = '/Apolice/BuscaUsuarios';
-            return $.ajax({
-                data: { 'ID': Id },
-                url: oURL,
-                cache: false,
-                type: "POST",
-                dataType: 'json',
-                success: function (returnedData) {
-                    if (returnedData.ID === 0) {  //Invalido
-                        Mensagem.Erro(returnedData.Mensagem);
-                    } else {
-                        var lista = returnedData.Item;
-                        $('#Usuario_id')
-                            .find('option')
-                            .remove()
-                            .end()
-                            .append('<option value="">:: Selecione ::</option>');
-                        for (var i = 0; i < lista.length; i++) {
-                            $('#Usuario_id').append($('<option></option>').val(lista[i].Id).data('item', lista[i].TipoUsuario).html(lista[i].Nome));
-                        }
-                        $('#Usuario_id').val(valor + '');
-                    }
-                }
-            });
-
         });
         //Busca CPF
         $('#btnBuscaCPF').on('click', function () {
@@ -128,6 +99,12 @@
             });
             return false;
         });
+
+        //Close MsgSucesso
+        $("#btnConfirmar").click(function () {
+            $("#modal-sucesso").modal("hide");
+        });
+
         //Validacao
         $('#frmDados').validate({
             rules: {
@@ -142,14 +119,17 @@
                 DadosCliente_DataNascimento: {
                     datanasc: true
                 },
-                DadosDependente_0_DataNasc: {
-                    datanasc: true
+                DadosCliente_TelefoneFixo: {
+                    require_from_group: [1, ".tel"]
                 },
-                DadosDependente_1_DataNasc: {
-                    datanasc: true
+                DadosCliente_TelefoneCelular: {
+                    require_from_group: [1, ".tel"]
                 },
-                Beneficiario_0_DataNasc: {
-                    datanasc: true
+                DadosCliente_TelefoneSecundario: {
+                    require_from_group: [1, ".tel"]
+                },
+                DadosCliente_TelefoneAdicional: {
+                    require_from_group: [1, ".tel"]
                 },
                 DadosPagamento_Conta: {
                     required: true,
@@ -161,8 +141,11 @@
                 }
             },
             messages: {
-                CPF: { require_from_group: "" },
-                Nome: { require_from_group: "Informe pelo menos um campo de busca" }
+                DadosCliente_TelefoneFixo: { require_from_group: "Informe pelo menos um tel" },
+                DadosCliente_TelefoneCelular: { require_from_group: "" },
+                DadosCliente_TelefoneSecundario: { require_from_group: "" },
+                DadosCliente_TelefoneAdicional: { require_from_group: "" },
+                DadosPagamento_CVV: { required: "requerido" }
 
             }
         });
@@ -173,7 +156,8 @@
         $('#btnRascunho').on('click', function () {
             $('#frmDados').valid();
             if ($('.error:visible').length === 0)
-                ojsPage.Salvar(0);
+                ojsPage.Salvar(1);
+
         });
         //Salvar
         $('#btnSalvar').on('click', function () {
@@ -182,31 +166,69 @@
                 ojsPage.Salvar(1);
 
         });
+
+        //Formatação
         $('.moeda').autoNumeric('init', { digitGroupSeparator: '.', decimalCharacter: ',', aSign: 'R$ ' });
 
-        if ($('#Id').val() == "0")
-            $('.datanasc').val('');
+        //trava edição se informado
+        if ($('#VinculoId').val() !== "")
+            $('#VinculoId').attr('readonly', true);
+
+        //Carrega dependentes Conjuge caso não exista
+        var hasConjuge = $('#hasConjuge').length > 0;
+        var hasFilhos = $("#ListaDependentes").length > 0;
+        if (!hasConjuge) {
+            this.CarregaDepConjuge();
+        }
+        if (!hasFilhos) {
+            this.CarregaDepFilhos();
+        }
+
+        //Carrega beneficiario
+        var hasBeneficiario = $('#tableBeneficiario').children().length > 0;
+        if (!hasBeneficiario) {
+            this.CarregaBeneficiario();
+        }
+    };
+
+    this.CarregaDepConjuge = function () {
+        var NDependentes = parseInt($('#NDependentes').val());
+        $('#DepConjuge').prepend($("#tmpDepConjuge").html().replace(/DadosDependente_/gi, 'DadosDependente_' + NDependentes + '__').replace(/NameDependente./gi, 'DadosDependente[' + NDependentes + '].'));
+        $('#NDependentes').val(NDependentes + 1);
+    };
+    this.CarregaDepFilhos = function () {
+        var NDependentes = parseInt($('#NDependentes').val());
+        var html = $("#tmpDependente").html().replace(/DadosDependente_/gi, 'DadosDependente_' + NDependentes + '__').replace(/NameDependente./gi, 'DadosDependente[' + NDependentes + '].');
+        $('#DepFilhos').prepend(html);
+        $('#NDependentes').val(NDependentes + 1);
+    };
+    this.CarregaBeneficiario = function () {
+        var NBeneficiarios = $('#tableBeneficiario').children().length;
+        $('#tableBeneficiario').append($("#tmpBeneficiario").html().replace(/DadosBeneficiario_/gi, 'DadosBeneficiario_' + NBeneficiarios + '__').replace(/DadosBeneficiario./gi, 'DadosBeneficiario[' + NBeneficiarios + '].'));
     };
     this.Salvar = function (Status) {
         var dataBene = [];
         var dataDep = [];
-        for (var i = 0; i < $("#ListaDependentes").children().length; i++) {
-            if ($('#DadosDependente_Nome')[i].val() !== "")
+        var NDependentes = parseInt($('#NDependentes').val());
+        for (var i = 0; i < NDependentes; i++) {
+            if ($('#DadosDependente_' + i + '__Nome') !== "")
                 dataDep.push({
-                    DadosDependente_Nome: $('#DadosDependente_Nome')[i].val(),
-                    DadosDependente_DataNasc: $('#DadosDependente_DataNasc')[i].val()
+                    Id: $('#DadosDependente_' + i + '__Id').val(),
+                    Tipo: $('#DadosDependente_' + i + '__Tipo').val(),
+                    Nome: $('#DadosDependente_' + i + '__Nome').val(),
+                    DataNasc: $('#DadosDependente_' + i + '__DataNasc').val()
                 });
         }
 
         for (var a = 0; a < $("#ListaDependentes").children().length; a++) {
             if ($('#Beneficiario_Nome')[a].val() !== "")
                 dataBene.push({
-                    DadosBeneficiario_Nome: $('#Beneficiario_Nome')[a].val(),
-                    NDocumento: $('#Beneficiario_NDocumento')[a].val(),
-                    DataNasc: $('#Beneficiario_DataNasc')[a].val(),
-                    SexoId: $('#Beneficiario_SexoId')[a].val(),
-                    Parentesco: $('#Beneficiario_Parentesco')[a].val(),
-                    Porcentagem: $('#Beneficiario_Porcentagem')[a].val()
+                    Nome: $('#DadosBeneficiario_' + a + '__Nome')[a].val(),
+                    NDocumento: $('#DadosBeneficiario_' + a + '__NDocumento')[a].val(),
+                    DataNasc: $('#DadosBeneficiario_' + a + '__DataNasc')[a].val(),
+                    SexoId: $('#DadosBeneficiario_' + a + '__SexoId')[a].val(),
+                    Parentesco: $('#DadosBeneficiario_' + a + '__Parentesco')[a].val(),
+                    Porcentagem: $('#DadosBeneficiario_' + a + '__Porcentagem')[a].val()
                 });
         }
 
@@ -271,24 +293,17 @@
             dataType: 'json',
             success: function (returnedData) {
                 if (returnedData.ID === 0) {  //Invalido
-                    Mensagem.Erro(returnedData.Mensagem);
+                    swal("Oops", returnedData.Mensagem, "error");
                 } else {
-                    var lista = returnedData.Item;
-                    $('#Usuario_id')
-                        .find('option')
-                        .remove()
-                        .end()
-                        .append('<option value="">:: Selecione ::</option>');
-                    for (var i = 0; i < lista.length; i++) {
-                        $('#Usuario_id').append($('<option></option>').val(lista[i].Id).data('item', lista[i].TipoUsuario).html(lista[i].Nome));
-                    }
-                    $('#Usuario_id').val(valor + '');
+                    returnedData.Item;
+                    $('#modal-sucesso').html(returnedData.Item.Codigo);
+                    $("#myModal").modal();
                 }
             }
         });
     };
     this.SalvaAdesao = function () {
-
+        //
     };
     this.Inicio = function () {
         this.AoAssociar();

@@ -106,6 +106,29 @@ namespace Caminhoneiro.Business
             return retorno;
         }
 
+        public RetornoGenericoDTO<List<ClienteDTO>> TEste()
+        {
+            ClienteDTO a = new ClienteDTO
+            {
+                Bairro = "Vila Mariana",
+                Id = Clientes.Itens().Count + 1,
+                Nome = "Jose Eduardo",
+                SexoId = 3,
+                CEP = "01515-044"
+            };
+
+            Clientes.Itens().Add(new ClienteDTO
+            {
+                Bairro = "Vila Mariana",
+                Id = Clientes.Itens().Count + 1,
+                Nome = "Jose Eduardo",
+                SexoId = 3,
+                CEP = "01515-044"
+            });
+
+                return null;
+        }
+
         public RetornoGenericoDTO<ClienteDTO> BuscaCEP(FiltroGenericoDTO filtro)
         {
             RetornoGenericoDTO<ClienteDTO> retorno = new RetornoGenericoDTO<ClienteDTO>() { Mensagem = "Falha ao Carregar", Item = new ClienteDTO(), ID = -1 };

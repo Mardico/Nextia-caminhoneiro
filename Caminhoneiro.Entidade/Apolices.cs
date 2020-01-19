@@ -15,27 +15,37 @@ namespace Caminhoneiro.Entidade
         public static List<ApoliceDTO> Itens() { return _Itens; }
         internal void GetApolices()
         {
+            Random r = new Random();
             _Itens = new List<ApoliceDTO>();
             foreach (ClienteDTO oCliente in Clientes.Itens())
             {
                 if (oCliente.CPF == "197.612.188-48")
                     continue;
 
-                bool randombool = Convert.ToBoolean(new Random().Next(-1, 1));
+                bool randombool = Convert.ToBoolean(r.Next(-1, 1));
                 if (1 == 1)
                 {
-                    int randomNumber2 = new Random().Next(0, 5);
-                    var oAgente = Usuarios.Itens()[new Random().Next(1, 11)];
-                    ApoliceDadosProdutoDTO oProduto = ApoliceDadosProduto.Itens()[new Random().Next(0, 99)];
-                    ApoliceDadosVeiculoDTO oVeiculo = ApoliceDadosVeiculo.Itens()[new Random().Next(0, 99)];
-                    ApoliceDadosPagamentoDTO oPagamento = ApoliceDadosPagamento.Itens()[new Random().Next(0, 99)];
+                    int randomNumber2 = r.Next(0, 9);
+                    int randomNumber3 = r.Next(0, 2);
+                    var oAgente = Usuarios.Itens()[r.Next(1, 11)];
+                    ApoliceDadosProdutoDTO oProduto = ApoliceDadosProduto.Itens()[r.Next(0, 99)];
+                    ApoliceDadosVeiculoDTO oVeiculo = ApoliceDadosVeiculo.Itens()[r.Next(0, 99)];
+                    ApoliceDadosPagamentoDTO oPagamento = ApoliceDadosPagamento.Itens()[r.Next(0, 99)];
+                    
                     List<ApoliceDadosDependenteDTO> oDependentes = new List<ApoliceDadosDependenteDTO>();
                     if (randomNumber2 > 0)
-                        oDependentes = ApoliceDadosDependente.Itens().GetRange(new Random().Next(0, 90), new Random().Next(0, 4));
+                        oDependentes = ApoliceDadosDependente.Itens().GetRange(r.Next(0, 90), r.Next(0, 4));
                     else
                         oDependentes = new List<ApoliceDadosDependenteDTO>();
+
+                    List<ApoliceDadosBeneficiarioDTO> oBeneficiarios = new List<ApoliceDadosBeneficiarioDTO>();
+                    if (randomNumber3 > 0)
+                        oBeneficiarios = ApoliceDadosBeneficiario.Itens().GetRange(r.Next(1, 80), r.Next(0, 4));
+                    else
+                        oBeneficiarios = new List<ApoliceDadosBeneficiarioDTO>();
+                    
                     string Codigo = new Random().Next(0, 99).ToString().PadLeft(8, '0');
-                    ApoliceStatusDTO oStatus = ApoliceStatus.Itens()[new Random().Next(1, 5)];
+                    ApoliceStatusDTO oStatus = ApoliceStatus.Itens()[r.Next(0, 4)];
                     DateTime dataini = new DateTime();
                     DateTime start = new DateTime(1995, 1, 1);
                     _Itens.Add(new ApoliceDTO()
@@ -58,7 +68,8 @@ namespace Caminhoneiro.Entidade
                         DadosVeiculo = oVeiculo,
                         DadosCliente = oCliente,
                         DadosClienteId = oCliente.Id,
-                        DadosDependente = oDependentes
+                        DadosDependente = oDependentes,
+                        DadosBeneficiario = oBeneficiarios
                     });
                 }
             }

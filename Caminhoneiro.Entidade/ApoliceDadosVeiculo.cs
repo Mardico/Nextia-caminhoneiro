@@ -14,23 +14,24 @@ namespace Caminhoneiro.Entidade
         public static List<ApoliceDadosVeiculoDTO> Itens() { return _Itens; }
         internal void ListaApoliceVeiculos()
         {
+            Random r = new Random();
             _Itens = new List<ApoliceDadosVeiculoDTO>();
             for (int i = 0; i < 100; i++)
             {
                 int SeguradoraId = 0;
                 string SeguradoraNome = "";
-                bool Segurado = Convert.ToBoolean(new Random().Next(-1, 1));
+                bool Segurado = Convert.ToBoolean(r.Next(-1, 1));
                 if (Segurado) {
-                    var oSeguradora = Seguradoras.Itens()[new Random().Next(0, 99)];
+                    var oSeguradora = Seguradoras.Itens()[r.Next(0, 99)];
                     SeguradoraId = oSeguradora.Id;
                     SeguradoraNome = oSeguradora.Texto;
                 }
-                TabelaApoioDTO oVeiculoProprio = VeiculoProprio.Itens()[ new Random().Next(1, 2)];
-                TabelaApoioDTO oQdadeViagens = QdadeViagens.Itens()[ new Random().Next(0, 4)];
-                int TipoEntregaId = new Random().Next(0, 2);
-                TabelaApoioDTO oRendaLiquida = RendasLiquidas.Itens()[new Random().Next(0, 3)];
-                var oVeiculo = Veiculos.Itens()[new Random().Next(1, 15)];
-                bool SolicitouServApolice = Convert.ToBoolean(new Random().Next(-1, 1));
+                TabelaApoioDTO oVeiculoProprio = VeiculoProprio.Itens()[r.Next(1, 2)];
+                TabelaApoioDTO oQdadeViagens = QdadeViagens.Itens()[r.Next(1, 3)];
+                int TipoEntregaId = r.Next(0, 2);
+                TabelaApoioDTO oRendaLiquida = RendasLiquidas.Itens()[r.Next(1, 3)];
+                var oVeiculo = Veiculos.Itens()[r.Next(1, 15)];
+                bool SolicitouServApolice = Convert.ToBoolean(r.Next(-1, 1));
                 _Itens.Add(new ApoliceDadosVeiculoDTO() { Id = i, Codigo = oVeiculo.Codigo, 
                     VeiculoID = oVeiculo.Id, Veiculo= oVeiculo.Texto, 
                     QdadeViagensId = oQdadeViagens.Id, QdadeViagens = oQdadeViagens.Texto, 

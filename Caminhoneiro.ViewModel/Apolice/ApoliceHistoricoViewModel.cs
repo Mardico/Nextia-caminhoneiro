@@ -11,7 +11,7 @@ namespace Caminhoneiro.ViewModel
         public string NrEndosso { get; set; }
         public string TipoEndosso { get; set; }
         public string Endosso { get; set; }
-        public DateTime Data { get; set; }
+        public DateTime? Data { get; set; }
         public string Usuario { get; set; }
     }
 }
