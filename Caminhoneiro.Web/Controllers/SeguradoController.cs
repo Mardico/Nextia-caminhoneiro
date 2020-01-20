@@ -31,6 +31,21 @@ namespace Caminhoneiro.Web.Controllers
         }
         public ActionResult KitProduto(ClienteApoliceViewModel FiltroApolice)
         {
+            ViewBag.Produto = "";
+            if (FiltroApolice.ApoliceId > 0)
+            {
+                using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDTO>>())
+                {
+                    FiltroGenericoDTO filtro = new FiltroGenericoDTO() {ID = FiltroApolice.ApoliceId };
+                    RetornoGenericoDTO<ApoliceDTO> retDTO = client.Post("Apolice/Item", filtro);
+                    if (retDTO != null)
+                    {
+                        var retorno = Mapper.Map<RetornoGenericoDTO<ApoliceDTO>, RetornoGenericoViewModel<ApoliceViewModel>>(retDTO);
+                        if (retorno.ID > 0)
+                            ViewBag.Produto = retorno.Item.DadosProduto;
+                    }
+                }
+            }
             return View(FiltroApolice);
         }
         public ActionResult DadosCadastrais(ClienteApoliceViewModel FiltroCliente)

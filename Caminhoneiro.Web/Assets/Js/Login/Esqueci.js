@@ -8,11 +8,14 @@
         $('#frmEsqueci').validate({
             rules: {
                 Usuario: {
-                    required: true
+                    required: true,
+                    email: true
                 }
             },
             messages: {
-                Usuario: { required: "Campo Obrigatório" }
+                Usuario: {
+                    required: "Campo Obrigatório",
+                    email:"Por favor entre com um email válido"}
 
             },
             errorPlacement: function (error, element) {

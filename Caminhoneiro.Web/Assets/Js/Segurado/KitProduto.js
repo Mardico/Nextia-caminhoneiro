@@ -26,6 +26,10 @@
             var tipo = $(this).data('item');
             ojsPage.SolicitaKitProduto(tipo);
         });
+
+        //Formatação
+        $('.moeda').autoNumeric('init', { digitGroupSeparator: '.', decimalCharacter: ',', aSign: 'R$ ' });
+
     };
     this.ValidaForm = function () {
         //Apolice 

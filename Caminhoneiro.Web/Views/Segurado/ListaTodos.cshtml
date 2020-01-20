@@ -80,7 +80,7 @@
                                 <tr>
                                     <td>@item.Nome</td>
                                     <td>@item.CPF</td>
-                                    <td>@item.DataNascimento</td>
+                                    <td>@item.DataNascimento.Value.ToString("dd/mm/yyyy")</td>
                                     <td><a href="#" data-item="@item.CPF" data-id="@item.Id" class="btnDetalhe"><i class="fas fa-eye"></i></a></td>
                                 </tr>
                             }

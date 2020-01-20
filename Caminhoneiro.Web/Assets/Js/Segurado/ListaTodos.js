@@ -7,7 +7,7 @@ var jsPage = function () {
             tabela.clear();
     };
     this.AoAssociar = function () {
-        $('.btnDetalhe').on('click', function () {
+        $('#tbsegurado').on('click', '.btnDetalhe', function () {
             ojsPage.CarregaCliente(this);
             return false;
         });

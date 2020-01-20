@@ -380,7 +380,7 @@
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
-                                <label>Quantidade Viagens</label>
+                                <label>Quantidade Viagens/Mês</label>
                                 @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
@@ -433,12 +433,6 @@
 
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label>Nome no cartao</label>
-                                            @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required", autocomplete = "off" })
-                                        </div>
-                                    </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Data de expiração</label>
@@ -457,6 +451,12 @@
                                                 autocomplete = "off"
                                             })
 
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Nome no cartao</label>
+                                            @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required", autocomplete = "off" })
                                         </div>
                                     </div>
                                     @Html.HiddenFor(l => l.DadosPagamentoId, new { @Value = Model.DadosPagamentoId })

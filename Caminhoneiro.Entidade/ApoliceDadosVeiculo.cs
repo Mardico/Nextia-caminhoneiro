@@ -22,11 +22,11 @@ namespace Caminhoneiro.Entidade
                 string SeguradoraNome = "";
                 bool Segurado = Convert.ToBoolean(r.Next(-1, 1));
                 if (Segurado) {
-                    var oSeguradora = Seguradoras.Itens()[r.Next(0, 99)];
+                    var oSeguradora = Seguradoras.Itens()[r.Next(0, 1)];
                     SeguradoraId = oSeguradora.Id;
                     SeguradoraNome = oSeguradora.Texto;
                 }
-                TabelaApoioDTO oVeiculoProprio = VeiculoProprio.Itens()[r.Next(1, 2)];
+                TabelaApoioDTO oVeiculoProprio = VeiculoProprio.Itens()[r.Next(0, 1)];
                 TabelaApoioDTO oQdadeViagens = QdadeViagens.Itens()[r.Next(1, 3)];
                 int TipoEntregaId = r.Next(0, 2);
                 TabelaApoioDTO oRendaLiquida = RendasLiquidas.Itens()[r.Next(1, 3)];

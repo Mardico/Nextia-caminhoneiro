@@ -14,8 +14,8 @@ namespace Caminhoneiro.Entidade
         internal void GetVeiculosProprios()
         {
             _Itens =  new List<TabelaApoioDTO>() {
-                new TabelaApoioDTO() { Id = 2, Codigo = "0002", Texto="Próprio" },
-                new TabelaApoioDTO() { Id = 3, Codigo = "0003", Texto="Fianciado"}
+                new TabelaApoioDTO() { Id = 2, Codigo = "0002", Texto="Sim"},
+                new TabelaApoioDTO() { Id = 3, Codigo = "0003", Texto="Não"}
             };
         }
     }

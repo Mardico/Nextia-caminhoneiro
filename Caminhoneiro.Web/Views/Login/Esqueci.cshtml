@@ -10,6 +10,7 @@
         .text-error {
             color: red;
             font-size: 12px;
+            margin: auto;
             margin-bottom: 10px !important;
         }
 
@@ -25,7 +26,7 @@
 @using (Html.BeginForm("Esqueci", "Login", FormMethod.Post, new { id = "frmEsqueci", name = "frmEsqueci" }))
 {
     <div class="input-group mb-3">
-        @Html.TextBoxFor(l => l.Usuario, new { @class = "form-control", placeholder = "Usuario", data_error = "#txtUsuarioErro" })
+        @Html.TextBoxFor(l => l.Usuario, new { @class = "form-control", placeholder = "Usuario", data_error = "#txtUsuarioErro", type="email"})
         <div class="input-group-append">
             <div class="input-group-text">
                 <span class="fa fa-user-check"></span>

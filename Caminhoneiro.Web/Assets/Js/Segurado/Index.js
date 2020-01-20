@@ -2,7 +2,7 @@
     this.Limpar = function () {
         $('#Nome').val('');
         $('#CPF').val('');
-        $('#tbsegurado > tbody').empty();
+        $('#ListaProdutos').empty();
     };
     this.AoAssociar = function () {
         $('#btnConsultar').on('click', function () {
@@ -28,6 +28,9 @@
                 CPF: { require_from_group: "" },
                 Nome: { require_from_group: "Informe pelo menos um campo de busca" }
             }
+        });
+        $('#ListaProdutos').on('click', '.itemproduto', function () {
+            ojsPage.NovoPedido(this);
         });
     };
     this.CarregaProdutos = function () {

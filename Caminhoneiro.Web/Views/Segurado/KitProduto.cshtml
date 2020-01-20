@@ -1,6 +1,7 @@
 ﻿@model Caminhoneiro.ViewModel.ClienteApoliceViewModel
 @section head
 {
+    <link rel="stylesheet" href="~/plugins/sweetalert2/sweetalert2.min.css">
     <link rel="stylesheet" href="~/Assets/Css/Segurado/KitProduto.css">
 }
 
@@ -36,6 +37,34 @@
             <p class="lead mb-0">Kit do Produto</p>
         </div>
         <div class="card card-primary card-outline">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Código</label>
+                            <input type="text" class="form-control" value="@ViewBag.Produto.Codigo" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Campanha</label>
+                            <input type="text" class="form-control" value="@ViewBag.Produto.Campanha" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label>Produto</label>
+                            <input type="text" class="form-control" value="@ViewBag.Produto.Nome" disabled>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="form-group">
+                            <label>Valor</label>
+                            <input type="text" class="form-control moeda" value="@ViewBag.Produto.Valor" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
             @using (Html.BeginForm("SolicitarKitProduto", "Segurado", FormMethod.Post, new { id = "KitSegurado" }))
             {
                 <input type="hidden" name="ApoliceId" id="ApoliceId" value="" />
