@@ -1,31 +1,7 @@
 ﻿@model Caminhoneiro.ViewModel.ApoliceViewModel
-@{
-    Layout = "~/Views/MasterPage.cshtml";
-}
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/Adesao.css" type="text/css">
-    <style type="text/css">
-        .hidden {
-            display: none;
-        }
-
-        span.red {
-            color: red;
-            cursor: pointer;
-            font-size: 22px;
-            margin: auto;
-            font-weight: bold;
-        }
-
-        .align-right {
-            text-align: right;
-        }
-
-        .pa10 {
-            padding: 10px;
-        }
-    </style>
 }
 <div class="content-header">
     <div class="container-fluid">
@@ -291,6 +267,9 @@
                                                 <label>Data de Nascimento</label>
                                                 @Html.TextBoxFor(m => m.DadosDependente[a].DataNasc, null, new { @class = "form-control datanasc", @required = "required", placeholder = "Data Nascimento" })
                                             </div>
+                                            <div class="col-lg-1" style="margin-top:32px;">
+                                                <span class="deleteLinha red chave">X</span>
+                                            </div>
                                             @Html.HiddenFor(m => m.DadosDependente[a].Id, new { @Value = Model.DadosDependente[a].Id })
                                             @Html.HiddenFor(m => m.DadosDependente[a].Tipo, new { @Value = Model.DadosDependente[a].Tipo })
                                         </div>
@@ -308,7 +287,7 @@
             </div>
         </div>
     </section>
-    <section class="content">
+    <section class="content hidden">
         <div class="container-fluid">
             <div class="card card-primary">
                 <div class="card-header">

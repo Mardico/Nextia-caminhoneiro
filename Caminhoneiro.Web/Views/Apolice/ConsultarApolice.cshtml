@@ -1,8 +1,4 @@
 ﻿@model Caminhoneiro.ViewModel.ApoliceViewModel
-@{
-    Layout = "~/Views/MasterPage.cshtml";
-}
-
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/ConsultarApolice.css" type="text/css">
@@ -172,7 +168,7 @@
                             @if (Model != null)
                             {
                                 <b>Modelo :</b> @Model.DadosVeiculo.Veiculo<br>
-                                <b>Já existe Seguro:</b> @((Model.DadosVeiculo.Segurado) ? "Sim" : "Não")<br>
+                                <b>Já existe Seguro:</b> @((Model.DadosVeiculo.Segurado ==1) ? "Sim" : "Não")<br>
                                 <b>Empresa Seguro/Assistêcia</b> @Model.DadosVeiculo.Seguradora<br>
                                 <b>Veículo Próprio/ Finaciado</b> @Model.DadosVeiculo.VeiculoProprio<br>
                             }
@@ -193,7 +189,7 @@
                                 <b>Quantidade Viagens</b> @Model.DadosVeiculo.QdadeViagens<br>
                                 <b>Entregas</b>@Model.DadosVeiculo.TipoEntrega<br>
                                 <b>Renda Líquida</b> @Model.DadosVeiculo.RendaLiquida<br>
-                                <b>Já precisou de Assistencia Médica?</b> @((Model.DadosVeiculo.SolicitouServApolice) ? "Sim" : "Não")<br>
+                                <b>Já precisou de Assistencia Médica?</b> @((Model.DadosVeiculo.SolicitouServApolice==1) ? "Sim" : "Não")<br>
                             }
                             else
                             {

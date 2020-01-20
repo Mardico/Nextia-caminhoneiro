@@ -144,7 +144,9 @@
         //Close MsgSucesso
         $("#btnConfirmar").click(function () {
             $("#modal-sucesso").modal("hide");
-            window.location.href = '/';
+            $('#TabSegurado').attr('target', '_self');
+            $('#TabSegurado').attr('action', '/Apolice/ConsultarApolice');
+            $('#TabSegurado').submit();
         });
         $('.cc-number').on('change', function () {
             if ($('.cc-number').val() !== '') {

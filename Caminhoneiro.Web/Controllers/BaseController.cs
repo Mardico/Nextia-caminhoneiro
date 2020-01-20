@@ -71,7 +71,6 @@ namespace Caminhoneiro.Web.Controllers
             retorno.DadosCliente.ContactarPorId = null;
             retorno.DadosCliente.EstadoCivilId = null;
             retorno.DadosCliente.SexoId = null;
-            retorno.DadosPagamento.MeioPgtoId = 0;
             retorno.DadosVeiculo.TipoEntregaId = null;
             retorno.DadosVeiculo.Segurado = null;
             retorno.DadosVeiculo.SolicitouServApolice = null;
@@ -127,6 +126,7 @@ namespace Caminhoneiro.Web.Controllers
                         retorno.VinculoId = UsuarioAtual.Vinculos.FirstOrDefault().Id;
                 }
             }
+
             //Carrega combos
             ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
 

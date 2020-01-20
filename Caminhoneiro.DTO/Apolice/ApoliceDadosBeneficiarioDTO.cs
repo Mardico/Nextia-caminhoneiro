@@ -8,8 +8,7 @@ namespace Caminhoneiro.DTO
 {
     public class ApoliceDadosBeneficiarioDTO
     {
-        private int _SexoId = 0;
-        public int Id { get; set; }
+       public int Id { get; set; }
         public string Nome { get; set; }
         public string NDocumento { get; set; }
         public DateTime DataNasc { get; set; }

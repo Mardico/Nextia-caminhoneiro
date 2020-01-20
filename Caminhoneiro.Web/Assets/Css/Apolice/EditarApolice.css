@@ -16,3 +16,27 @@ table {
     color: blue;
     cursor: pointer;
 }
+
+label.error {
+    font-size: 12px;
+}
+
+.hidden {
+    display: none;
+}
+
+span.red {
+    color: red;
+    cursor: pointer;
+    font-size: 22px;
+    margin: auto;
+    font-weight: bold;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.pa10 {
+    padding: 10px;
+}

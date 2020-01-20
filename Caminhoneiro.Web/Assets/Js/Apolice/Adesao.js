@@ -176,7 +176,7 @@
             this.CarregaBeneficiario();
         }
 
-        $('.percent').rules('add', 'Percent');
+        //$('.percent').rules('add', 'Percent');
 
 
         //Salvar Rascunho
