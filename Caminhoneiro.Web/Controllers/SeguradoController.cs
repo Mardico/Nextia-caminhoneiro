@@ -60,13 +60,14 @@ namespace Caminhoneiro.Web.Controllers
                 RetornoGenericoDTO<List<ClienteDTO>> retDTO = client.Post("Cliente/Listar", filtro);
                 if (retDTO != null)
                 {
-                    ViewBag.Mensagem = retDTO.Mensagem;
                     retorno = Mapper.Map<RetornoGenericoDTO<List<ClienteDTO>>, RetornoGenericoViewModel<List<ClienteViewModel>>>(retDTO);
                     if (retorno.ID > -1)
                         return View(retorno.Item);
+
                 }
             }
-            ViewBag.Mensagem = retorno.Mensagem;
+            if (retorno.ID < 0)
+                ViewBag.Mensagem = retorno.Mensagem;
             return View();
         }
         public JsonResult SolicitarKitProduto(ApoliceKitProdutoViewModel dados = null)

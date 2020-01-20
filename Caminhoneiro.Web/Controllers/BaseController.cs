@@ -73,6 +73,7 @@ namespace Caminhoneiro.Web.Controllers
             retorno.DadosCliente.SexoId = null;
             retorno.DadosVeiculo.TipoEntregaId = null;
             retorno.DadosVeiculo.Segurado = null;
+            retorno.DadosPagamento.MeioPgtoId = 0;
             retorno.DadosVeiculo.SolicitouServApolice = null;
             if (Apolice != null)
             {
