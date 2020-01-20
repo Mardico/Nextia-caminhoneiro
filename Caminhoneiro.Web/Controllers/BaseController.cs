@@ -73,14 +73,16 @@ namespace Caminhoneiro.Web.Controllers
             retorno.DadosCliente.SexoId = null;
             retorno.DadosPagamento.MeioPgtoId = 0;
             retorno.DadosVeiculo.TipoEntregaId = null;
+            retorno.DadosVeiculo.Segurado = null;
+            retorno.DadosVeiculo.SolicitouServApolice = null;
             if (Apolice != null)
             {
-                if (Apolice.DadosProdutoId > 0 && Apolice.Id == 0)
+                if (Apolice.DadosProduto.ProdutoId > 0 && Apolice.Id == 0)
                 {
                     retorno.DadosCliente.CPF = Apolice.Codigo;
                     using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDadosProdutoDTO>>())
                     {
-                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProdutoId, Valor = UsuarioAtual.Id };
+                        FiltroGenericoDTO filtro = new FiltroGenericoDTO() { ID = Apolice.DadosProduto.ProdutoId, Valor = UsuarioAtual.Id };
                         RetornoGenericoDTO<ApoliceDadosProdutoDTO> retDTO = client.Post("Apolice/DadosProduto", filtro);
                         if (retDTO != null && retDTO.ID > 0)
                         {
@@ -127,9 +129,12 @@ namespace Caminhoneiro.Web.Controllers
             }
             //Carrega combos
             ViewBag.SimNao = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } };
+
+            ViewBag.Segurado = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } }, "Value", "Text", retorno.DadosVeiculo.Segurado);
+            ViewBag.SolicitouServApolice = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Não" }, new SelectListItem() { Value = "1", Text = "Sim" } }, "Value", "Text", retorno.DadosVeiculo.SolicitouServApolice);
             ViewBag.Contactar = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "WhatsApp" }, new SelectListItem() { Value = "1", Text = "E-mail" } }, "Value", "Text", retorno.DadosCliente.ContactarPorId);
             ViewBag.EstadoCivil = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Casada(o)" }, new SelectListItem() { Value = "1", Text = "Divorciada(o)" }, new SelectListItem() { Value = "1", Text = "Solteira(o)" } }, "Value", "Text", retorno.DadosCliente.EstadoCivilId);
-            ViewBag.Sexo = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "1", Text = "Outro" } }, "Value", "Text", retorno.DadosCliente.SexoId);
+            ViewBag.Sexo = new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Masculino" }, new SelectListItem() { Value = "1", Text = "Feminino" }, new SelectListItem() { Value = "2", Text = "Outro" } };
 
             ViewBag.MeioPgto = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Cartão de Crédito" }, new SelectListItem() { Value = "1", Text = "Conta Digital" } }, "Value", "Text", retorno.DadosPagamento.MeioPgtoId);
             ViewBag.Cargas = new SelectList(new List<SelectListItem>() { new SelectListItem() { Value = "", Text = ":: Selecione ::" }, new SelectListItem() { Value = "0", Text = "Municipal" }, new SelectListItem() { Value = "1", Text = "Intermunicipal" } }, "Value", "Text", retorno.DadosVeiculo.TipoEntregaId);

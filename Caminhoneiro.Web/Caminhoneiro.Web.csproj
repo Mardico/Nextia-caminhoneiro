@@ -175,6 +175,12 @@
     <Content Include="Assets\Css\Segurado\EditarSegurado.css" />
     <Content Include="Assets\Css\Segurado\KitProduto.css" />
     <Content Include="Assets\Css\Segurado\ListaTodos.css" />
+    <Content Include="Assets\Img\amex.jpg" />
+    <Content Include="Assets\Img\dinersclub.jpg" />
+    <Content Include="Assets\Img\error.jpg" />
+    <Content Include="Assets\Img\Maestro.jpg" />
+    <Content Include="Assets\Img\MasterCard.jpg" />
+    <Content Include="Assets\Img\Visa.jpg" />
     <Content Include="Assets\Js\Apolice\Adesao.js" />
     <Content Include="Assets\Js\Apolice\ConsultarApolice.js" />
     <Content Include="Assets\Js\Apolice\EditarApolice.js" />
@@ -2054,11 +2060,13 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+    <Content Include="Scripts\jquery.payment.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\methods.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />

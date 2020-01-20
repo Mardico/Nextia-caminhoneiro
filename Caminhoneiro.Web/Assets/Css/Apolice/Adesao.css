@@ -16,6 +16,6 @@ table {
     color: blue;
     cursor: pointer;
 }
-.error{
+label.error{
     font-size:12px;
 }

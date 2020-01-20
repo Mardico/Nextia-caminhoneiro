@@ -2,7 +2,7 @@
     autoFill: true,
     responsive: true,
     bFilter: false,
-    lengthChange: false,    
+    lengthChange: false,
     pagingType: window.innerWidth > 1024 ? "simple_numbers" : "simple",
     pageLength: 7,
     lengthMenu: window.innerWidth < 1300 ? [[5, 10, 25, 50, -1], [5, 10, 25, 50, "Todos"]] : [[10, 25, 50, -1], [10, 25, 50, "Todos"]],
@@ -11,6 +11,80 @@
     }
 });
 $.fn.dataTable.ext.errMode = 'none';
+
+jQuery.validator.addMethod("Whatsapp", function (value, element, data) {
+    var checado = false;
+    if (value === "0") {
+        $(data).each(function () {
+            if ($(this).is(':checked'))
+                checado = true;
+        });
+    } else
+        checado = true;
+    return checado;
+}, "Um dos telefones tem de ser whatsapp.");
+
+jQuery.validator.addMethod("Percent", function (value, element) {
+    var sum = 0;
+    $('.percent').each(function (atual, indice) {
+        if (!isNaN($(this).val()))
+            sum += Number($(this).val());
+    });
+    if (sum !== 100)
+        return false;
+    else
+        return true;
+}, "A soma tem de ser 100%.");
+
+jQuery.validator.addMethod("require_from_any", function (value, element, data) {
+    var naovazio = false;
+    $(data).each(function () {
+        var oval = $(this).val();
+        if (oval !== "__/__/____" && oval !== '' && value !== null) {
+            naovazio = true;
+        }
+    });
+
+    if (value === "__/__/____" || value ==='' || value ===null)
+        if (naovazio)
+            return false;
+        else
+            return true;
+    else
+        return true;
+}, "Este campo é requerido.");
+
+jQuery.validator.addMethod("CardNumber", function (value, element) {
+    //if (this.optional(b))
+    //    return "dependency-mismatch";
+    //if (/[^0-9 \-]+/.test(a))
+    //    return !1;
+    //var c, d, e = 0, f = 0, g = !1;
+    //if (a = a.replace(/\D/g, ""), a.length < 13 || a.length > 19) return !1;
+    //for (c = a.length - 1; c >= 0; c--)
+    //    d = a.charAt(c), f = parseInt(d, 10), g && (f *= 2) > 9 && (f -= 9), e += f, g = !g;
+    //return e % 10 === 0;
+    return $.payment.validateCardNumber(value);
+}, "Numero do Cartão Inválido.");
+
+jQuery.validator.addMethod("CardCVC", function (value, element, data) {
+    if (value === '')
+        return true;
+    var cardNumber = $(data).val();
+    if (cardNumber !== '') {
+        var type = $.payment.cardType(cardNumber);
+        return $.payment.validateCardCVC(value, type);
+    } else
+        return true;
+}, "Inválido");
+
+jQuery.validator.addMethod("CardExpiry", function (value, element) {
+    if (value === "") return true;
+    if (value.length !== 9) return false;
+    var partes = value.split('/');
+    if (partes.length !== 2) return false;
+    return $.payment.validateCardExpiry(partes[0], partes[1]);
+}, "Data inválida");
 
 jQuery.validator.addMethod("CPF", function (value, element) {
     return ValidaCPF(value);
@@ -22,15 +96,6 @@ jQuery.validator.addMethod("datanasc", function (value, element) {
     if (value === "__/__/____   :  ") return true;
     if (value.length !== 10) return false;
     return value.match(/^(0[1-9]|[12][0-9]|3[01])[- \/.](0[1-9]|1[012])[- \/.](19|20)\d\d$/);
-}, "Data inválida");
-
-jQuery.validator.addMethod("datacartao", function (value, element) {
-    if (value === "") return true;
-    if (value.length !== 7) return false;
-    var partes = value.split('/');
-    if (partes.length !== 2) return false;
-    if (isNaN(parseInt(partes[0])) || isNaN(parseInt(partes[1])) || parseInt(partes[0]) > 12 || parseInt(partes[1]) < 2020 || parseInt(partes[1]) > 2040) return false;
-    return true;
 }, "Data inválida");
 
 jQuery.extend(jQuery.validator.messages, {

@@ -6,6 +6,27 @@
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/EditarApolice.css" type="text/css">
+    <style type="text/css">
+        .hidden {
+            display: none;
+        }
+
+        span.red {
+            color: red;
+            cursor: pointer;
+            font-size: 22px;
+            margin: auto;
+            font-weight: bold;
+        }
+
+        .align-right {
+            text-align: right;
+        }
+
+        .pa10 {
+            padding: 10px;
+        }
+    </style>
 }
 <section class="content">
     <div class="card-body">
@@ -58,498 +79,544 @@
 
             <div class="container-fluid">
                 <h3>Editar Apolice</h3>
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Dados Caminhoneiro</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>Nome Caminhoneiro</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Caminhoneiro" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Data Nascimento</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.DataNascimento, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/yyyy" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Sexo</label>
-                                    @Html.DropDownListFor(l => l.DadosCliente.SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", Model.DadosCliente.SexoId), new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Estado Civil</label>
-                                    @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label>E-mail</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control email", @required = "required", placeholder = "Email", type = "email" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>CEP</label>
-                                    <div class="input-group">
-                                        @Html.TextBoxFor(l => l.DadosCliente.CEP, new { @class = "form-control cep", @required = "required", placeholder = "CEP" })
-                                        <div class="input-group-append">
-                                            <button class="btn btn-secondary" type="button" id="btnBuscaCEP">
-                                                <i class="fa fa-search"></i>
-                                            </button>
-                                        </div>
+                @using (Html.BeginForm("Adesao", "Apolice", FormMethod.Post, new { id = "frmDados" }))
+                {
+                    @Html.HiddenFor(e => e.Id, new { @Value = Model.Id })
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dados Caminhoneiro</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Endereço</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Endereco, new { @class = "form-control ", @required = "required", placeholder = "Endereço" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Número</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Numero, new { @class = "form-control ", @required = "required", placeholder = "Número" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Complento</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Complemento, new { @class = "form-control ", @required = "required", placeholder = "Complemento" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Bairro</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Bairro, new { @class = "form-control ", @required = "required", placeholder = "Bairro" })
-                                </div>
-                            </div>
-                            <div class="col-lg-3">
-                                <div class="form-group">
-                                    <label>Cidade</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.Cidade, new { @class = "form-control ", @required = "required", placeholder = "Cidade" })
-                                </div>
-                            </div>
-                            <div class="col-lg-1">
-                                <div class="form-group">
-                                    <label>UF</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.UF, new { @class = "form-control ", @required = "required", placeholder = "UF" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Telefone Fixo</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneFixo, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Telefone Celular</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneCelular, new { @class = "form-control tel", @required = "required", placeholder = "(DDD)+NÚMERO" })
-                                    <input id="whatsapp1" type="checkbox" name="whatsapp1" value="" />
-                                    <label for="whatsapp1" style="cursor:pointer;">
-                                        WhatsApp
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Telefone Celular(2)</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneSecundario, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
-                                    <input id="whatsapp2" type="checkbox" name="whatsapp2" value="" />
-                                    <label for="whatsapp2" style="cursor:pointer;">
-                                        WhatsApp
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Telefone Celular(3)</label>
-                                    @Html.TextBoxFor(l => l.DadosCliente.TelefoneAdicional, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
-                                    <input id="whatsapp3" type="checkbox" name="whatsapp3" value="" />
-                                    <label for="whatsapp3" style="cursor:pointer;">
-                                        WhatsApp
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <label>Vínculo</label>
-                                    @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control" })
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Usuário</label>
-                                    <select class="form-control" id="Usuario_id" name="Usuario_id">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label>Como Prefere ser conectado?</label>
-                                    @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control" })
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <h3 class="card-title">Dados Dependentes</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                            <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @for (var i = 0; i < Model.DadosDependente.Count(); i++)
-                        {
-                            if (Model.DadosDependente[i].Tipo == "Cônjuge")
-                            {
-                                <h5 class="mb-2">@Model.DadosDependente[i].Tipo</h5>
-                                <div class="form-group">
+                                @Html.HiddenFor(l => l.DadosClienteId, new { @Value = Model.DadosClienteId })
+                                <div class="card-body">
                                     <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label>Nome </label>
-                                                @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", placeholder = "Nome Cônjuge" })
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label>Data Nascimento </label>
-                                                @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Cônjuge", })
-                                            </div>
-                                        </div>
-                                        <div id="linha"></div>
-                                    </div>
-                                </div>
-                                @Html.HiddenFor(m => m.DadosDependente[i].Id, null)
-                                @Html.HiddenFor(m => m.DadosDependente[i].Tipo, null)
-                            }
-                            else
-                            {
-                                <h5 class="mb-2">@Model.DadosDependente[i].Tipo</h5>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <table class="table" id="ListaDependentes">
-                                                <tr>
-                                                    <td>
-                                                        <label>Nome</label>
-                                                        @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
-                                                    </td>
-                                                    <td>
-                                                        <label>Data de Nascimento</label>
-                                                        @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento" })
-                                                    </td>
-                                                    @Html.HiddenFor(m => m.DadosDependente[i].Id, null)
-                                                    @Html.HiddenFor(m => m.DadosDependente[i].Tipo, null)
-                                                </tr>
-                                            </table>
-                                            <div class="float-right">
-                                                <button class="btn btn-primary" id="addLinha" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Filha(o)</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    </div>
-                    <div class="card card-primary">
-
-                        <div class="card-header">
-                            <h3 class="card-title">Dados Beneficiário</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div id="tableBeneficiario">
-                                @for (var i = 0; i < Model.DadosBeneficiario.Count(); i++)
-                                {
-                                    <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label>Nome</label>
-                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control ", placeholder = "Nome do Beneficiário" })
-                                            </div>
-                                        </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label>RG</label>
-                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].NDocumento, new { @class = "form-control ", placeholder = "Doc. Identificação" })
+                                                <label>CPF</label>
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(l => l.DadosCliente.CPF, new { @class = "form-control cpf", @required = "required", placeholder = "CPF" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Nome Caminhoneiro</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Caminhoneiro" })
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Data Nascimento</label>
-                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].DataNasc, new { @class = "form-control ", placeholder = "dd/mm/aaaa" })
+                                                @Html.TextBoxFor(l => l.DadosCliente.DataNascimento, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/yyyy", Value = ((Model.DadosCliente.DataNascimento.HasValue) ? Model.DadosCliente.DataNascimento.Value.ToString() : "") })
                                             </div>
                                         </div>
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label>Sexo</label>
-                                                @Html.DropDownListFor(l => l.DadosBeneficiario[i].SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", null), new { @class = "form-control" })
+                                                @Html.DropDownListFor(l => l.DadosCliente.SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", Model.DadosCliente.SexoId), new { @class = "form-control" })
                                             </div>
                                         </div>
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-3">
                                             <div class="form-group">
-                                                <label>Grau de parentesco</label>
-                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control ", placeholder = "Grau" })
+                                                <label>Estado Civil</label>
+                                                @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>E-mail</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control email", @required = "required", placeholder = "Email", type = "email" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>CEP</label>
+                                                <div class="input-group">
+                                                    @Html.TextBoxFor(l => l.DadosCliente.CEP, new { @class = "form-control cep", @required = "required", placeholder = "CEP" })
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-secondary" type="button" id="btnBuscaCEP">
+                                                            <i class="fa fa-search"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="form-group">
-                                                <label>Porcentagem(%) do Beneficiário</label>
-                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, new { @class = "form-control ", placeholder = "Porcentagem" , type="numeric"})
+                                                <label>Endereço</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Endereco, new { @class = "form-control ", @required = "required", placeholder = "Endereço" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Número</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Numero, new { @class = "form-control ", @required = "required", placeholder = "Número" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Complento</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Complemento, new { @class = "form-control ", @required = "required", placeholder = "Complemento" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Bairro</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Bairro, new { @class = "form-control ", @required = "required", placeholder = "Bairro" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Cidade</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Cidade, new { @class = "form-control ", @required = "required", placeholder = "Cidade" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <div class="form-group">
+                                                <label>UF</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.UF, new { @class = "form-control ", @required = "required", placeholder = "UF" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Telefone Fixo</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.TelefoneFixo, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Telefone Celular</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.TelefoneCelular, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
+                                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp1, new { @class = "whatsapp", id = "whatsapp1" })
+                                                <label for="whatsapp1" style="cursor:pointer;">
+                                                    WhatsApp
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Telefone Celular(2)</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.TelefoneSecundario, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
+                                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp2, new { @class = "whatsapp", id = "whatsapp2" })
+                                                <label for="whatsapp2" style="cursor: pointer;">
+                                                    WhatsApp
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Telefone Celular(3)</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.TelefoneAdicional, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
+                                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp3, new { @class = "whatsapp", id = "whatsapp3" })
+                                                <label for="whatsapp3" style="cursor:pointer;">
+                                                    WhatsApp
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Vínculo</label>
+                                                @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Como prefere ser contactado?</label>
+                                                @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control contactar", @required = "required" })
                                             </div>
                                         </div>
                                     </div>
-                                }
-                            </div>
-                            <div class="float-right">
-                                <button class="btn btn-primary" id="addLinhaBeneficiario" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Beneficiáiro(o)</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Dados Caminhão</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Modelo</label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, (SelectList)ViewBag.Veiculos, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Já existe seguro?</label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoID, new SelectList(ViewBag.SimNao, "Value", "Text", Model.DadosVeiculo.VeiculoID), new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Qual empresa seguro/assistência? </label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Veículo próprio ou financiado? </label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-2">
-                                    <div class="form-group">
-                                        <label>Quantidade Viagens</label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Entregas Carga</label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.TipoEntregaId, (SelectList)ViewBag.Cargas, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Renda Líquida</label>
-                                        @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
-                                        <div class="row">
-                                            <div class="col-lg-6">
-                                                @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, new SelectList(ViewBag.SimNao, "Value", "Text", Model.DadosVeiculo.SolicitouServApolice), new { @class = "form-control" })
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Dados Pagamento</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
-                                <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Possui conta Digital?</label>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                                            <label class="form-check-label" for="inlineCheckbox1">Sim</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2">
-                                            <label class="form-check-label" for="inlineCheckbox2">Não</label>
-                                        </div>
-                                        <div class="float-right">
-                                            <button class="btn btn-primary" type="button"><i class="fas fa-credit-card" aria-hidden="true"></i> Abrir Conta Digital</button>
-                                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dados Dependentes</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group">
-                                        <label>Número do cartão</label>
-                                        @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control credicard", placeholder = "Número do cartão", @required = "required" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-5">
-                                    <div class="form-group">
-                                        <label>Nome no cartao</label>
-                                        @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required" })
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="form-group">
-                                        <label>Data de expiração</label>
-                                        @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control datacartao", placeholder = "Data de expiração", @required = "required" })
-                                    </div>
-                                </div>
-
-                                <div class="col-lg-1">
-                                    <div class="form-group">
-                                        <label>CVV</label>
-                                        @Html.TextBoxFor(l => l.DadosPagamento.CVV, new
+                                <div class="card-body" id="DepConjuge">
+                                    @Html.Hidden("NDependentes", Model.DadosDependente.Count())
+                                    @for (var i = 0; i < Model.DadosDependente.Count(); i++)
+                                    {
+                                        if (Model.DadosDependente[i].Tipo == "Cônjuge")
                                         {
-                                            @class = "form-control",
-                                            placeholder = "CVV",
-                                            @required = "required"
-                                        })
-
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
+                                            <h5 class="mb-2">@Model.DadosDependente[i].Tipo</h5>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-lg-9">
+                                                        <div class="form-group">
+                                                            <label>Nome </label>
+                                                            @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome Cônjuge" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Data Nascimento </label>
+                                                            @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", @required = "required", placeholder = "Data Nascimento Cônjuge", })
+                                                        </div>
+                                                    </div>
+                                                    <div id="linha"></div>
+                                                </div>
+                                            </div>
+                                            @Html.HiddenFor(m => m.DadosDependente[i].Id, new { @Value = Model.DadosDependente[i].Id })
+                                            @Html.HiddenFor(m => m.DadosDependente[i].Tipo, new { @Value = Model.DadosDependente[i].Tipo })
+                                            @Html.Hidden("hasConjuge", null, "1");
+                                        }
+                                    }
+                                    <h5 class="mb-2">Filha(o)</h5>
                                     <div class="form-group">
-                                        <label>Parcelamento</label>
-                                       @* @Html.DropDownListFor(l => l.DadosPagamento.NParcelasId, (SelectList)ViewBag.Parcelas, new { @class = "form-control" })*@
+                                        <div class="row">
+                                            <div class="col-lg-12" id="DepFilhos">
+                                                @for (var a = 0; a < Model.DadosDependente.Count(); a++)
+                                                {
+                                                    if (Model.DadosDependente[a].Tipo != "Cônjuge")
+                                                    {
+                                                        <div class="row table">
+                                                            <div class="col-lg-8">
+                                                                <label>Nome</label>
+                                                                @Html.TextBoxFor(m => m.DadosDependente[a].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome Filho(a)" })
+                                                            </div>
+                                                            <div class="col-lg-3">
+                                                                <label>Data de Nascimento</label>
+                                                                @Html.TextBoxFor(m => m.DadosDependente[a].DataNasc, null, new { @class = "form-control datanasc", @required = "required", placeholder = "Data Nascimento" })
+                                                            </div>
+                                                            @Html.HiddenFor(m => m.DadosDependente[a].Id, new { @Value = Model.DadosDependente[a].Id })
+                                                            @Html.HiddenFor(m => m.DadosDependente[a].Tipo, new { @Value = Model.DadosDependente[a].Tipo })
+                                                        </div>
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 align-right pa10">
+                                                <button class="btn btn-primary" id="addLinha" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Filha(o)</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
-                    </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dados Beneficiário</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="tableBeneficiario">
+                                        @for (int i = 0; i < Model.DadosBeneficiario.Count; i++)
+                                        {
+                                            <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
+                                                <div class="col-lg-6">
+                                                    <div class="form-group">
+                                                        <label>Nome</label>
+                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Beneficiário" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>RG</label>
+                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].NDocumento, new { @class = "form-control ", @required = "required", placeholder = "Doc. Identificação" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>Data Nascimento</label>
+                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].DataNasc, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/aaaa" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        <label>Sexo</label>
+                                                        @Html.DropDownListFor(l => l.DadosBeneficiario[i].SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", Model.DadosBeneficiario[i].SexoId), new { @required = "required", @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-5">
+                                                    <div class="form-group">
+                                                        <label>Grau de parentesco</label>
+                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control", @required = "required", placeholder = "Grau" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Porcentagem(%) do Beneficiário</label>
+                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, null, new { @class = "form-control percent", @required = "required", placeholder = "Porcentagem", type = "number", min = "1", max = "100", length = "3" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="float-right">
+                                        <button class="btn btn-primary" id="addLinhaBeneficiario" type="button"><i class="fas fa-arrow-down" aria-hidden="true"></i> Beneficiáiro(o)</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dados Caminhão</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Já existe seguro?</label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.Segurado, (SelectList)ViewBag.Segurado, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Possui assistência? </label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Veículo próprio?</label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2">
+                                            <div class="form-group">
+                                                <label>Quantidade Viagens</label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3">
+                                            <div class="form-group">
+                                                <label>Renda Líquida</label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7">
+                                            <div class="form-group">
+                                                <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
+                                                @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, (SelectList)ViewBag.SolicitouServApolice, new { @class = "form-control", @required = "required" })
+                                            </div>
+                                        </div>
+                                        @Html.HiddenFor(l => l.DadosVeiculoId, new { @Value = Model.DadosVeiculoId })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-header">
+                                    <h3 class="card-title">Dados Pagamento</h3>
+                                    <div class="card-tools">
+                                        <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i></button>
+                                        <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Meio de Pagamento</label>
+                                                    @Html.DropDownListFor(l => l.DadosPagamento.MeioPgtoId, (SelectList)ViewBag.MeioPgto, new { @class = "form-control", @disabled = "disabled" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="divCartao" class="col-lg-12">
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Número do cartão</label>
+                                                            <img src="" id="credicardtype" />
+                                                            @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control cc-number", placeholder = "Número do cartão", @required = "required", type = "tel", autocomplete = "off" })
 
-                </div>
-                <div class="card-footer">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-primary">
-                        Salvar
-                    </button>
-                </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Nome no cartao</label>
+                                                            @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required", autocomplete = "off" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Data de expiração</label>
+                                                            @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control cc-exp", placeholder = "Data de expiração", @required = "required", type = "tel", autocomplete = "off" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-1">
+                                                        <div class="form-group">
+                                                            <label>CVV</label>
+                                                            @Html.TextBoxFor(l => l.DadosPagamento.CVV, new
+                                                            {
+                                                                @class = "form-control cc-cvc",
+                                                                placeholder = "CVV",
+                                                                @required = "required",
+                                                                type = "tel",
+                                                                autocomplete = "off"
+                                                            })
+
+                                                        </div>
+                                                    </div>
+                                                    @Html.HiddenFor(l => l.DadosPagamentoId, new { @Value = Model.DadosPagamentoId })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="content">
+                        <div class="container-fluid">
+                            <div class="card card-primary">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card-footer">
+                                                @*<button type="button" class="btn btn-info" id="btnRascunho">
+                                                    Salvar
+                                                </button>*@
+                                                <button type="button" class="btn btn-primary" id="btnSalvar">
+                                                    Confirmar
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                }
             </div>
         </div>
+    </div>
 </section>
 
-<div class="modal fade" id="modal-primary">
+<div class="modal fade" id="modal-sucesso">
     <div class="modal-dialog">
         <div class="modal-content bg-primary">
             <div class="modal-header">
                 <h4 class="modal-title">Sucesso!</h4>
             </div>
             <div class="modal-body">
-                <p>Dados Editados com sucesso!</p>
+                <p>Dados editados com sucesso!</p>
             </div>
             <div class="modal-footer float-lg-right">
-                <button type="button" class="btn btn-outline-light"
-                        onclick="location.href='@Url.Action("ConsultarApolice", "Apolice")'">
-                    Voltar
-                </button>
-
+                <button type="button" id="btnConfirmar" class="btn btn-outline-light">Ok</button>
             </div>
         </div>
-
     </div>
 </div>
 @section scripts{
+
     <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
+    <script src="~/Scripts/jquery.payment.js"></script>
     <script src="~/Assets/Js/Apolice/EditarApolice.js"></script>
+    <script id="tmpDepConjuge" type="text/x-jquery-tmpl">
+        <h5 class="mb-2">Cônjuge</h5>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-9">
+                    <div class="form-group">
+                        <label>Nome </label>
+                        @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome Cônjuge", id = "DadosDependente.Nome" })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <label>Data Nascimento </label>
+                        @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento Cônjuge", id = "DadosDependente.DataNasc" })
+                    </div>
+                </div>
+                <div id="linha"></div>
+            </div>
+        </div>
+        @Html.Hidden("NameDependente.Id", 0, new { id = "DadosDependente.Id" })
+        @Html.Hidden("NameDependente.Tipo", "Cônjuge", new { id = "DadosDependente.Tipo" })
+    </script>
     <script id="tmpDependente" type="text/x-jquery-tmpl">
-        <tr>
-            <td>
+        <div class="row">
+            <div class="col-lg-8">
                 <label>Nome</label>
-                @Html.TextBox("Dependente.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
-            </td>
-            <td>
+                @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome Filho(a)", id = "DadosDependente.Nome" })
+            </div>
+            <div class="col-lg-3">
                 <label>Data de Nascimento</label>
-                @Html.TextBox("Dependente.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Filho" })
-            </td>
-            <td><a class="deleteLinha nav-icon far fa-arrow-alt-circle-up display4"></a></td>
-            @Html.Hidden("Dependente.${Proximo}.Tipo", "Filho(a)")
-        </tr>
+                @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento Filho", id = "DadosDependente.DataNasc" })
+            </div>
+            <div class="col-lg-1" style="margin-top:32px;">
+                <span class="deleteLinha red chave">X</span>
+            </div>
+            @Html.Hidden("NameDependente.Id", "Filho(a)", new { id = "DadosDependente.Id" })
+            @Html.Hidden("NameDependente.Tipo", "Filho(a)", new { id = "DadosDependente.Tipo" })
+        </div>
     </script>
     <script id="tmpBeneficiario" type="text/x-jquery-tmpl">
         <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>Nome</label>
-                    @Html.TextBox("Beneficiario.${Proximo}.Nome", null, new { @class = "form-control", placeholder = "Nome do Beneficiário" })
+                    @Html.TextBox("NameBeneficiario.Nome", null, new { @class = "form-control classbene", placeholder = "Nome do Beneficiário", id = "DadosBeneficiario.Nome" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Doc. Identificação</label>
-                    @Html.TextBox("Beneficiario.${Proximo}.NDocumento", null, new { @class = "form-control rg-beneficiario", placeholder = "Doc. Identificação" })
+                    @Html.TextBox("NameBeneficiario.NDocumento", null, new { @class = "form-control classbene", placeholder = "Doc. Identificação", id = "DadosBeneficiario.NDocumento" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Data Nascimento</label>
-                    @Html.TextBox("Beneficiario.${Proximo}.DataNasc", null, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa" })
+                    @Html.TextBox("NameBeneficiario.DataNasc", null, new { @class = "form-control datanasc classbene", placeholder = "dd/mm/aaaa", id = "DadosBeneficiario.DataNasc" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Sexo</label>
-                    @Html.DropDownList("Beneficiario.${Proximo}.SexoId", (SelectList)ViewData["Sexo"], new { @class = "form-control" })
+                    @Html.DropDownList("NameBeneficiario.SexoId", new SelectList(ViewBag.Sexo, "Value", "Text", null), new { @class = "form-control classbene", id = "DadosBeneficiario.SexoId" })
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="form-group">
                     <label>Grau de parentesco</label>
-                    @Html.TextBox("Beneficiario.${Proximo}.Parentesco", null, new { @class = "form-control", placeholder = "Grau" })
+                    @Html.TextBox("NameBeneficiario.Parentesco", null, new { @class = "form-control classbene", placeholder = "Grau", id = "DadosBeneficiario.Parentesco" })
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="form-group">
                     <label>Porcentagem(%) do Beneficiário</label>
-                    @Html.TextBox("Beneficiario.${Proximo}.Porcentagem", null, new { @class = "form-control", placeholder = "Porcentagem", type = "number" })
+                    @Html.TextBox("NameBeneficiario.Porcentagem", null, new { @class = "form-control classbene percent", placeholder = "Porcentagem", type = "number", id = "DadosBeneficiario.Porcentagem", min = "1", max = "100" })
                 </div>
             </div>
-            <div class="col-lg-11"></div>
-            <div class="col-lg-1"><a class='deleteLinhaBeneficiario nav-icon far fa-arrow-alt-circle-up' style='margin:5px; cursor:pointer'></a></div>
+            <div class="col-lg-1">
+                <div class="col-lg-1" style="margin-top:32px;">
+                    <span class="deleteLinhaBeneficiario red chavebene">X</span>
+                </div>
+            </div>
         </div>
     </script>
 }

@@ -178,5 +178,20 @@ namespace Caminhoneiro.Web.Controllers
             }
             return Json(retorno, JsonRequestBehavior.AllowGet);
         }
+        public JsonResult Salvar(ApoliceViewModel Apolice)
+        {
+            RetornoGenericoViewModel<ApoliceViewModel> retorno = new RetornoGenericoViewModel<ApoliceViewModel>(-1, "Falha ao Acessar API");
+            using (var client = new HttpClientUtil<RetornoGenericoDTO<ApoliceDTO>>())
+            {
+                Apolice.UsuarioId = UsuarioAtual.Id;
+                var filtro = Mapper.Map<ApoliceViewModel, ApoliceDTO>(Apolice);
+                RetornoGenericoDTO<ApoliceDTO> retDTO = client.Post("Apolice/Salvar", filtro);
+                if (retDTO != null)
+                {
+                    retorno = Mapper.Map<RetornoGenericoDTO<ApoliceDTO>, RetornoGenericoViewModel<ApoliceViewModel>>(retDTO);
+                }
+            }
+            return Json(retorno, JsonRequestBehavior.AllowGet);
+        }
     }
 }

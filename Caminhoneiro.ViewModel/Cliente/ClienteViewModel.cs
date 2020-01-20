@@ -27,6 +27,9 @@ namespace Caminhoneiro.ViewModel
         public string TelefoneCelular { get; set; }
         public string TelefoneSecundario { get; set; }
         public string TelefoneAdicional { get; set; }
+        public bool EWhatApp1 { get; set; }
+        public bool EWhatApp2 { get; set; }
+        public bool EWhatApp3 { get; set; }
         public int? ContactarPorId { get; set; }
         public string ContactarPor { get; set; }
         public DateTime? DataAlteracao { get; set; }

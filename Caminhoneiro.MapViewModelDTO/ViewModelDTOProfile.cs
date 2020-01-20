@@ -13,7 +13,10 @@ namespace Caminhoneiro.MapViewModelDTO
             CreateMap<ApoliceDadosDependenteViewModel, ApoliceDadosDependenteDTO>().ReverseMap();
             CreateMap<ApoliceDadosPagamentoViewModel, ApoliceDadosPagamentoDTO>().ReverseMap();
             CreateMap<ApoliceDadosProdutoViewModel, ApoliceDadosProdutoDTO>().ReverseMap();
-            CreateMap<ApoliceDadosVeiculoViewModel, ApoliceDadosVeiculoDTO>().ReverseMap();
+            CreateMap< ApoliceDadosVeiculoDTO,ApoliceDadosVeiculoViewModel > ()
+                .ForMember(o => o.Segurado, d => d.MapFrom(x => System.Convert.ToInt32(x.Segurado)))
+                .ForMember(o => o.SolicitouServApolice, d => d.MapFrom(x => System.Convert.ToInt32(x.SolicitouServApolice)))
+                .ReverseMap();
             CreateMap<ApoliceDadosBeneficiarioViewModel, ApoliceDadosBeneficiarioDTO>().ReverseMap();
             CreateMap<ApoliceViewModel, ApoliceDTO>().ReverseMap();
             CreateMap<ApoliceKitProdutoViewModel, ApoliceKitProdutoDTO>().ReverseMap();
@@ -29,7 +32,7 @@ namespace Caminhoneiro.MapViewModelDTO
             CreateMap<UsuarioViewModel, UsuarioDTO>().ReverseMap();
             CreateMap<VinculoViewModel, VinculoDTO>().ReverseMap();
             CreateMap<AlteraSenhaViewModel, AlteraSenhaDTO>().ReverseMap();
-            CreateMap <FiltroLoginViewModel,FiltroLoginDTO>().ReverseMap();
+            CreateMap<FiltroLoginViewModel, FiltroLoginDTO>().ReverseMap();
 
             //Produto
             CreateMap<ProdutoViewModel, ProdutoDTO>().ReverseMap();

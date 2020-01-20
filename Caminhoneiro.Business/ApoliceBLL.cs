@@ -35,16 +35,20 @@ namespace Caminhoneiro.Business
             try
             {
                 var Apolice = Apolices.Itens().Where(w => w.Id == filtro.Id).FirstOrDefault();
+                filtro.DadosProduto = DadosProduto(new FiltroGenericoDTO() { ID = filtro.DadosProduto.ProdutoId, Valor = filtro.UsuarioId }).Item;
+                filtro.Status = ApoliceStatus.Itens().Where(w => w.Id == filtro.StatusId).FirstOrDefault().Nome;
+
                 if (Apolice != null)
                 {
                     Apolices.Itens().Remove(Apolice);
                     Apolices.Itens().Add(filtro);
+                    filtro.Codigo = (filtro.Id * 3).ToString().PadLeft(10, '0');
                 }
                 else
                 {
                     var IdApolice = Apolices.Itens().Max(w => w.Id);
-                    filtro.Id = IdApolice++;
-
+                    filtro.Id = IdApolice + 1;
+                    filtro.Codigo = (filtro.Id * 3).ToString().PadLeft(10, '0');
                     if (filtro.DadosClienteId == 0)
                     {
                         var idCliente = 0;
@@ -62,6 +66,7 @@ namespace Caminhoneiro.Business
                         var IdVeiculo = Apolices.Itens().Max(w => w.DadosVeiculoId);
                         filtro.DadosVeiculoId = IdVeiculo++;
                         filtro.DadosVeiculo.Id = filtro.DadosVeiculoId;
+                        ApoliceDadosVeiculo.Itens().Add(filtro.DadosVeiculo);
                     }
 
                     if (filtro.DadosProdutoId == 0)
@@ -69,6 +74,11 @@ namespace Caminhoneiro.Business
                         var IdProduto = Apolices.Itens().Max(w => w.DadosProdutoId);
                         filtro.DadosProdutoId = IdProduto++;
                         filtro.DadosProduto.Id = filtro.DadosProdutoId;
+                        ApoliceDadosProduto.Itens().Add(filtro.DadosProduto);
+                    }
+                    else
+                    {
+                        filtro.DadosProduto = ApoliceDadosProduto.Itens().Where(w => w.ProdutoId == filtro.DadosProdutoId).FirstOrDefault();
                     }
 
                     if (filtro.DadosPagamentoId == 0)
@@ -76,20 +86,30 @@ namespace Caminhoneiro.Business
                         var IdPagamento = Apolices.Itens().Max(w => w.DadosPagamentoId);
                         filtro.DadosPagamentoId = IdPagamento++;
                         filtro.DadosPagamento.Id = filtro.DadosPagamentoId;
+                        ApoliceDadosPagamento.Itens().Add(filtro.DadosPagamento);
                     }
 
                     if (filtro.DadosDependente.Count > 0)
                     {
-                        var IdDepentende = Apolices.Itens().Max(w => w.DadosDependente.Max(e => e.Id));
+                        var IdDepentende = ApoliceDadosDependente.Itens().Count;
                         foreach (var dependente in filtro.DadosDependente)
                         {
                             dependente.Id = IdDepentende++;
                         }
                     }
-
+                    if (filtro.DadosBeneficiario.Count > 0)
+                    {
+                        var IdDepentende = ApoliceDadosBeneficiario.Itens().Count;
+                        foreach (var dependente in filtro.DadosBeneficiario)
+                        {
+                            dependente.Id = IdDepentende++;
+                        }
+                    }
                     Apolices.Itens().Add(filtro);
                 }
-                retorno.ID = retorno.Item.Id;
+
+                retorno.Item = filtro;
+                retorno.ID = filtro.Id;
                 retorno.Mensagem = "Sucesso ao Processar";
             }
             catch (Exception ex)
@@ -106,7 +126,7 @@ namespace Caminhoneiro.Business
             {
 
 
-                var oAgente = Usuarios.Itens().Where(w=> w.Id == filtro.Valor).FirstOrDefault();
+                var oAgente = Usuarios.Itens().Where(w => w.Id == filtro.Valor).FirstOrDefault();
                 var oProduto = Produtos.Itens().Where(w => w.Id == filtro.ID).FirstOrDefault();
                 retorno.Item = new ApoliceDadosProdutoDTO() { Id = 0, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, Campanha = oProduto.Campanha, ProdutoId = oProduto.Id, Valor = oProduto.ValorPrincipal, Codigo = oProduto.Codigo, Nome = oProduto.Nome };
                 if (retorno.Item != null)

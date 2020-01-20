@@ -141,7 +141,7 @@
     };
     this.NovoPedido = function (obj) {
         var IdProduto = $(obj).data('item');
-        $('#DadosProdutoId').val(IdProduto);
+        $('#DadosProduto_ProdutoId').val(IdProduto);
         var CPF = $('#CPF').val();
         $('#Codigo').val(CPF);
         var form = $("#frmDados");

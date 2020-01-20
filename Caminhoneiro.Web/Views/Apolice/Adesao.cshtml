@@ -5,7 +5,7 @@
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/Adesao.css" type="text/css">
-    <style>
+    <style type="text/css">
         .hidden {
             display: none;
         }
@@ -15,14 +15,15 @@
             cursor: pointer;
             font-size: 22px;
             margin: auto;
+            font-weight: bold;
         }
 
         .align-right {
             text-align: right;
         }
 
-        .pa10{
-            padding:10px;
+        .pa10 {
+            padding: 10px;
         }
     </style>
 }
@@ -37,7 +38,7 @@
 </div>
 @using (Html.BeginForm("Adesao", "Apolice", FormMethod.Post, new { id = "frmDados" }))
 {
-    @Html.HiddenFor(e => e.Id)
+    @Html.HiddenFor(e => e.Id, new { @Value = Model.Id })
     <section class="content">
         <div class="container-fluid">
             <div class="card card-primary">
@@ -76,7 +77,8 @@
                         </div>
                     </div>
                 </div>
-                @Html.HiddenFor(l => l.DadosProdutoId)
+                @Html.HiddenFor(l => l.DadosProdutoId, new { @Value = Model.DadosProdutoId })
+                @Html.HiddenFor(l => l.DadosProduto.ProdutoId, new { @Value = Model.DadosProduto.ProdutoId })
             </div>
         </div>
     </section>
@@ -90,7 +92,7 @@
                         <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-remove"></i></button>
                     </div>
                 </div>
-                @Html.HiddenFor(l => l.DadosClienteId)
+                @Html.HiddenFor(l => l.DadosClienteId, new { @Value = Model.DadosClienteId })
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3">
@@ -190,7 +192,7 @@
                             <div class="form-group">
                                 <label>Telefone Celular</label>
                                 @Html.TextBoxFor(l => l.DadosCliente.TelefoneCelular, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
-                                <input id="whatsapp1" type="checkbox" name="whatsapp1" value="" />
+                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp1, new { @class = "whatsapp", id = "whatsapp1" })
                                 <label for="whatsapp1" style="cursor:pointer;">
                                     WhatsApp
                                 </label>
@@ -200,9 +202,8 @@
                             <div class="form-group">
                                 <label>Telefone Celular(2)</label>
                                 @Html.TextBoxFor(l => l.DadosCliente.TelefoneSecundario, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
-                                <input id="whatsapp2" type="checkbox" name="whatsapp2" value="" />
-                                <label for="whatsapp2" style="        cursor: pointer;
-">
+                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp2, new { @class = "whatsapp", id = "whatsapp2" })
+                                <label for="whatsapp2" style="cursor: pointer;">
                                     WhatsApp
                                 </label>
                             </div>
@@ -211,7 +212,7 @@
                             <div class="form-group">
                                 <label>Telefone Celular(3)</label>
                                 @Html.TextBoxFor(l => l.DadosCliente.TelefoneAdicional, new { @class = "form-control tel", placeholder = "(DDD)+NÚMERO" })
-                                <input id="whatsapp3" type="checkbox" name="whatsapp3" value="" />
+                                @Html.CheckBoxFor(l => l.DadosCliente.EWhatApp3, new { @class = "whatsapp", id = "whatsapp3" })
                                 <label for="whatsapp3" style="cursor:pointer;">
                                     WhatsApp
                                 </label>
@@ -220,13 +221,13 @@
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label>Vínculo</label>
-                                @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.VinculoId, (SelectList)ViewBag.Sindicatos, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Como prefere ser contactado?</label>
-                                @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control contactar", @required = "required" })
                             </div>
                         </div>
                     </div>
@@ -245,7 +246,7 @@
                     </div>
                 </div>
                 <div class="card-body" id="DepConjuge">
-                    @Html.Hidden("NDependentes",Model.DadosDependente.Count())
+                    @Html.Hidden("NDependentes", Model.DadosDependente.Count())
                     @for (var i = 0; i < Model.DadosDependente.Count(); i++)
                     {
                         if (Model.DadosDependente[i].Tipo == "Cônjuge")
@@ -256,20 +257,20 @@
                                     <div class="col-lg-9">
                                         <div class="form-group">
                                             <label>Nome </label>
-                                            @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", placeholder = "Nome Cônjuge" })
+                                            @Html.TextBoxFor(m => m.DadosDependente[i].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome Cônjuge" })
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Data Nascimento </label>
-                                            @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Cônjuge", })
+                                            @Html.TextBoxFor(m => m.DadosDependente[i].DataNasc, null, new { @class = "form-control datanasc", @required = "required", placeholder = "Data Nascimento Cônjuge", })
                                         </div>
                                     </div>
                                     <div id="linha"></div>
                                 </div>
                             </div>
-                            @Html.HiddenFor(m => m.DadosDependente[i].Id, null)
-                            @Html.HiddenFor(m => m.DadosDependente[i].Tipo, null)
+                            @Html.HiddenFor(m => m.DadosDependente[i].Id, new { @Value = Model.DadosDependente[i].Id })
+                            @Html.HiddenFor(m => m.DadosDependente[i].Tipo, new { @Value = Model.DadosDependente[i].Tipo })
                             @Html.Hidden("hasConjuge", null, "1");
                         }
                     }
@@ -284,14 +285,14 @@
                                         <div class="row table">
                                             <div class="col-lg-8">
                                                 <label>Nome</label>
-                                                @Html.TextBoxFor(m => m.DadosDependente[a].Nome, null, new { @class = "form-control", placeholder = "Nome Filho(a)" })
+                                                @Html.TextBoxFor(m => m.DadosDependente[a].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome Filho(a)" })
                                             </div>
                                             <div class="col-lg-3">
                                                 <label>Data de Nascimento</label>
-                                                @Html.TextBoxFor(m => m.DadosDependente[a].DataNasc, null, new { @class = "form-control datanasc", placeholder = "Data Nascimento" })
+                                                @Html.TextBoxFor(m => m.DadosDependente[a].DataNasc, null, new { @class = "form-control datanasc", @required = "required", placeholder = "Data Nascimento" })
                                             </div>
-                                            @Html.HiddenFor(m => m.DadosDependente[a].Id, null)
-                                            @Html.HiddenFor(m => m.DadosDependente[a].Tipo, null)
+                                            @Html.HiddenFor(m => m.DadosDependente[a].Id, new { @Value = Model.DadosDependente[a].Id })
+                                            @Html.HiddenFor(m => m.DadosDependente[a].Tipo, new { @Value = Model.DadosDependente[a].Tipo })
                                         </div>
                                     }
                                 }
@@ -325,37 +326,37 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label>Nome</label>
-                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control", placeholder = "Nome do Beneficiário" })
+                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control", @required = "required", placeholder = "Nome do Beneficiário" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>RG</label>
-                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].NDocumento, new { @class = "form-control ", placeholder = "Doc. Identificação" })
+                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].NDocumento, new { @class = "form-control ", @required = "required", placeholder = "Doc. Identificação" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Data Nascimento</label>
-                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].DataNasc, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa" })
+                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].DataNasc, new { @class = "form-control datanasc", @required = "required", placeholder = "dd/mm/aaaa" })
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Sexo</label>
-                                        @Html.DropDownListFor(l => l.DadosBeneficiario[i].SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", null), new { @class = "form-control" })
+                                        @Html.DropDownListFor(l => l.DadosBeneficiario[i].SexoId, new SelectList(ViewBag.Sexo, "Value", "Text", Model.DadosBeneficiario[i].SexoId), new { @required = "required", @class = "form-control" })
                                     </div>
                                 </div>
                                 <div class="col-lg-5">
                                     <div class="form-group">
                                         <label>Grau de parentesco</label>
-                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control", placeholder = "Grau" })
+                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control", @required = "required", placeholder = "Grau" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label>Porcentagem(%) do Beneficiário</label>
-                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, null, new { @class = "form-control", placeholder = "Porcentagem", type = "number", min = "0", max = "100" })
+                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, null, new { @class = "form-control percent", @required = "required", placeholder = "Porcentagem", type = "number", min = "1", max = "100", length = "3" })
                                     </div>
                                 </div>
                             </div>
@@ -383,40 +384,40 @@
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Já existe seguro?</label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.Segurado, new SelectList(ViewBag.SimNao, "Value", "Text", Model.DadosVeiculo.Segurado), new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.Segurado, (SelectList)ViewBag.Segurado, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="form-group">
                                 <label>Possui assistência? </label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.SeguradoraId, (SelectList)ViewBag.Seguradoras, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Veículo próprio?</label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.VeiculoProprioId, (SelectList)ViewBag.VeiculoProprio, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-2">
                             <div class="form-group">
                                 <label>Quantidade Viagens</label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.QdadeViagensId, (SelectList)ViewBag.QdadeViagens, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <label>Renda Líquida</label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.RendaLiquidaId, (SelectList)ViewBag.RendasLiquidas, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
                         <div class="col-lg-7">
                             <div class="form-group">
                                 <label>Já precisou de assistência médica de urgência em períodos de viagem</label>
-                                @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, new SelectList(ViewBag.SimNao, "Value", "Text", Model.DadosVeiculo.SolicitouServApolice), new { @class = "form-control" })
+                                @Html.DropDownListFor(l => l.DadosVeiculo.SolicitouServApolice, (SelectList)ViewBag.SolicitouServApolice, new { @class = "form-control", @required = "required" })
                             </div>
                         </div>
-                        @Html.HiddenFor(l => l.DadosVeiculoId)
+                        @Html.HiddenFor(l => l.DadosVeiculoId, new { @Value = Model.DadosVeiculoId })
                     </div>
                 </div>
             </div>
@@ -448,19 +449,21 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Número do cartão</label>
-                                            @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control credicard", placeholder = "Número do cartão", @required = "required" })
+                                            <img src="" id="credicardtype" />
+                                            @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control cc-number", placeholder = "Número do cartão", @required = "required", type = "tel", autocomplete = "off" })
+
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Nome no cartao</label>
-                                            @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required" })
+                                            @Html.TextBoxFor(l => l.DadosPagamento.NomeResponsavel, new { @class = "form-control", placeholder = "Nome no cartão", @required = "required", autocomplete = "off" })
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label>Data de expiração</label>
-                                            @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control datacartao", placeholder = "Data de expiração", @required = "required" })
+                                            @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control cc-exp", placeholder = "Data de expiração", @required = "required", type = "tel", autocomplete = "off" })
                                         </div>
                                     </div>
                                     <div class="col-lg-1">
@@ -468,13 +471,16 @@
                                             <label>CVV</label>
                                             @Html.TextBoxFor(l => l.DadosPagamento.CVV, new
                                             {
-                                                @class = "form-control",
+                                                @class = "form-control cc-cvc",
                                                 placeholder = "CVV",
-                                                @required = "required"
+                                                @required = "required",
+                                                type = "tel",
+                                                autocomplete = "off"
                                             })
 
                                         </div>
                                     </div>
+                                    @Html.HiddenFor(l => l.DadosPagamentoId, new { @Value = Model.DadosPagamentoId })
                                 </div>
                             </div>
                         </div>
@@ -522,6 +528,7 @@
 @section scripts
 {
     <script src="~/plugins/jqtemplate/jquery.tmpl.js"></script>
+    <script src="~/Scripts/jquery.payment.js"></script>
     <script src="~/Assets/Js/Apolice/Adesao.js"></script>
     <script id="tmpDepConjuge" type="text/x-jquery-tmpl">
         <h5 class="mb-2">Cônjuge</h5>
@@ -530,36 +537,36 @@
                 <div class="col-lg-9">
                     <div class="form-group">
                         <label>Nome </label>
-                        @Html.TextBox("DadosDependente_Nome", null, new { @class = "form-control", placeholder = "Nome Cônjuge", name = "NameDependente.Nome" })
+                        @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome Cônjuge", id = "DadosDependente.Nome" })
                     </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
                         <label>Data Nascimento </label>
-                        @Html.TextBox("DadosDependente_DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Cônjuge", name = "NameDependente.DataNasc" })
+                        @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento Cônjuge", id = "DadosDependente.DataNasc" })
                     </div>
                 </div>
                 <div id="linha"></div>
             </div>
         </div>
-        @Html.Hidden("DadosDependente_Id", null, new { name = "DadosDependente.Id" })
-        @Html.Hidden("DadosDependente_Tipo", null, new { name = "DadosDependente.Id" })
+        @Html.Hidden("NameDependente.Id", 0, new { id = "DadosDependente.Id" })
+        @Html.Hidden("NameDependente.Tipo", "Cônjuge", new { id = "DadosDependente.Tipo" })
     </script>
     <script id="tmpDependente" type="text/x-jquery-tmpl">
         <div class="row">
             <div class="col-lg-8">
                 <label>Nome</label>
-                @Html.TextBox("DadosDependente_Nome", null, new { @class = "form-control", placeholder = "Nome Filho(a)", name = "NameDependente.Nome" })
+                @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome Filho(a)", id = "DadosDependente.Nome" })
             </div>
             <div class="col-lg-3">
                 <label>Data de Nascimento</label>
-                @Html.TextBox("DadosDependente_DataNasc", null, new { @class = "form-control datanasc", placeholder = "Data Nascimento Filho", name = "NameDependente.DataNasc" })
+                @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento Filho", id = "DadosDependente.DataNasc" })
             </div>
             <div class="col-lg-1" style="margin-top:32px;">
-                <span class="deleteLinha red">X</span>
+                <span class="deleteLinha red chave">X</span>
             </div>
-            @Html.Hidden("DadosDependente_Id", "Filho(a)", new { name = "Dependente.Id" })
-            @Html.Hidden("DadosDependente_Tipo", "Filho(a)", new { name = "Dependente.Tipo" })
+            @Html.Hidden("NameDependente.Id", "Filho(a)", new { id = "DadosDependente.Id" })
+            @Html.Hidden("NameDependente.Tipo", "Filho(a)", new { id = "DadosDependente.Tipo" })
         </div>
     </script>
     <script id="tmpBeneficiario" type="text/x-jquery-tmpl">
@@ -567,41 +574,44 @@
             <div class="col-lg-6">
                 <div class="form-group">
                     <label>Nome</label>
-                    @Html.TextBox("DadosBeneficiario_Nome", null, new { @class = "form-control", placeholder = "Nome do Beneficiário", name = "DadosBeneficiario.Nome" })
+                    @Html.TextBox("NameBeneficiario.Nome", null, new { @class = "form-control classbene", placeholder = "Nome do Beneficiário", id = "DadosBeneficiario.Nome" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Doc. Identificação</label>
-                    @Html.TextBox("DadosBeneficiario_NDocumento", null, new { @class = "form-control rg-beneficiario", placeholder = "Doc. Identificação", name = "DadosBeneficiario.NDocumento" })
+                    @Html.TextBox("NameBeneficiario.NDocumento", null, new { @class = "form-control classbene", placeholder = "Doc. Identificação", id = "DadosBeneficiario.NDocumento" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Data Nascimento</label>
-                    @Html.TextBox("DadosBeneficiario_DataNasc", null, new { @class = "form-control datanasc", placeholder = "dd/mm/aaaa", name = "DadosBeneficiario.DataNasc" })
+                    @Html.TextBox("NameBeneficiario.DataNasc", null, new { @class = "form-control datanasc classbene", placeholder = "dd/mm/aaaa", id = "DadosBeneficiario.DataNasc" })
                 </div>
             </div>
             <div class="col-lg-3">
                 <div class="form-group">
                     <label>Sexo</label>
-                    @Html.DropDownList("DadosBeneficiario_SexoId", new SelectList(ViewBag.Sexo, "Value", "Text", null), new { @class = "form-control", name = "DadosBeneficiario.SexoId" })
+                    @Html.DropDownList("NameBeneficiario.SexoId", new SelectList(ViewBag.Sexo, "Value", "Text", null), new { @class = "form-control classbene", id = "DadosBeneficiario.SexoId" })
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="form-group">
                     <label>Grau de parentesco</label>
-                    @Html.TextBox("DadosBeneficiario_Parentesco", null, new { @class = "form-control", placeholder = "Grau", name = "DadosBeneficiario.Parentesco" })
+                    @Html.TextBox("NameBeneficiario.Parentesco", null, new { @class = "form-control classbene", placeholder = "Grau", id = "DadosBeneficiario.Parentesco" })
                 </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
                 <div class="form-group">
                     <label>Porcentagem(%) do Beneficiário</label>
-                    @Html.TextBox("DadosBeneficiario_Porcentagem", null, new { @class = "form-control", placeholder = "Porcentagem", type = "number", name = "DadosBeneficiario.Porcentagem" })
+                    @Html.TextBox("NameBeneficiario.Porcentagem", null, new { @class = "form-control classbene percent", placeholder = "Porcentagem", type = "number", id = "DadosBeneficiario.Porcentagem", min = "1", max = "100" })
                 </div>
             </div>
-            <div class="col-lg-11"></div>
-            <div class="col-lg-1"><a class='deleteLinhaBeneficiario nav-icon far fa-arrow-alt-circle-up' style='margin:5px; cursor:pointer'></a></div>
+            <div class="col-lg-1">
+                <div class="col-lg-1" style="margin-top:32px;">
+                    <span class="deleteLinhaBeneficiario red chavebene">X</span>
+                </div>
+            </div>
         </div>
     </script>
 }
