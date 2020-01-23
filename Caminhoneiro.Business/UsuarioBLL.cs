@@ -51,7 +51,7 @@ namespace Caminhoneiro.Business
         public RetornoGenericoDTO<UsuarioDTO> SolicitaSenha(FiltroGenericoDTO filtro)
         {
             RetornoGenericoDTO<UsuarioDTO> retorno = new RetornoGenericoDTO<UsuarioDTO>() { ID = -1, Mensagem = "Falha ao Logar" };
-            var DadosUsuario = Usuarios.Itens().Where(w => w.Codigo == filtro.Texto).FirstOrDefault();
+            var DadosUsuario = Usuarios.Itens().Where(w => w.Email == filtro.Texto).FirstOrDefault();
             if (DadosUsuario != null)
             {
                 retorno.ID = DadosUsuario.Id;

@@ -2,6 +2,11 @@
 @section head
 {
     <link rel="stylesheet" href="~/Assets/Css/Apolice/Adesao.css" type="text/css">
+    <style>
+        .cc-number {
+            margin-right: 5px;
+        }
+    </style>
 }
 <div class="content-header">
     <div class="container-fluid">
@@ -428,12 +433,13 @@
                                     <div class="col-lg-4">
                                         <div class="form-group">
                                             <label>Número do cartão</label>
-                                            <img src="" id="credicardtype" />
-                                            @Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control cc-number", placeholder = "Número do cartão", @required = "required", type = "tel", autocomplete = "off" })
-
+                                            <div class="row">
+                                                <div class="col-10">@Html.TextBoxFor(l => l.DadosPagamento.Conta, new { @class = "form-control cc-number", placeholder = "Número do cartão", @required = "required", type = "tel", autocomplete = "off" })</div>
+                                                <div class="col-2" style="margin:auto"><img class="pull-right" src="" id="credicardtype" /></div>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="form-group">
                                             <label>Data de expiração</label>
                                             @Html.TextBoxFor(l => l.DadosPagamento.DataExpiracao, new { @class = "form-control cc-exp", placeholder = "Data de expiração", @required = "required", type = "tel", autocomplete = "off" })

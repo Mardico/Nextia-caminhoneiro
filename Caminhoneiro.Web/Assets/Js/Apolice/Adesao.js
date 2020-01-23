@@ -178,7 +178,6 @@
 
         //$('.percent').rules('add', 'Percent');
 
-
         //Salvar Rascunho
         $('#btnRascunho').on('click', function () {
             $('#frmDados').valid();
@@ -194,7 +193,7 @@
                 swal("Existem campos não preenchidos", "Preencha os campos faltantes", "warning");
         });
 
-
+        $('.cc-number').change();
     };
     this.CarregaDepConjuge = function () {
         var NDependentes = parseInt($('#NDependentes').val());

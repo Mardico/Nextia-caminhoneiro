@@ -19,7 +19,7 @@ namespace Caminhoneiro.Entidade
             for (int i = 0; i < 100; i++)
             {
                 var oAgente = Usuarios.Itens()[r.Next(1, 11)];
-                var oProduto = Produtos.Itens()[r.Next(1, 4)];
+                var oProduto = Produtos.Itens()[0];
                 _Itens.Add(new ApoliceDadosProdutoDTO() { Id = i, Agente = oAgente.Nome, CampanhaId = oProduto.CampanhaId, Campanha= oProduto.Campanha, ProdutoId = oProduto.Id, Valor = oProduto.ValorPrincipal, Codigo = oProduto.Codigo, Nome = oProduto.Nome });
             }
         }

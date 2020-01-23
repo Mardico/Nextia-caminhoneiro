@@ -236,7 +236,7 @@
                 swal("Existem campos não preenchidos", "Preencha os campos faltantes", "warning");
         });
 
-
+        $('.cc-number').change();
     };
     this.CarregaDepConjuge = function () {
         var NDependentes = parseInt($('#NDependentes').val());
