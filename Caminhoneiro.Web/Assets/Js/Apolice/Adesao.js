@@ -230,11 +230,17 @@
             $('.chave' + NDependentes).hide();
 
         $('#NDependentes').val(NDependentes + 1);
-
-
+        
         var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
+        var txtSexo = '#DadosDependente_' + NDependentes + '__SexoId';
         var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
         $(txtNome).rules('add', {
+            require_from_any: ".classdep" + NDependentes,
+            messages: {
+                require_from_group: "requerido"
+            }
+        });
+        $(txtSexo).rules('add', {
             require_from_any: ".classdep" + NDependentes,
             messages: {
                 require_from_group: "requerido"

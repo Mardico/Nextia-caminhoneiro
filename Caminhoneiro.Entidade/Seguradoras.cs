@@ -15,9 +15,8 @@ namespace Caminhoneiro.Entidade
         {
 			_Itens = new List<TabelaApoioDTO>() {
 				new TabelaApoioDTO  { Id = 1, Codigo = "3314", Texto = "Sim" },
-				new TabelaApoioDTO  { Id = 2, Codigo = "4408", Texto = "Não" }
-			};
-
+				new TabelaApoioDTO  { Id = 0, Codigo = "4408", Texto = "Não" }
+			}   ;
 		}
 	}
 }

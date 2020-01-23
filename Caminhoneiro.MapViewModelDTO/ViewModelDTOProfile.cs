@@ -23,7 +23,6 @@ namespace Caminhoneiro.MapViewModelDTO
             CreateMap<ApolicePagamentoViewModel, ApolicePagamentoDTO>().ReverseMap();
             CreateMap<ApoliceHistoricoViewModel, ApoliceHistoricoDTO>().ReverseMap();
 
-
             //Dados do Cliente
             CreateMap<ClienteViewModel, ClienteDTO>().ReverseMap();
             CreateMap<ClienteApoliceViewModel, ClienteDTO>().ReverseMap();
@@ -41,9 +40,6 @@ namespace Caminhoneiro.MapViewModelDTO
             CreateMap<FiltroGenericoViewModel, FiltroGenericoDTO>().ReverseMap();
             CreateMap(typeof(RetornoGenericoDTO<>), typeof(RetornoGenericoViewModel<>)).ReverseMap();
             CreateMap<TabelaApoioViewModel, TabelaApoioDTO>().ReverseMap();
-
-
-
         }
     }
 }

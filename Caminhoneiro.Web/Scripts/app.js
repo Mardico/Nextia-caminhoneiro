@@ -22,7 +22,16 @@ jQuery.validator.addMethod("Whatsapp", function (value, element, data) {
     } else
         checado = true;
     return checado;
-}, "Um dos telefones tem de ser whatsapp.");
+}, "Um dos telefones deve ser whatsapp.");
+
+jQuery.validator.addMethod("AnoVeiculo", function (value, element, data) {
+    var currentYear = (new Date).getFullYear();
+    console.log(currentYear);
+    if (value > currentYear) {
+        return false;
+    }
+    return true;
+}, "O ano deve ser menor ou igual o atual");
 
 jQuery.validator.addMethod("Percent", function (value, element) {
     var sum = 0;
@@ -87,7 +96,7 @@ jQuery.validator.addMethod("CardExpiry", function (value, element) {
 }, "Data inválida");
 
 jQuery.validator.addMethod("CPF", function (value, element) {
-    return ValidaCPF(value);
+   return ValidaCPF(value);
 }, "Informe um CPF válido");
 
 jQuery.validator.addMethod("datanasc", function (value, element) {
@@ -124,6 +133,8 @@ $(function () {
     $('.datacartao').mask('99/9999');
     $('.cpf').mask('999.999.999-99');
     $('.cep').mask('99999-999');
+    $('.telfixo').mask("(99)9999-9999");
+    $('.anoveiculo').mask("9999");
     $('.tel').mask("(99) 9999-9999?9")
         .focusout(function (event) {
             var target, phone, element;
@@ -141,7 +152,6 @@ $(function () {
     $(document).ajaxError(function (event, request, settings) {
         swal("Oops", "Falha na chamada: " + settings.url, "error");
     });
-
 });
 
 function ValidaCPF(valor) {

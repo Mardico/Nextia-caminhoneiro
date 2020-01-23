@@ -190,11 +190,11 @@
                 require_from_group: "Informe pelo menos um tel"
             }
         });
-
+        $('.anoveiculo').rules('add', 'AnoVeiculo');
         $('.cc-number').payment('formatCardNumber');
         $('.cc-exp').payment('formatCardExpiry');
         $('.cc-cvc').payment('formatCardCVC');
-
+        
         //Formatação
         $('.moeda').autoNumeric('init', { digitGroupSeparator: '.', decimalCharacter: ',', aSign: 'R$ ' });
 
@@ -220,7 +220,6 @@
 
         $('.percent').rules('add', 'Percent');
 
-
         //Salvar Rascunho
         $('#btnRascunho').on('click', function () {
             $('#frmDados').valid();
@@ -239,28 +238,28 @@
         $('.cc-number').change();
     };
     this.CarregaDepConjuge = function () {
-        var NDependentes = parseInt($('#NDependentes').val());
-        var html = $("#tmpDepConjuge").html().replace(/DadosDependente./gi, 'DadosDependente_' + NDependentes + '__');
-        html = html.replace(/NameDependente/gi, 'DadosDependente[' + NDependentes + ']');
-        html = html.replace(/classdep/g, 'classdep' + NDependentes);
-        $('#DepConjuge').prepend(html);
-        $('#NDependentes').val(NDependentes + 1);
+        //var NDependentes = parseInt($('#NDependentes').val());
+        //var html = $("#tmpDepConjuge").html().replace(/DadosDependente./gi, 'DadosDependente_' + NDependentes + '__');
+        //html = html.replace(/NameDependente/gi, 'DadosDependente[' + NDependentes + ']');
+        //html = html.replace(/classdep/g, 'classdep' + NDependentes);
+        //$('#DepConjuge').prepend(html);
+        //$('#NDependentes').val(NDependentes + 1);
 
-        var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
-        var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
-        $(txtNome).rules('add', {
-            require_from_any: ".classdep" + NDependentes,
-            messages: {
-                require_from_group: "Requerido"
-            }
-        });
-        $(txtDataNasc).rules('add', {
-            require_from_any: ".classdep" + NDependentes,
-            messages: {
-                require_from_group: "Requerido"
-            }
-        });
-        $(txtDataNasc).mask('99/99/9999');
+        //var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
+        //var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
+        //$(txtNome).rules('add', {
+        //    require_from_any: ".classdep" + NDependentes,
+        //    messages: {
+        //        require_from_group: "Requerido"
+        //    }
+        //});
+        //$(txtDataNasc).rules('add', {
+        //    require_from_any: ".classdep" + NDependentes,
+        //    messages: {
+        //        require_from_group: "Requerido"
+        //    }
+        //});
+        //$(txtDataNasc).mask('99/99/9999');
     };
     this.CarregaDepFilhos = function () {
         var NDependentes = parseInt($('#NDependentes').val());
@@ -273,9 +272,10 @@
             $('.chave' + NDependentes).hide();
 
         $('#NDependentes').val(NDependentes + 1);
-
-
+        
         var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
+        var txtSexo = '#DadosDependente_' + NDependentes + '__Sexo';
+        var txtSexo = '#DadosDependente_' + NDependentes + '__GrauDependencia';
         var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
         $(txtNome).rules('add', {
             require_from_any: ".classdep" + NDependentes,
@@ -291,6 +291,7 @@
         });
         $(txtDataNasc).mask('99/99/9999');
     };
+
     this.CarregaBeneficiario = function () {
         var NBeneficiarios = $('#tableBeneficiario').children().length;
         var html = $("#tmpBeneficiario").html().replace(/DadosBeneficiario./gi, 'DadosBeneficiario_' + NBeneficiarios + '__');
@@ -302,52 +303,50 @@
         if (NBeneficiarios < 1)
             $('.chavebene' + NBeneficiarios).hide();
 
-
         var txtNome = '#DadosBeneficiario_' + NBeneficiarios + '__Nome';
-        var txtNDocumento = '#DadosBeneficiario_' + NBeneficiarios + '__NDocumento';
-        var txtDataNasc = '#DadosBeneficiario_' + NBeneficiarios + '__DataNasc';
-        var txtSexoId = '#DadosBeneficiario_' + NBeneficiarios + '__SexoId';
+        //var txtNDocumento = '#DadosBeneficiario_' + NBeneficiarios + '__NDocumento';
+        //var txtDataNasc = '#DadosBeneficiario_' + NBeneficiarios + '__DataNasc';
+        //var txtSexoId = '#DadosBeneficiario_' + NBeneficiarios + '__SexoId';
         var txtParentesco = '#DadosBeneficiario_' + NBeneficiarios + '__Parentesco';
         var txtPorcentagem = '#DadosBeneficiario_' + NBeneficiarios + '__Porcentagem';
         var classname = ".classbene" + NBeneficiarios;
-        $(txtDataNasc).mask('99/99/9999');
+        //$(txtDataNasc).mask('99/99/9999');
         $(txtNome).rules('add', {
             require_from_any: classname,
             messages: {
                 require_from_group: "requerido"
             }
         });
-        $(txtNDocumento).rules('add', {
-            require_from_any: classname,
-            messages: {
-                require_from_group: "requerido"
-            }
-        });
-        $(txtDataNasc).rules('add', {
-            require_from_any: classname,
-            messages: {
-                require_from_group: "requerido"
-            }
-        });
-        $(txtDataNasc).rules('add', {
-            require_from_any: classname,
-            messages: {
-                require_from_group: "requerido"
-            }
-        });
-        $(txtSexoId).rules('add', {
-            require_from_any: classname,
-            messages: {
-                require_from_group: "requerido"
-            }
-        });
+        //$(txtNDocumento).rules('add', {
+        //    require_from_any: classname,
+        //    messages: {
+        //        require_from_group: "requerido"
+        //    }
+        //});
+        //$(txtDataNasc).rules('add', {
+        //    require_from_any: classname,
+        //    messages: {
+        //        require_from_group: "requerido"
+        //    }
+        //});
+        //$(txtDataNasc).rules('add', {
+        //    require_from_any: classname,
+        //    messages: {
+        //        require_from_group: "requerido"
+        //    }
+        //});
+        //$(txtSexoId).rules('add', {
+        //    require_from_any: classname,
+        //    messages: {
+        //        require_from_group: "requerido"
+        //    }
+        //});
         $(txtParentesco).rules('add', {
             require_from_any: classname,
             messages: {
                 require_from_group: "requerido"
             }
         });
-
         $(txtPorcentagem).rules('add', {
             Percent: ["percent"],
             require_from_any: classname
@@ -386,7 +385,7 @@
                     Nome: $('#DadosBeneficiario_' + a + '__Nome').val(),
                     NDocumento: $('#DadosBeneficiario_' + a + '__NDocumento').val(),
                     DataNasc: $('#DadosBeneficiario_' + a + '__DataNasc').val(),
-                    SexoId: $('#DadosBeneficiario_' + a + '__SexoId').val(),
+                    //SexoId: $('#DadosBeneficiario_' + a + '__SexoId').val(),
                     Parentesco: $('#DadosBeneficiario_' + a + '__Parentesco').val(),
                     Porcentagem: $('#DadosBeneficiario_' + a + '__Porcentagem').val()
                 });
@@ -472,6 +471,7 @@
     this.Inicio = function () {
         this.AoAssociar();
     };
+    
 }
 
 var ojsPage = new jsPage();
