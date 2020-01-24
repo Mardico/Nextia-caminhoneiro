@@ -158,6 +158,20 @@
             }
         });
 
+        var emailInput = $('.email');
+        var contactInput = $('.contactar');
+        contactInput.blur(function () {
+            console.log(contactInput.val());
+            if ($(".contactar").val() == 1) {
+                emailInput.prop('required', true);
+                return
+            } else {
+                emailInput.prop('required', false);
+                console.log('email não requerido');
+                return
+            };
+        });
+
         //Validacao
         $('#frmDados').validate({
             rules: {

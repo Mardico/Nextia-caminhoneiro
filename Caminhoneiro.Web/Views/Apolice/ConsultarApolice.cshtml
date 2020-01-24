@@ -51,7 +51,7 @@
             </div>
             <div class="invoice p-3 mb-3">
                 <h4>
-                    Dados Apolice
+                    Dados do Certificado
                 </h4>
                 <div class="row invoice-info">
                     <div class="col-sm-4 invoice-col">
@@ -159,7 +159,7 @@
                 </div>
                 <div id="linha"></div>
                 <h4>
-                    Dados Caminhão
+                    Dados Complementares
                 </h4>
                 <div class="row invoice-info">
                     <div class="col-sm-4 invoice-col">
@@ -167,17 +167,17 @@
                             <br>
                             @if (Model != null)
                             {
-                                <b>Modelo :</b> @Model.DadosVeiculo.Veiculo<br>
-                                <b>Já existe Seguro:</b> @((Model.DadosVeiculo.Segurado ==1) ? "Sim" : "Não")<br>
-                                <b>Empresa Seguro/Assistêcia</b> @Model.DadosVeiculo.Seguradora<br>
-                                <b>Veículo Próprio/ Finaciado</b> @Model.DadosVeiculo.VeiculoProprio<br>
+                                <b>Ano do Veículo :</b> @Model.DadosVeiculo.AnoVeiculo<br>
+                                <b>Possui Seguro:</b> @((Model.DadosVeiculo.Segurado ==1) ? "Sim" : "Não")<br>
+                                <b>Possui Assistêcia</b> @Model.DadosVeiculo.Seguradora<br>
+                                <b>Veículo Próprio?</b> @Model.DadosVeiculo.VeiculoProprio<br>
                             }
                             else
                             {
-                                <b>Modelo :</b> <br>
-                                <b>Já existe Seguro:</b> <br>
-                                <b>Empresa Seguro/Assistêcia</b> <br>
-                                <b>Veículo Próprio/ Finaciado</b> <br>
+                                <b>Ano do Veículo :</b> <br>
+                                <b>Possui Seguro:</b> <br>
+                                <b>Possui Assistêcia</b> <br>
+                                <b>Veículo Próprio?</b> <br>
                             }
                         </address>
                     </div>
@@ -186,17 +186,17 @@
                             <br>
                             @if (Model != null)
                             {
-                                <b>Quantidade Viagens</b> @Model.DadosVeiculo.QdadeViagens<br>
-                                <b>Entregas</b>@Model.DadosVeiculo.TipoEntrega<br>
+                                <b>Viagens/Mês</b> @Model.DadosVeiculo.QdadeViagens<br>
+                                @*<b>Entregas</b>@Model.DadosVeiculo.TipoEntrega<br>*@
                                 <b>Renda Líquida</b> @Model.DadosVeiculo.RendaLiquida<br>
-                                <b>Já precisou de Assistencia Médica?</b> @((Model.DadosVeiculo.SolicitouServApolice==1) ? "Sim" : "Não")<br>
+                                @*<b>Já precisou de Assistencia Médica?</b> @((Model.DadosVeiculo.SolicitouServApolice==1) ? "Sim" : "Não")<br>*@
                             }
                             else
                             {
-                                <b>Quantidade Viagens</b> <br>
-                                <b>Entregas</b><br>
+                                <b>Viagens/Mês</b> <br>
+                                @*<b>Entregas</b><br>*@
                                 <b>Renda Líquida</b> <br>
-                                <b>Já precisou de Assistencia Médica?</b> <br>
+                                @*<b>Já precisou de Assistencia Médica?</b> <br>*@
                             }
                         </address>
                     </div>

@@ -116,6 +116,20 @@
             }
         });
 
+        var emailInput = $('.email');
+        var contactInput = $('.contactar');
+        contactInput.blur(function () {
+            console.log(contactInput.val());
+            if ($(".contactar").val() == 1) {
+                emailInput.prop('required', true);
+                return
+            } else {
+                emailInput.prop('required', false);
+                console.log('email não requerido');
+                return
+            };
+        });
+
         //Validacao
         $('#frmDados').validate({
             rules: {
@@ -196,28 +210,28 @@
         $('.cc-number').change();
     };
     this.CarregaDepConjuge = function () {
-        var NDependentes = parseInt($('#NDependentes').val());
-        var html = $("#tmpDepConjuge").html().replace(/DadosDependente./gi, 'DadosDependente_' + NDependentes + '__');
-        html = html.replace(/NameDependente/gi, 'DadosDependente[' + NDependentes + ']');
-        html = html.replace(/classdep/g, 'classdep' + NDependentes);
-        $('#DepConjuge').prepend(html);
-        $('#NDependentes').val(NDependentes + 1);
+        //var NDependentes = parseInt($('#NDependentes').val());
+        //var html = $("#tmpDepConjuge").html().replace(/DadosDependente./gi, 'DadosDependente_' + NDependentes + '__');
+        //html = html.replace(/NameDependente/gi, 'DadosDependente[' + NDependentes + ']');
+        //html = html.replace(/classdep/g, 'classdep' + NDependentes);
+        //$('#DepConjuge').prepend(html);
+        //$('#NDependentes').val(NDependentes + 1);
 
-        var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
-        var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
-        $(txtNome).rules('add', {
-            require_from_any: ".classdep" + NDependentes,
-            messages: {
-                require_from_group: "Requerido"
-            }
-        });
-        $(txtDataNasc).rules('add', {
-            require_from_any: ".classdep" + NDependentes,
-            messages: {
-                require_from_group: "Requerido"
-            }
-        });
-        $(txtDataNasc).mask('99/99/9999');
+        //var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
+        //var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
+        //$(txtNome).rules('add', {
+        //    require_from_any: ".classdep" + NDependentes,
+        //    messages: {
+        //        require_from_group: "Requerido"
+        //    }
+        //});
+        //$(txtDataNasc).rules('add', {
+        //    require_from_any: ".classdep" + NDependentes,
+        //    messages: {
+        //        require_from_group: "Requerido"
+        //    }
+        //});
+        //$(txtDataNasc).mask('99/99/9999');
     };
     this.CarregaDepFilhos = function () {
         var NDependentes = parseInt($('#NDependentes').val());
@@ -230,17 +244,12 @@
             $('.chave' + NDependentes).hide();
 
         $('#NDependentes').val(NDependentes + 1);
-        
+
         var txtNome = '#DadosDependente_' + NDependentes + '__Nome';
-        var txtSexo = '#DadosDependente_' + NDependentes + '__SexoId';
+        var txtSexo = '#DadosDependente_' + NDependentes + '__Sexo';
+        var txtSexo = '#DadosDependente_' + NDependentes + '__GrauDependencia';
         var txtDataNasc = '#DadosDependente_' + NDependentes + '__DataNasc';
         $(txtNome).rules('add', {
-            require_from_any: ".classdep" + NDependentes,
-            messages: {
-                require_from_group: "requerido"
-            }
-        });
-        $(txtSexo).rules('add', {
             require_from_any: ".classdep" + NDependentes,
             messages: {
                 require_from_group: "requerido"

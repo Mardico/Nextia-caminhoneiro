@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Caminhoneiro.ViewModel
+﻿namespace Caminhoneiro.ViewModel
 {
     public class ApoliceDadosVeiculoViewModel
     {
@@ -10,10 +8,10 @@ namespace Caminhoneiro.ViewModel
         public int AnoVeiculo { get; set; }
         public int VeiculoID { get; set; }
         public string Veiculo { get; set; }
-        public string Segurado { get; set; }
-        public char SeguradoraId { get; set; }
+        public int? Segurado { get; set; }
+        public int SeguradoraId { get; set; }
         public string Seguradora { get; set; }
-        public char VeiculoProprioId { get; set; }
+        public int VeiculoProprioId { get; set; }
         public string VeiculoProprio { get; set; }
         public int QdadeViagensId { get; set; }
         public string QdadeViagens { get; set; }

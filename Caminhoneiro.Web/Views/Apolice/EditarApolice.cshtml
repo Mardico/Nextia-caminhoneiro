@@ -3,34 +3,34 @@
 @{
     // DadosCliente.UF
     ViewBag.UF = new SelectList(new object[]{
-        new {Name = "AC", Value = "AC"},
-        new {Name = "AL", Value = "AL"},
-        new {Name = "AP", Value = "AP"},
-        new {Name = "AM", Value = "AM"},
-        new {Name = "BA", Value = "BA"},
-        new {Name = "CE", Value = "CE"},
-        new {Name = "DF", Value = "DF"},
-        new {Name = "ES", Value = "ES"},
-        new {Name = "GO", Value = "GO"},
-        new {Name = "MA", Value = "MA"},
-        new {Name = "MT", Value = "MT"},
-        new {Name = "MS", Value = "MS"},
-        new {Name = "MG", Value = "MG"},
-        new {Name = "PA", Value = "PA"},
-        new {Name = "PB", Value = "PB"},
-        new {Name = "PR", Value = "PR"},
-        new {Name = "PE", Value = "PE"},
-        new {Name = "PI", Value = "PI"},
-        new {Name = "RJ", Value = "RJ"},
-        new {Name = "RN", Value = "RN"},
-        new {Name = "RS", Value = "RS"},
-        new {Name = "RO", Value = "RO"},
-        new {Name = "RR", Value = "RR"},
-        new {Name = "SC", Value = "SC"},
-        new {Name = "SP", Value = "SP"},
-        new {Name = "SE", Value = "SE"},
-        new {Name = "TO", Value = "TO"}
-    }, "Value", "Name");
+    new {Name = "AC", Value = "AC"},
+    new {Name = "AL", Value = "AL"},
+    new {Name = "AP", Value = "AP"},
+    new {Name = "AM", Value = "AM"},
+    new {Name = "BA", Value = "BA"},
+    new {Name = "CE", Value = "CE"},
+    new {Name = "DF", Value = "DF"},
+    new {Name = "ES", Value = "ES"},
+    new {Name = "GO", Value = "GO"},
+    new {Name = "MA", Value = "MA"},
+    new {Name = "MT", Value = "MT"},
+    new {Name = "MS", Value = "MS"},
+    new {Name = "MG", Value = "MG"},
+    new {Name = "PA", Value = "PA"},
+    new {Name = "PB", Value = "PB"},
+    new {Name = "PR", Value = "PR"},
+    new {Name = "PE", Value = "PE"},
+    new {Name = "PI", Value = "PI"},
+    new {Name = "RJ", Value = "RJ"},
+    new {Name = "RN", Value = "RN"},
+    new {Name = "RS", Value = "RS"},
+    new {Name = "RO", Value = "RO"},
+    new {Name = "RR", Value = "RR"},
+    new {Name = "SC", Value = "SC"},
+    new {Name = "SP", Value = "SP"},
+    new {Name = "SE", Value = "SE"},
+    new {Name = "TO", Value = "TO"}
+}, "Value", "Name");
 }
 
 @section head
@@ -138,13 +138,13 @@
                                         <div class="col-lg-3">
                                             <div class="form-group">
                                                 <label class="required">Estado Civil</label>
-                                                @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, new { @class = "form-control" })
+                                                @Html.DropDownListFor(l => l.DadosCliente.EstadoCivilId, (SelectList)ViewBag.EstadoCivil, Model.DadosCliente.EstadoCivil, new { @class = "form-control" })
                                             </div>
                                         </div>
                                         <div class="col-lg-6">
                                             <div class="form-group">
-                                                <label>E-mail</label>
-                                                @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control email", placeholder = "Email", type = "email" })
+                                                <label class="isRequired">E-mail</label>
+                                                @Html.TextBoxFor(l => l.DadosCliente.Email, new { @class = "form-control email", placeholder = "Email", type = "email", name="email" })
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
@@ -193,7 +193,7 @@
                                         <div class="col-lg-1">
                                             <div class="form-group">
                                                 <label class="required">UF</label>
-                                                @Html.DropDownListFor(l => l.DadosCliente.UF, (SelectList)ViewBag.UF, new { @class = "form-control", @required = "required" })
+                                                @Html.DropDownListFor(l => l.DadosCliente.UF, new SelectList(ViewBag.UF, "Value", "Text"), new { @class = "form-control", @required = "required" })
                                             </div>
                                         </div>
                                         <div class="col-lg-2">
@@ -241,7 +241,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <label>Como prefere ser contactado?</label>
-                                                @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control contactar", @required = "required" })
+                                                @Html.DropDownListFor(l => l.DadosCliente.ContactarPorId, (SelectList)ViewBag.Contactar, new { @class = "form-control contactar", @id="contactar-select", @required = "required", name="contactar" })
                                             </div>
                                         </div>
                                     </div>
@@ -602,8 +602,8 @@
             <div class="col-1" style="margin-top:32px;">
                 <span class="deleteLinha red chave">X</span>
             </div>
-            @Html.Hidden("NameDependente.Id", "Filho(a)", new { id = "DadosDependente.Id" })
-            @Html.Hidden("NameDependente.GrauDependencia", "Filho(a)", new { id = "DadosDependente.GrauDependencia" })
+            @Html.Hidden("NameDependente.Id", "Adicionar", new { id = "DadosDependente.Id" })
+            @Html.Hidden("NameDependente.GrauDependencia", "Adicionar", new { id = "DadosDependente.GrauDependencia" })
         </div>
     </script>
     <script id="tmpBeneficiario" type="text/x-jquery-tmpl">

@@ -39,3 +39,9 @@ span.red {
 .pa10 {
     padding: 10px;
 }
+
+.required::after {
+    content: "*";
+    display: inline-block;
+    color: red;
+}
