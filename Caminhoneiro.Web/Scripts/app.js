@@ -129,6 +129,7 @@ jQuery.extend(jQuery.validator.messages, {
 });
 
 $(function () {
+    $('.benedata').mask('99/99/9999');
     $('.datanasc').mask('99/99/9999');
     $('.datacartao').mask('99/9999');
     $('.cpf').mask('999.999.999-99');

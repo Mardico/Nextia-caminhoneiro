@@ -301,7 +301,7 @@
                                                 <div class="row table">
                                                     <div class="col-lg-4 col-md-6">
                                                         <label>Nome</label>
-                                                        @Html.TextBoxFor(m => m.DadosDependente[a].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome Filho(a)" })
+                                                        @Html.TextBoxFor(m => m.DadosDependente[a].Nome, null, new { @class = "form-control", @required = "required", placeholder = "Nome" })
                                                     </div>
                                                     <div class="col-lg-2 col-md-6">
                                                         <label>Sexo</label>
@@ -348,31 +348,35 @@
                                     <div id="tableBeneficiario">
                                         @for (int i = 0; i < Model.DadosBeneficiario.Count; i++)
                                         {
-                                            <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
-                                                <div class="col-lg-6">
-                                                    <div class="form-group">
-                                                        <label>Nome</label>
-                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control classbene", placeholder = "Nome do Beneficiário" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Relação de parentesco</label>
-                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control classbene", @required = "required", placeholder = "Grau" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-2">
-                                                    <div class="form-group">
-                                                        <label>(%) do Beneficiário</label>
-                                                        @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, null, new { @class = "form-control percent classbene", @required = "required", placeholder = "Porcentagem", type = "number", min = "1", max = "100", length = "3" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-1">
-                                                    <div class="col-lg-1" style="margin-top:32px;">
-                                                        <span class="deleteLinhaBeneficiario red chavebene">X</span>
-                                                    </div>
+                                        <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Nome</label>
+                                                    @Html.TextBoxFor(l => l.DadosBeneficiario[i].Nome, new { @class = "form-control classbene", placeholder = "Nome do Beneficiário" })
                                                 </div>
                                             </div>
+                                            <div class="col-lg-3 col-md-3">
+                                                <label>Data de Nascimento</label>
+                                                @Html.TextBoxFor(l => l.DadosBeneficiario[i].DataNasc, null, new { @class = "form-control datanasc classbene", @required = "required", placeholder = "dd/mm/yyyy"})
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label>Relação de parentesco</label>
+                                                    @Html.TextBoxFor(l => l.DadosBeneficiario[i].Parentesco, new { @class = "form-control classbene", @required = "required", placeholder = "Grau" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label>(%) do Beneficiário</label>
+                                                    @Html.TextBoxFor(l => l.DadosBeneficiario[i].Porcentagem, null, new { @class = "form-control percent classbene", @required = "required", placeholder = "Porcentagem", type = "number", min = "1", max = "100", length = "3" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-1">
+                                                <div class="col-lg-1" style="margin-top:32px;">
+                                                    <span class="deleteLinhaBeneficiario red chavebene">X</span>
+                                                </div>
+                                            </div>
+                                        </div>
                                         }
                                     </div>
                                     <div class="float-right">
@@ -585,7 +589,7 @@
         <div class="row">
             <div class="col-md-6 col-lg-4">
                 <label>Nome</label>
-                @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome Filho(a)", id = "DadosDependente.Nome" })
+                @Html.TextBox("NameDependente.Nome", null, new { @class = "form-control classdep", placeholder = "Nome", id = "DadosDependente.Nome" })
             </div>
             <div class="col-md-6 col-lg-2">
                 <label>Sexo</label>
@@ -597,7 +601,7 @@
             </div>
             <div class="col-md-5 col-lg-3">
                 <label>Data de Nascimento</label>
-                @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento Filho", id = "DadosDependente.DataNasc" })
+                @Html.TextBox("NameDependente.DataNasc", null, new { @class = "form-control datanasc classdep", placeholder = "Data Nascimento", id = "DadosDependente.DataNasc" })
             </div>
             <div class="col-1" style="margin-top:32px;">
                 <span class="deleteLinha red chave">X</span>
@@ -608,11 +612,16 @@
     </script>
     <script id="tmpBeneficiario" type="text/x-jquery-tmpl">
         <div class="row" style="border-bottom: 1px solid rgba(0,0,0,0.2); margin:5px;">
-            <div class="col-lg-6">
+            <div class="col-lg-3">
                 <div class="form-group">
                     <label>Nome</label>
                     @Html.TextBox("NameBeneficiario.Nome", null, new { @class = "form-control classbene", placeholder = "Nome do Beneficiário", id = "DadosBeneficiario.Nome" })
                 </div>
+            </div>
+            <div class="col-md-3 col-lg-3">
+                <label>Data de Nascimento</label>
+                @*@Html.TextBox("NameBeneficiario.DataNasc", null, new { @class = "form-control datanasc benedata", placeholder = "Data Nascimento", id = "DadosBeneficiario.DataNasc" })*@
+                @Html.TextBox("NameBeneficiario.DataNasc", null, new { @class = "form-control classbene datanasc", placeholder="dd/mm/aaaa", id="DadosBeneficiario.DataNasc"})
             </div>
             <div class="col-lg-3">
                 <div class="form-group">

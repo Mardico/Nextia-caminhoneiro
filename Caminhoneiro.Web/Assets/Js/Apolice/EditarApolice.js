@@ -322,6 +322,7 @@
         //var txtDataNasc = '#DadosBeneficiario_' + NBeneficiarios + '__DataNasc';
         //var txtSexoId = '#DadosBeneficiario_' + NBeneficiarios + '__SexoId';
         var txtParentesco = '#DadosBeneficiario_' + NBeneficiarios + '__Parentesco';
+        var txtDataNasc = '#DadosBeneficiario_' + NBeneficiarios + '__DataNasc';
         var txtPorcentagem = '#DadosBeneficiario_' + NBeneficiarios + '__Porcentagem';
         var classname = ".classbene" + NBeneficiarios;
         //$(txtDataNasc).mask('99/99/9999');
@@ -331,12 +332,13 @@
                 require_from_group: "requerido"
             }
         });
-        //$(txtNDocumento).rules('add', {
-        //    require_from_any: classname,
-        //    messages: {
-        //        require_from_group: "requerido"
-        //    }
-        //});
+        $(txtDataNasc).rules('add', {
+            require_from_any: ".classbene" + NBeneficiarios,
+            messages: {
+                require_from_group: "requerido"
+            }
+        });
+        $(txtDataNasc).mask('99/99/9999');
         //$(txtDataNasc).rules('add', {
         //    require_from_any: classname,
         //    messages: {
